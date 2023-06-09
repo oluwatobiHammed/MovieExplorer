@@ -71,6 +71,7 @@
 		31CF4BAB2A3334550044A51D /* MovieDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CF4BAA2A3334550044A51D /* MovieDetailTableViewCell.swift */; };
 		F10FC1B52A335DF800B1F2EE /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = F10FC1B42A335DF800B1F2EE /* Kingfisher */; };
 		F10FC1BB2A337B7500B1F2EE /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FC1BA2A337B7500B1F2EE /* MovieListViewController.swift */; };
+		F10FC1BD2A33A77F00B1F2EE /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FC1BC2A33A77F00B1F2EE /* UIViewControllerExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -154,6 +155,7 @@
 		31CF4B9B2A33320A0044A51D /* EffraMedium-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "EffraMedium-Italic.ttf"; sourceTree = "<group>"; };
 		31CF4BAA2A3334550044A51D /* MovieDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailTableViewCell.swift; sourceTree = "<group>"; };
 		F10FC1BA2A337B7500B1F2EE /* MovieListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
+		F10FC1BC2A33A77F00B1F2EE /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -321,6 +323,7 @@
 				31CF4B802A33118C0044A51D /* String+isBlank.swift */,
 				31CF4B822A33137A0044A51D /* UIImage+ImageName.swift */,
 				31CF4B842A331AEC0044A51D /* CustomTextField.swift */,
+				F10FC1BC2A33A77F00B1F2EE /* UIViewControllerExtension.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -615,6 +618,7 @@
 				31A847E62A33090C009B6903 /* SceneDelegate.swift in Sources */,
 				31CF4B812A33118C0044A51D /* String+isBlank.swift in Sources */,
 				31A847CA2A33086E009B6903 /* HTTPMethod.swift in Sources */,
+				F10FC1BD2A33A77F00B1F2EE /* UIViewControllerExtension.swift in Sources */,
 				31A847CF2A33086E009B6903 /* Manager.swift in Sources */,
 				31A847C52A33086E009B6903 /* URLParameterEncoding.swift in Sources */,
 				31CF4AF42A330AA90044A51D /* HomeTabSelectorCell.swift in Sources */,

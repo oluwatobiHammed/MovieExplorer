@@ -38,7 +38,7 @@ class MovieDetailTableViewCell:  UITableViewCell {
         $0.font = kFont.EffraBold.of(size: 20)
         $0.textAlignment = .left
         $0.numberOfLines = 0
-        //$0.textColor = tintColor
+        $0.textColor = kColor.BrandColours.DarkGray.withAlphaComponent(0.6)
         return $0
     }(UILabel())
 
@@ -73,8 +73,8 @@ class MovieDetailTableViewCell:  UITableViewCell {
                                           .cacheOriginalImage,
                                           .diskCacheExpiration(.days(7)),
                                           .transition(.fade(0.5))])
-        centeredTitleLabel.text = movie.originalTitle
-        subTitleLabel.text = movie.releaseDate
+       // centeredTitleLabel.text = movie.originalTitle
+       // subTitleLabel.text = movie.releaseDate
     }
     
     private func setUpUI() {
@@ -88,18 +88,18 @@ class MovieDetailTableViewCell:  UITableViewCell {
         }
         safeAreaView.addSubview(posterImage)
         posterImage.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(10)
-            make.width.equalTo(self.frame.width/2)
-            make.top.equalToSuperview().offset(10)
-            make.bottom.equalToSuperview().offset(-10)
+            make.left.equalTo(safeAreaView.snp.left)
+            make.right.equalTo(safeAreaView.snp.right)
+            make.top.equalTo(safeAreaView.snp.top)
+            make.bottom.equalTo(safeAreaView.snp.bottom)
         }
         
-        safeAreaView.addSubview(containerStackView)
-        containerStackView.snp.makeConstraints { make in
-            make.left.equalTo(posterImage.snp.right).offset(10)
-            make.bottom.equalTo(safeAreaView.snp.bottom).offset(-10)
-            make.right.equalTo(safeAreaView.snp.right).offset(-10)
-            make.height.equalTo(100)
-        }
+//        safeAreaView.addSubview(containerStackView)
+//        containerStackView.snp.makeConstraints { make in
+//            make.left.equalTo(posterImage.snp.right).offset(10)
+//            make.bottom.equalTo(safeAreaView.snp.bottom).offset(-10)
+//            make.right.equalTo(safeAreaView.snp.right).offset(-10)
+//            make.height.equalTo(100)
+//        }
     }
 }

@@ -12,33 +12,31 @@ class MovieListViewController: UIViewController, UITextViewDelegate, UITextField
 
     
     private let messageUnavailableCellIdentifier = "UnavailableCellIdentifier"
-    private var movieList: [Discover] = []
+    private var movieList: DiscoverMovie?
+    private var movieResult: [Discover] = []
+    private var currentPage = 1
+    private var query = ""
     
     private let inputViewContainerView: UIView = {
-        $0.backgroundColor = kColor.BrandColours.Bizarre
+        $0.backgroundColor = .white
+        $0.layer.shadowColor = UIColor.black.cgColor
+        $0.layer.shadowOpacity = 0.1
+        $0.layer.shadowOffset = .zero
+        $0.layer.shadowRadius = 10
+        $0.layer.borderWidth = 1
+        $0.layer.cornerRadius = 8
+        $0.layer.rasterizationScale = UIScreen.main.scale
         return $0
     }(UIView())
-    
-
     
     lazy var searchTextField: CustomTextField = {
         let image = UIImage(named: .searchIcon)
         let textField = CustomTextField(iconImage: image.imageWithColor(tintColor: kColor.BrandColours.DarkGray))
-        textField.backgroundColor = .white
-        textField.layer.cornerRadius = 8
+        textField.backgroundColor = .clear
         textField.clipsToBounds = false
-        textField.placeholder = "Search for movie, tv show, person..."
+        textField.placeholder = "Search for movie"
         textField.textColor = kColor.BrandColours.DarkGray
-        textField.layer.borderWidth = 1
-        textField.keyboardType = .emailAddress
         textField.font = kFont.EffraRegular.of(size: 15)
-        textField.layer.shadowColor = UIColor.black.cgColor
-        textField.layer.shadowOpacity = 0.1
-        textField.layer.shadowOffset = .zero
-        textField.layer.shadowRadius = 10
-        textField.layer.shouldRasterize = true
-        textField.layer.rasterizationScale = UIScreen.main.scale
-        textField.autocapitalizationType = .none
         textField.delegate = self
         textField.returnKeyType = UIReturnKeyType.next
         return textField
@@ -89,35 +87,47 @@ class MovieListViewController: UIViewController, UITextViewDelegate, UITextField
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
-
         
+        setupNotificationObservers()
+        setUpview()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        dismissKeyboard()
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
+    func setUpview() {
         let centerImageTitleView  = centerImageTitleView(title: "TMBD", subTitle: "Millions of movies TV shows and people to discover", tintColor: kColor.BrandColours.DarkGray)
         view.addSubview(naVBarView)
-        view.addSubview(inputViewContainerView)
         naVBarView.addSubview(centerImageTitleView)
         
         centerImageTitleView.snp.makeConstraints { make in
-            make.top.equalTo(naVBarView.snp.top).offset(15)
+            make.top.equalTo(naVBarView.snp.top).inset(-35)
             make.left.equalTo(naVBarView.snp.left)
             make.right.equalTo(naVBarView.snp.right)
             make.bottom.equalTo(naVBarView.snp.bottom)
         }
         
         naVBarView.snp.makeConstraints { make in
-            make.topMargin.equalToSuperview().inset(20)
+            make.topMargin.equalToSuperview().inset(15)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-            make.bottom.equalTo(inputViewContainerView.snp.top)
-            make.height.equalTo(80)
+            make.height.equalTo(40)
         }
         
+        view.addSubview(movieListTableView)
+        movieListTableView.snp.makeConstraints { make in
+            make.top.equalTo(naVBarView.snp.bottom)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
        
-        inputViewContainerView.snp.updateConstraints { make in
-                make.top.equalToSuperview().inset(100)
-                make.left.equalToSuperview()
-                make.right.equalToSuperview()
-            }
-        
+    
+        adjustKeyboard(bottomConstraint: 55)
         inputViewContainerView.addSubview(searchTextField)
         inputViewContainerView.addSubview(sendButton)
         sendButton.snp.makeConstraints { make in
@@ -133,18 +143,19 @@ class MovieListViewController: UIViewController, UITextViewDelegate, UITextField
             make.top.equalTo(inputViewContainerView.snp.top).inset(7)
             make.bottom.equalTo(inputViewContainerView.snp.bottom)
             make.height.equalTo(50)
-            
-        }
-        
-        view.addSubview(movieListTableView)
-        movieListTableView.snp.makeConstraints { make in
-            make.top.equalTo(inputViewContainerView.snp.bottom)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.bottom.equalToSuperview()
-        }
-        
 
+        }
+    }
+    
+    private func adjustKeyboard(bottomConstraint: CGFloat) {
+        view.addSubview(inputViewContainerView)
+        inputViewContainerView.snp.updateConstraints { make in
+                make.left.equalToSuperview().offset(15)
+                make.right.equalToSuperview().offset(-15)
+                make.bottom.equalToSuperview().inset(bottomConstraint)
+                make.height.equalTo(60)
+            }
+    
     }
     
     
@@ -188,38 +199,101 @@ class MovieListViewController: UIViewController, UITextViewDelegate, UITextField
         
     }
     
-    @objc private func sendButtonnPressed() {
+    func getQueryText(page: Int) {
+        guard query != ""  else { return }
         
-        guard let query = searchTextField.text, query != ""  else { return }
-        networkManager.getSearch(page: 1, query: query) { [weak self] movie, err in
+        networkManager.getSearch(page: page, query: query) { [weak self] movie, err in
             
             DispatchQueue.main.async { [weak self] in
                 guard let self, let movie else {return}
-                movieList = Array(movie.results)
+                if movieList?.results.count ?? 0 < 1 {
+                    movieList = movie
+                    movieResult = Array(movie.results)
+                } else {
+                    movieList = movie
+                    movieResult.append(contentsOf: movie.results)
+                }
+                
                 movieListTableView.reloadData()
                 searchTextField.text = ""
             }
             
         }
     }
+    
+    @objc private func sendButtonnPressed() {
+        if currentPage > 1 {
+            currentPage = 1
+        }
+        movieList = nil
+        movieResult.removeAll()
+        query = searchTextField.text ?? ""
+        getQueryText(page: currentPage)
+        searchTextField.endEditing(true)
+    }
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        movieList.count
+        movieResult.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if  let cell = tableView.dequeueReusableCell(withIdentifier: MovieDetailTableViewCell.reuseIdentifier, for: indexPath) as? MovieDetailTableViewCell {
-            cell.setUpImage(movie:movieList[indexPath.row])
+            cell.setUpImage(movie:  movieResult[indexPath.row])
+            
             return cell
         } else {
             return tableView.dequeueReusableCell(withIdentifier: messageUnavailableCellIdentifier, for: indexPath)
         }
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+            if let totalPages = movieList?.totalPages, currentPage  < totalPages, indexPath.row == movieResult.count  - 1 {
+                currentPage += 1
+                
+                getQueryText(page: currentPage)
+            } 
+    
+    }
+    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+    
+    fileprivate func setupNotificationObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc fileprivate func handleKeyboardHide(notification: Notification) {
+        
+        let keyboardData = keyboardInfoFromNotification(notification)
+        
+        adjustKeyboard(bottomConstraint: 55)
+        weak var weakSelf = self
+        UIView.animate(withDuration: keyboardData.animationDuration,
+                       delay: 0,
+                       options: keyboardData.animationCurve,
+                       animations: {
+                        weakSelf?.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    @objc fileprivate func handleKeyboardShow(notification: Notification) {
+        
+        let keyboardData = keyboardInfoFromNotification(notification)
+        adjustKeyboard(bottomConstraint: keyboardData.endFrame.height + 5)
+        
+        weak var weakSelf = self
+        UIView.animate(withDuration: keyboardData.animationDuration,
+                       delay: 0,
+                       options: keyboardData.animationCurve,
+                       animations: {
+            weakSelf?.view.layoutIfNeeded()
+        }, completion: nil)
+     
     }
     
 
