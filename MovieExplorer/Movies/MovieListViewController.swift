@@ -34,7 +34,7 @@ class MovieListViewController: UIViewController, UITextViewDelegate, UITextField
         let textField = CustomTextField(iconImage: image.imageWithColor(tintColor: kColor.BrandColours.DarkGray))
         textField.backgroundColor = .clear
         textField.clipsToBounds = false
-        textField.placeholder = "Search for movie"
+        textField.attributedPlaceholder = NSAttributedString( string: "Search for movie", attributes: [NSAttributedString.Key.foregroundColor: kColor.BrandColours.DarkGray])
         textField.textColor = kColor.BrandColours.DarkGray
         textField.font = kFont.EffraRegular.of(size: 15)
         textField.delegate = self
@@ -252,7 +252,7 @@ class MovieListViewController: UIViewController, UITextViewDelegate, UITextField
                 currentPage += 1
                 
                 getQueryText(page: currentPage)
-            } 
+            }
     
     }
     
