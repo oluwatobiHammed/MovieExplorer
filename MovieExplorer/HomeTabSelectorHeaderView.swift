@@ -42,7 +42,7 @@ class HomeTabSelectorHeaderView: UIView {
         self.barArray = barArray
         super.init(frame: frame)
         backgroundColor = .clear
-        addSubview(tabBarMenuCollectionView)
+    //    addSubview(tabBarMenuCollectionView)
 //        tabBarMenuCollectionView.anchor(top: topAnchor,
 //                                        left: leftAnchor,
 //                                        bottom: bottomAnchor,

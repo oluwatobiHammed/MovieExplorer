@@ -54,6 +54,22 @@
 		31CF4B7A2A330C060044A51D /* Univers-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B5B2A330C060044A51D /* Univers-Black.ttf */; };
 		31CF4B7B2A330C060044A51D /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B5D2A330C060044A51D /* Montserrat-Bold.ttf */; };
 		31CF4B7C2A330C060044A51D /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B5E2A330C060044A51D /* Montserrat-Regular.ttf */; };
+		31CF4B7F2A3311000044A51D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 31CF4B7E2A3311000044A51D /* SnapKit */; };
+		31CF4B812A33118C0044A51D /* String+isBlank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CF4B802A33118C0044A51D /* String+isBlank.swift */; };
+		31CF4B832A33137A0044A51D /* UIImage+ImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CF4B822A33137A0044A51D /* UIImage+ImageName.swift */; };
+		31CF4B852A331AEC0044A51D /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CF4B842A331AEC0044A51D /* CustomTextField.swift */; };
+		31CF4B882A332C090044A51D /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 31CF4B872A332C090044A51D /* SkeletonView */; };
+		31CF4B9C2A33320A0044A51D /* Effra-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B8B2A33320A0044A51D /* Effra-BoldItalic.ttf */; };
+		31CF4B9E2A33320A0044A51D /* Effra-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B8D2A33320A0044A51D /* Effra-Regular.ttf */; };
+		31CF4B9F2A33320A0044A51D /* Effra-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B8E2A33320A0044A51D /* Effra-Bold.ttf */; };
+		31CF4BA02A33320A0044A51D /* Effra-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B8F2A33320A0044A51D /* Effra-Italic.ttf */; };
+		31CF4BA22A33320A0044A51D /* EffraLight-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B922A33320A0044A51D /* EffraLight-Italic.ttf */; };
+		31CF4BA32A33320A0044A51D /* EffraLight-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B932A33320A0044A51D /* EffraLight-Regular.ttf */; };
+		31CF4BA42A33320A0044A51D /* EffraHeavy-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B952A33320A0044A51D /* EffraHeavy-Regular.ttf */; };
+		31CF4BA52A33320A0044A51D /* EffraHeavy-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B962A33320A0044A51D /* EffraHeavy-Italic.ttf */; };
+		31CF4BA82A33320A0044A51D /* EffraMedium-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B9A2A33320A0044A51D /* EffraMedium-Regular.ttf */; };
+		31CF4BA92A33320A0044A51D /* EffraMedium-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B9B2A33320A0044A51D /* EffraMedium-Italic.ttf */; };
+		31CF4BAB2A3334550044A51D /* MovieDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CF4BAA2A3334550044A51D /* MovieDetailTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +139,20 @@
 		31CF4B5B2A330C060044A51D /* Univers-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Univers-Black.ttf"; sourceTree = "<group>"; };
 		31CF4B5D2A330C060044A51D /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		31CF4B5E2A330C060044A51D /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		31CF4B802A33118C0044A51D /* String+isBlank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+isBlank.swift"; sourceTree = "<group>"; };
+		31CF4B822A33137A0044A51D /* UIImage+ImageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+ImageName.swift"; sourceTree = "<group>"; };
+		31CF4B842A331AEC0044A51D /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		31CF4B8B2A33320A0044A51D /* Effra-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Effra-BoldItalic.ttf"; sourceTree = "<group>"; };
+		31CF4B8D2A33320A0044A51D /* Effra-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Effra-Regular.ttf"; sourceTree = "<group>"; };
+		31CF4B8E2A33320A0044A51D /* Effra-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Effra-Bold.ttf"; sourceTree = "<group>"; };
+		31CF4B8F2A33320A0044A51D /* Effra-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Effra-Italic.ttf"; sourceTree = "<group>"; };
+		31CF4B922A33320A0044A51D /* EffraLight-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "EffraLight-Italic.ttf"; sourceTree = "<group>"; };
+		31CF4B932A33320A0044A51D /* EffraLight-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "EffraLight-Regular.ttf"; sourceTree = "<group>"; };
+		31CF4B952A33320A0044A51D /* EffraHeavy-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "EffraHeavy-Regular.ttf"; sourceTree = "<group>"; };
+		31CF4B962A33320A0044A51D /* EffraHeavy-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "EffraHeavy-Italic.ttf"; sourceTree = "<group>"; };
+		31CF4B9A2A33320A0044A51D /* EffraMedium-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "EffraMedium-Regular.ttf"; sourceTree = "<group>"; };
+		31CF4B9B2A33320A0044A51D /* EffraMedium-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "EffraMedium-Italic.ttf"; sourceTree = "<group>"; };
+		31CF4BAA2A3334550044A51D /* MovieDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +160,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31CF4B882A332C090044A51D /* SkeletonView in Frameworks */,
+				31CF4B7F2A3311000044A51D /* SnapKit in Frameworks */,
 				31A847D92A3308DE009B6903 /* RealmSwift in Frameworks */,
 				31A847D72A3308DE009B6903 /* Realm in Frameworks */,
 			);
@@ -187,6 +219,7 @@
 				31A8471E2A3304B1009B6903 /* Assets.xcassets */,
 				31A847202A3304B1009B6903 /* LaunchScreen.storyboard */,
 				31A847232A3304B1009B6903 /* Info.plist */,
+				31CF4BAA2A3334550044A51D /* MovieDetailTableViewCell.swift */,
 			);
 			path = MovieExplorer;
 			sourceTree = "<group>";
@@ -284,6 +317,9 @@
 				31A847DC2A3308F5009B6903 /* FontConstants.swift */,
 				31A847DF2A3308F5009B6903 /* kAPI.swift */,
 				31A847DE2A3308F5009B6903 /* ColorConstants.swift */,
+				31CF4B802A33118C0044A51D /* String+isBlank.swift */,
+				31CF4B822A33137A0044A51D /* UIImage+ImageName.swift */,
+				31CF4B842A331AEC0044A51D /* CustomTextField.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -299,6 +335,7 @@
 		31CF4B392A330C060044A51D /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				31CF4B892A33320A0044A51D /* EffraFont */,
 				31CF4B4D2A330C060044A51D /* Univers */,
 				31CF4B5C2A330C060044A51D /* Montserrat */,
 			);
@@ -335,6 +372,55 @@
 			path = Montserrat;
 			sourceTree = "<group>";
 		};
+		31CF4B892A33320A0044A51D /* EffraFont */ = {
+			isa = PBXGroup;
+			children = (
+				31CF4B8A2A33320A0044A51D /* Effra */,
+				31CF4B902A33320A0044A51D /* Effra Light */,
+				31CF4B942A33320A0044A51D /* Effra Heavy */,
+				31CF4B982A33320A0044A51D /* Effra Medium */,
+			);
+			path = EffraFont;
+			sourceTree = "<group>";
+		};
+		31CF4B8A2A33320A0044A51D /* Effra */ = {
+			isa = PBXGroup;
+			children = (
+				31CF4B8B2A33320A0044A51D /* Effra-BoldItalic.ttf */,
+				31CF4B8D2A33320A0044A51D /* Effra-Regular.ttf */,
+				31CF4B8E2A33320A0044A51D /* Effra-Bold.ttf */,
+				31CF4B8F2A33320A0044A51D /* Effra-Italic.ttf */,
+			);
+			path = Effra;
+			sourceTree = "<group>";
+		};
+		31CF4B902A33320A0044A51D /* Effra Light */ = {
+			isa = PBXGroup;
+			children = (
+				31CF4B922A33320A0044A51D /* EffraLight-Italic.ttf */,
+				31CF4B932A33320A0044A51D /* EffraLight-Regular.ttf */,
+			);
+			path = "Effra Light";
+			sourceTree = "<group>";
+		};
+		31CF4B942A33320A0044A51D /* Effra Heavy */ = {
+			isa = PBXGroup;
+			children = (
+				31CF4B952A33320A0044A51D /* EffraHeavy-Regular.ttf */,
+				31CF4B962A33320A0044A51D /* EffraHeavy-Italic.ttf */,
+			);
+			path = "Effra Heavy";
+			sourceTree = "<group>";
+		};
+		31CF4B982A33320A0044A51D /* Effra Medium */ = {
+			isa = PBXGroup;
+			children = (
+				31CF4B9A2A33320A0044A51D /* EffraMedium-Regular.ttf */,
+				31CF4B9B2A33320A0044A51D /* EffraMedium-Italic.ttf */,
+			);
+			path = "Effra Medium";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -354,6 +440,8 @@
 			packageProductDependencies = (
 				31A847D62A3308DE009B6903 /* Realm */,
 				31A847D82A3308DE009B6903 /* RealmSwift */,
+				31CF4B7E2A3311000044A51D /* SnapKit */,
+				31CF4B872A332C090044A51D /* SkeletonView */,
 			);
 			productName = MovieExplorer;
 			productReference = 31A847122A3304B0009B6903 /* MovieExplorer.app */;
@@ -430,6 +518,8 @@
 			packageReferences = (
 				31A847D52A3308DE009B6903 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				31CF4AEF2A3309E50044A51D /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				31CF4B7D2A3311000044A51D /* XCRemoteSwiftPackageReference "SnapKit" */,
+				31CF4B862A332C090044A51D /* XCRemoteSwiftPackageReference "SkeletonView" */,
 			);
 			productRefGroup = 31A847132A3304B0009B6903 /* Products */;
 			projectDirPath = "";
@@ -448,18 +538,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				31CF4B7C2A330C060044A51D /* Montserrat-Regular.ttf in Resources */,
+				31CF4BA52A33320A0044A51D /* EffraHeavy-Italic.ttf in Resources */,
 				31CF4B732A330C060044A51D /* Univers-BlackOblique.ttf in Resources */,
+				31CF4BA02A33320A0044A51D /* Effra-Italic.ttf in Resources */,
 				31CF4B742A330C060044A51D /* Univers-Oblique.ttf in Resources */,
+				31CF4B9E2A33320A0044A51D /* Effra-Regular.ttf in Resources */,
 				31CF4B6E2A330C060044A51D /* Univers-Light.ttf in Resources */,
 				31CF4B792A330C060044A51D /* Univers-LightOblique.ttf in Resources */,
+				31CF4BA22A33320A0044A51D /* EffraLight-Italic.ttf in Resources */,
+				31CF4B9C2A33320A0044A51D /* Effra-BoldItalic.ttf in Resources */,
 				31CF4B6F2A330C060044A51D /* Univers-Bold.ttf in Resources */,
+				31CF4BA42A33320A0044A51D /* EffraHeavy-Regular.ttf in Resources */,
 				31CF4B762A330C060044A51D /* Univers-CondensedOblique.ttf in Resources */,
+				31CF4BA82A33320A0044A51D /* EffraMedium-Regular.ttf in Resources */,
 				31CF4B782A330C060044A51D /* Univers-CondensedLightOblique.ttf in Resources */,
 				31CF4B752A330C060044A51D /* Univers-BoldOblique.ttf in Resources */,
 				31A847222A3304B1009B6903 /* LaunchScreen.storyboard in Resources */,
 				31CF4B7A2A330C060044A51D /* Univers-Black.ttf in Resources */,
 				31CF4B722A330C060044A51D /* Univers.ttf in Resources */,
 				31CF4B712A330C060044A51D /* Univers-Condensed.ttf in Resources */,
+				31CF4BA32A33320A0044A51D /* EffraLight-Regular.ttf in Resources */,
+				31CF4B9F2A33320A0044A51D /* Effra-Bold.ttf in Resources */,
+				31CF4BA92A33320A0044A51D /* EffraMedium-Italic.ttf in Resources */,
 				31A8471F2A3304B1009B6903 /* Assets.xcassets in Resources */,
 				31CF4B7B2A330C060044A51D /* Montserrat-Bold.ttf in Resources */,
 				31CF4B6D2A330C060044A51D /* Univers-CondensedLight.ttf in Resources */,
@@ -489,6 +589,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31CF4B832A33137A0044A51D /* UIImage+ImageName.swift in Sources */,
 				31A847C92A33086E009B6903 /* HTTPTask.swift in Sources */,
 				31A847C62A33086E009B6903 /* JSONParameterEncoder.swift in Sources */,
 				31A847E42A3308F5009B6903 /* kAPI.swift in Sources */,
@@ -496,15 +597,18 @@
 				31A847CC2A33086E009B6903 /* HTTPHeaders.swift in Sources */,
 				31A847C42A33086E009B6903 /* ParameterEncoding.swift in Sources */,
 				31A847C82A33086E009B6903 /* SyncDataManager.swift in Sources */,
+				31CF4B852A331AEC0044A51D /* CustomTextField.swift in Sources */,
 				31A847CB2A33086E009B6903 /* Router.swift in Sources */,
 				31CF4AF32A330AA90044A51D /* HomeTabSelectorHeaderView.swift in Sources */,
 				31A847D32A3308A5009B6903 /* Discover.swift in Sources */,
 				31A847E62A33090C009B6903 /* SceneDelegate.swift in Sources */,
+				31CF4B812A33118C0044A51D /* String+isBlank.swift in Sources */,
 				31A847CA2A33086E009B6903 /* HTTPMethod.swift in Sources */,
 				31A847CF2A33086E009B6903 /* Manager.swift in Sources */,
 				31A847C52A33086E009B6903 /* URLParameterEncoding.swift in Sources */,
 				31CF4AF42A330AA90044A51D /* HomeTabSelectorCell.swift in Sources */,
 				31A847E22A3308F5009B6903 /* UIColor+HexStringHelper.swift in Sources */,
+				31CF4BAB2A3334550044A51D /* MovieDetailTableViewCell.swift in Sources */,
 				31A847E32A3308F5009B6903 /* ColorConstants.swift in Sources */,
 				31A847E12A3308F5009B6903 /* FontConstants.swift in Sources */,
 				31A847CE2A33086E009B6903 /* EndPointType.swift in Sources */,
@@ -875,6 +979,22 @@
 				minimumVersion = 7.7.0;
 			};
 		};
+		31CF4B7D2A3311000044A51D /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.0;
+			};
+		};
+		31CF4B862A332C090044A51D /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Juanpe/SkeletonView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.30.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -887,6 +1007,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 31A847D52A3308DE009B6903 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		31CF4B7E2A3311000044A51D /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 31CF4B7D2A3311000044A51D /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		31CF4B872A332C090044A51D /* SkeletonView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 31CF4B862A332C090044A51D /* XCRemoteSwiftPackageReference "SkeletonView" */;
+			productName = SkeletonView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

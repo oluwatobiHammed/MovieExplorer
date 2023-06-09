@@ -23,7 +23,7 @@ class HomeTabSelectorCell: UICollectionViewCell {
         let label = UILabel(frame: .zero)
         label.text = "Undefined Title"
         label.textColor = kColor.BrandColours.Pink
-        label.font = kFont.EffraMediumRegular.of(size: 14)
+        //label.font = kFont.EffraMediumRegular.of(size: 14)
         label.adjustsFontSizeToFitWidth = true
         label.sizeToFit()
         return label

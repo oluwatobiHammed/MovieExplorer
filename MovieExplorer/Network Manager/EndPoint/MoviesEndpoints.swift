@@ -42,7 +42,6 @@ enum MovieEndpoints: EndPointType {
                                                 additionHeaders: headers)
             
             case .getNowPlayinMovies(let page):
-                let trimmedDictionary = getTrimmedDict(page: page)
                 return .requestParametersAndHeaders(bodyParameters: nil,
                                                     bodyEncoding: .urlEncoding,
                                                     urlParameters: ["page" : page],
@@ -50,7 +49,6 @@ enum MovieEndpoints: EndPointType {
             
             
             case .search(let query, let page):
-                let trimmedDictionary = getTrimmedDict(page: page)
                 return .requestParametersAndHeaders(bodyParameters: nil,
                                                     bodyEncoding: .urlEncoding,
                                                     urlParameters: ["page" : page, "query": query, "include_adult": false],

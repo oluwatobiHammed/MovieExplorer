@@ -2,6 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Montserrat-Regular.ttf</string>
+		<string>Montserrat-Bold.ttf</string>
+		<string>Effra-BoldItalic.ttf</string>
+		<string>Effra-Regular.ttf</string>
+		<string>Effra-Bold.ttf</string>
+		<string>Effra-Italic.ttf</string>
+		<string>EffraLight-Italic.ttf</string>
+		<string>EffraLight-Regular.ttf</string>
+		<string>EffraHeavy-Regular.ttf</string>
+		<string>EffraHeavy-Italic.ttf</string>
+		<string>EffraMedium-Regular.ttf</string>
+		<string>EffraMedium-Italic.ttf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -19,5 +34,7 @@
 			</array>
 		</dict>
 	</dict>
+	<key>CFBundleIdentifier</key>
+	<string></string>
 </dict>
 </plist>

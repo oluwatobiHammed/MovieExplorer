@@ -10,6 +10,7 @@ import Foundation
 
 struct kAPI {
     static let Base_URL = "https://api.themoviedb.org/3"
+    static let Base_img_URL = "https://image.tmdb.org/t/p/w300"
     
     
     struct Endpoints {

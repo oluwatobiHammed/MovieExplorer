@@ -18,4 +18,12 @@ struct kColor {
         static let Green = UIColor(hexString: "#F80089")
         static let Bizarre = UIColor(hexString: "#EFE5DB")
     }
+    
+    struct Bar {
+        
+        struct Background {
+            static let FitnessBlue = UIColor(hexString: "#2A83DF")
+            static let LightGray = UIColor(hexString: "#F5F7F8")
+        }
+    }
 }
