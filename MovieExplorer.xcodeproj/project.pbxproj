@@ -38,6 +38,22 @@
 		31CF4AF32A330AA90044A51D /* HomeTabSelectorHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CF4AF02A330AA90044A51D /* HomeTabSelectorHeaderView.swift */; };
 		31CF4AF42A330AA90044A51D /* HomeTabSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CF4AF12A330AA90044A51D /* HomeTabSelectorCell.swift */; };
 		31CF4AF52A330AA90044A51D /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CF4AF22A330AA90044A51D /* MovieListViewController.swift */; };
+		31CF4B6D2A330C060044A51D /* Univers-CondensedLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B4E2A330C060044A51D /* Univers-CondensedLight.ttf */; };
+		31CF4B6E2A330C060044A51D /* Univers-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B4F2A330C060044A51D /* Univers-Light.ttf */; };
+		31CF4B6F2A330C060044A51D /* Univers-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B502A330C060044A51D /* Univers-Bold.ttf */; };
+		31CF4B702A330C060044A51D /* Univers-CondensedBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B512A330C060044A51D /* Univers-CondensedBold.ttf */; };
+		31CF4B712A330C060044A51D /* Univers-Condensed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B522A330C060044A51D /* Univers-Condensed.ttf */; };
+		31CF4B722A330C060044A51D /* Univers.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B532A330C060044A51D /* Univers.ttf */; };
+		31CF4B732A330C060044A51D /* Univers-BlackOblique.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B542A330C060044A51D /* Univers-BlackOblique.ttf */; };
+		31CF4B742A330C060044A51D /* Univers-Oblique.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B552A330C060044A51D /* Univers-Oblique.ttf */; };
+		31CF4B752A330C060044A51D /* Univers-BoldOblique.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B562A330C060044A51D /* Univers-BoldOblique.ttf */; };
+		31CF4B762A330C060044A51D /* Univers-CondensedOblique.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B572A330C060044A51D /* Univers-CondensedOblique.ttf */; };
+		31CF4B772A330C060044A51D /* Univers-CondensedBoldOblique.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B582A330C060044A51D /* Univers-CondensedBoldOblique.ttf */; };
+		31CF4B782A330C060044A51D /* Univers-CondensedLightOblique.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B592A330C060044A51D /* Univers-CondensedLightOblique.ttf */; };
+		31CF4B792A330C060044A51D /* Univers-LightOblique.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B5A2A330C060044A51D /* Univers-LightOblique.ttf */; };
+		31CF4B7A2A330C060044A51D /* Univers-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B5B2A330C060044A51D /* Univers-Black.ttf */; };
+		31CF4B7B2A330C060044A51D /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B5D2A330C060044A51D /* Montserrat-Bold.ttf */; };
+		31CF4B7C2A330C060044A51D /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B5E2A330C060044A51D /* Montserrat-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +107,22 @@
 		31CF4AF02A330AA90044A51D /* HomeTabSelectorHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTabSelectorHeaderView.swift; sourceTree = "<group>"; };
 		31CF4AF12A330AA90044A51D /* HomeTabSelectorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTabSelectorCell.swift; sourceTree = "<group>"; };
 		31CF4AF22A330AA90044A51D /* MovieListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieListViewController.swift; path = "../../ButterFlySystem Assesment/ButterFlySystem/MovieListViewController.swift"; sourceTree = "<group>"; };
+		31CF4B4E2A330C060044A51D /* Univers-CondensedLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Univers-CondensedLight.ttf"; sourceTree = "<group>"; };
+		31CF4B4F2A330C060044A51D /* Univers-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Univers-Light.ttf"; sourceTree = "<group>"; };
+		31CF4B502A330C060044A51D /* Univers-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Univers-Bold.ttf"; sourceTree = "<group>"; };
+		31CF4B512A330C060044A51D /* Univers-CondensedBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Univers-CondensedBold.ttf"; sourceTree = "<group>"; };
+		31CF4B522A330C060044A51D /* Univers-Condensed.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Univers-Condensed.ttf"; sourceTree = "<group>"; };
+		31CF4B532A330C060044A51D /* Univers.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Univers.ttf; sourceTree = "<group>"; };
+		31CF4B542A330C060044A51D /* Univers-BlackOblique.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Univers-BlackOblique.ttf"; sourceTree = "<group>"; };
+		31CF4B552A330C060044A51D /* Univers-Oblique.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Univers-Oblique.ttf"; sourceTree = "<group>"; };
+		31CF4B562A330C060044A51D /* Univers-BoldOblique.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Univers-BoldOblique.ttf"; sourceTree = "<group>"; };
+		31CF4B572A330C060044A51D /* Univers-CondensedOblique.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Univers-CondensedOblique.ttf"; sourceTree = "<group>"; };
+		31CF4B582A330C060044A51D /* Univers-CondensedBoldOblique.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Univers-CondensedBoldOblique.ttf"; sourceTree = "<group>"; };
+		31CF4B592A330C060044A51D /* Univers-CondensedLightOblique.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Univers-CondensedLightOblique.ttf"; sourceTree = "<group>"; };
+		31CF4B5A2A330C060044A51D /* Univers-LightOblique.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Univers-LightOblique.ttf"; sourceTree = "<group>"; };
+		31CF4B5B2A330C060044A51D /* Univers-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Univers-Black.ttf"; sourceTree = "<group>"; };
+		31CF4B5D2A330C060044A51D /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
+		31CF4B5E2A330C060044A51D /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,8 +291,48 @@
 		31CF4AF62A330AEB0044A51D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				31CF4B392A330C060044A51D /* Fonts */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		31CF4B392A330C060044A51D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				31CF4B4D2A330C060044A51D /* Univers */,
+				31CF4B5C2A330C060044A51D /* Montserrat */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		31CF4B4D2A330C060044A51D /* Univers */ = {
+			isa = PBXGroup;
+			children = (
+				31CF4B4E2A330C060044A51D /* Univers-CondensedLight.ttf */,
+				31CF4B4F2A330C060044A51D /* Univers-Light.ttf */,
+				31CF4B502A330C060044A51D /* Univers-Bold.ttf */,
+				31CF4B512A330C060044A51D /* Univers-CondensedBold.ttf */,
+				31CF4B522A330C060044A51D /* Univers-Condensed.ttf */,
+				31CF4B532A330C060044A51D /* Univers.ttf */,
+				31CF4B542A330C060044A51D /* Univers-BlackOblique.ttf */,
+				31CF4B552A330C060044A51D /* Univers-Oblique.ttf */,
+				31CF4B562A330C060044A51D /* Univers-BoldOblique.ttf */,
+				31CF4B572A330C060044A51D /* Univers-CondensedOblique.ttf */,
+				31CF4B582A330C060044A51D /* Univers-CondensedBoldOblique.ttf */,
+				31CF4B592A330C060044A51D /* Univers-CondensedLightOblique.ttf */,
+				31CF4B5A2A330C060044A51D /* Univers-LightOblique.ttf */,
+				31CF4B5B2A330C060044A51D /* Univers-Black.ttf */,
+			);
+			path = Univers;
+			sourceTree = "<group>";
+		};
+		31CF4B5C2A330C060044A51D /* Montserrat */ = {
+			isa = PBXGroup;
+			children = (
+				31CF4B5D2A330C060044A51D /* Montserrat-Bold.ttf */,
+				31CF4B5E2A330C060044A51D /* Montserrat-Regular.ttf */,
+			);
+			path = Montserrat;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -375,8 +447,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31CF4B7C2A330C060044A51D /* Montserrat-Regular.ttf in Resources */,
+				31CF4B732A330C060044A51D /* Univers-BlackOblique.ttf in Resources */,
+				31CF4B742A330C060044A51D /* Univers-Oblique.ttf in Resources */,
+				31CF4B6E2A330C060044A51D /* Univers-Light.ttf in Resources */,
+				31CF4B792A330C060044A51D /* Univers-LightOblique.ttf in Resources */,
+				31CF4B6F2A330C060044A51D /* Univers-Bold.ttf in Resources */,
+				31CF4B762A330C060044A51D /* Univers-CondensedOblique.ttf in Resources */,
+				31CF4B782A330C060044A51D /* Univers-CondensedLightOblique.ttf in Resources */,
+				31CF4B752A330C060044A51D /* Univers-BoldOblique.ttf in Resources */,
 				31A847222A3304B1009B6903 /* LaunchScreen.storyboard in Resources */,
+				31CF4B7A2A330C060044A51D /* Univers-Black.ttf in Resources */,
+				31CF4B722A330C060044A51D /* Univers.ttf in Resources */,
+				31CF4B712A330C060044A51D /* Univers-Condensed.ttf in Resources */,
 				31A8471F2A3304B1009B6903 /* Assets.xcassets in Resources */,
+				31CF4B7B2A330C060044A51D /* Montserrat-Bold.ttf in Resources */,
+				31CF4B6D2A330C060044A51D /* Univers-CondensedLight.ttf in Resources */,
+				31CF4B772A330C060044A51D /* Univers-CondensedBoldOblique.ttf in Resources */,
+				31CF4B702A330C060044A51D /* Univers-CondensedBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -603,7 +691,6 @@
 				INFOPLIST_FILE = MovieExplorer/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -631,7 +718,6 @@
 				INFOPLIST_FILE = MovieExplorer/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
