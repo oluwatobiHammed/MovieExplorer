@@ -77,6 +77,7 @@
 		F10FC1C72A347CB300B1F2EE /* UIView+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FC1C62A347CB300B1F2EE /* UIView+Border.swift */; };
 		F10FC1CC2A34C4D800B1F2EE /* MovieViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FC1CB2A34C4D800B1F2EE /* MovieViewModelProtocol.swift */; };
 		F10FC1CE2A34C52D00B1F2EE /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FC1CD2A34C52D00B1F2EE /* MovieViewModel.swift */; };
+		F10FC1D02A34F30E00B1F2EE /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FC1CF2A34F30E00B1F2EE /* MovieDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -166,6 +167,7 @@
 		F10FC1C62A347CB300B1F2EE /* UIView+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Border.swift"; sourceTree = "<group>"; };
 		F10FC1CB2A34C4D800B1F2EE /* MovieViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModelProtocol.swift; sourceTree = "<group>"; };
 		F10FC1CD2A34C52D00B1F2EE /* MovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModel.swift; sourceTree = "<group>"; };
+		F10FC1CF2A34F30E00B1F2EE /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -437,6 +439,7 @@
 				F10FC1C92A34C46B00B1F2EE /* ViewModel */,
 				F10FC1BA2A337B7500B1F2EE /* MovieListViewController.swift */,
 				31CF4BAA2A3334550044A51D /* MovieDetailTableViewCell.swift */,
+				F10FC1CF2A34F30E00B1F2EE /* MovieDetailsViewController.swift */,
 			);
 			path = Movies;
 			sourceTree = "<group>";
@@ -668,6 +671,7 @@
 				31CF4B852A331AEC0044A51D /* CustomTextField.swift in Sources */,
 				31A847CB2A33086E009B6903 /* Router.swift in Sources */,
 				31CF4AF32A330AA90044A51D /* HomeTabSelectorHeaderView.swift in Sources */,
+				F10FC1D02A34F30E00B1F2EE /* MovieDetailsViewController.swift in Sources */,
 				31A847D32A3308A5009B6903 /* Movie.swift in Sources */,
 				F10FC1BB2A337B7500B1F2EE /* MovieListViewController.swift in Sources */,
 				31A847E62A33090C009B6903 /* SceneDelegate.swift in Sources */,

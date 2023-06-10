@@ -20,7 +20,6 @@ class MovieListViewController: UIViewController, UITableViewDataSource, UITableV
     
     // MARK: Properties
     private let messageUnavailableCellIdentifier = "UnavailableCellIdentifier"
-    private var currentPage = 1
     private let image = UIImage(named: .searchIcon)
     
     private let inputViewContainerView: UIView = {
@@ -201,10 +200,7 @@ class MovieListViewController: UIViewController, UITableViewDataSource, UITableV
     
     
     @objc private func sendButtonnPressed() {
-        if currentPage > 1 {
-            currentPage = 1
-        }
-        movieViewViewModel.handleSendButton(query: searchTextField.text ?? "", currentPage: currentPage)
+        movieViewViewModel.handleSendButton(query: searchTextField.text ?? "")
         searchTextField.endEditing(true)
     }
 
@@ -225,17 +221,17 @@ class MovieListViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let (totalPages, movieResult) = movieViewViewModel.numberofMovies()
-        if  currentPage  < totalPages, indexPath.row == movieResult.count  - 1 {
-            currentPage += 1
-            movieViewViewModel.getQueryText(page: currentPage)
-        }
+        movieViewViewModel.pagination(index: indexPath.row)
     
     }
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 300
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
     }
     
     

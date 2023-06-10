@@ -17,6 +17,7 @@ class MovieViewModel {
     private var movieResult: [Movie] = []
     private var movieList: Movies?
     private var sendButtonPressed: Bool = false
+    private var currentPage = 1
     init(setView view: MovieListViewProtocol?) {
         if let view  { self.view = view }
         
@@ -24,6 +25,13 @@ class MovieViewModel {
 }
 
 extension MovieViewModel: MovieViewModelProtocol {
+    func pagination(index: Int) {
+        if  currentPage  < movieList?.totalPages ?? 0, index == movieResult.count - 1 {
+            currentPage += 1
+            getQueryText(page: currentPage)
+        }
+    }
+    
     
     
     func numberofMovies() -> (Int, [Movie]) {
@@ -36,7 +44,10 @@ extension MovieViewModel: MovieViewModelProtocol {
         }
     }
 
-    func handleSendButton(query: String, currentPage: Int) {
+    func handleSendButton(query: String) {
+        if currentPage > 1 {
+            currentPage = 1
+        }
         UserDefaults.standard.removeObject(forKey: "searchQuery")
         MovieRealmManager.shared.deleteDatabase()
         movieList = nil
