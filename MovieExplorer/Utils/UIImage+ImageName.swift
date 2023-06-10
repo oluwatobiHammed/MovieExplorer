@@ -39,4 +39,5 @@ extension UIImage {
 enum ImageName: String {
     case sendButton = "send_icon"
     case searchIcon = "search-icon"
+    case starfill = "star_fill"
 }

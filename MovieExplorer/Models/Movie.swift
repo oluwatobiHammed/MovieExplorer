@@ -9,7 +9,7 @@ import RealmSwift
 import Realm
 
 @objcMembers
-class Discover: Object, Decodable {
+class Movie: Object, Decodable {
     private enum CodingKeys: String, CodingKey {
         case id,  backdropPath = "backdrop_path", genreIds = "genre_ids", originalLanguage = "original_language", originalTitle = "original_title", overview, popularity, posterPath = "poster_path", releaseDate = "release_date", title, video, voteAverage = "vote_average",
              voteCount = "vote_count"

@@ -12,7 +12,7 @@ struct NetworkManager {
     
     
     
-    func getDiscover(page: Int, completion: @escaping (_ review: DiscoverMovie?, _ error: Error?)->()) {
+    func getDiscover(page: Int, completion: @escaping (_ movies: Movies?, _ error: Error?)->()) {
         Task {
             await router.request(.getMovies(page: page)) { data, response, error in
                 
@@ -33,11 +33,14 @@ struct NetworkManager {
                             let jsonData = try JSONSerialization.jsonObject(with: responseData, options: .mutableContainers)
                             print(jsonData)
                             
-                            guard let review = try? DiscoverMovie.decode(data: responseData) else {
+                            guard let movies = try? Movies.decode(data: responseData) else {
                                 completion(nil, NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.unableToDecode.rawValue]))
                                 return
                             }
-                            completion(review,nil)
+                            DispatchQueue.main.async {
+                                MovieRealmManager.shared.updateOrSave(realmObject: movies)
+                            }
+                            completion(movies,nil)
                         }catch {
 
                             completion(nil, NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.unableToDecode.rawValue]))
@@ -50,7 +53,7 @@ struct NetworkManager {
         }
     }
     
-    func getNowPlaying(page: Int, completion: @escaping (_ review: DiscoverMovie?, _ error: Error?)->()) {
+    func getNowPlaying(page: Int, completion: @escaping (_ movies: Movies?, _ error: Error?)->()) {
         Task {
             await router.request(.getNowPlayinMovies(page: page)) { data, response, error in
                 
@@ -71,11 +74,14 @@ struct NetworkManager {
                             let jsonData = try JSONSerialization.jsonObject(with: responseData, options: .mutableContainers)
                             print(jsonData)
                             
-                            guard let review = try? DiscoverMovie.decode(data: responseData) else {
+                            guard let movies = try? Movies.decode(data: responseData) else {
                                 completion(nil, NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.unableToDecode.rawValue]))
                                 return
                             }
-                            completion(review,nil)
+                            DispatchQueue.main.async {
+                                MovieRealmManager.shared.updateOrSave(realmObject: movies)
+                            }
+                            completion(movies,nil)
                         }catch {
 
                             completion(nil, NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.unableToDecode.rawValue]))
@@ -89,7 +95,7 @@ struct NetworkManager {
     }
     
     
-    func getSearch(page: Int, query: String, completion: @escaping (_ movies: DiscoverMovie?, _ error: Error?)->()) {
+    func getSearch(page: Int, query: String, completion: @escaping (_ movies: Movies?, _ error: Error?)->()) {
         Task {
             await router.request(.search(query: query, page: page)) { data, response, error in
                 
@@ -110,11 +116,14 @@ struct NetworkManager {
                             let jsonData = try JSONSerialization.jsonObject(with: responseData, options: .mutableContainers)
                             print(jsonData)
                             
-                            guard let movies = try? DiscoverMovie.decode(data: responseData) else {
+                            guard let movies = try? Movies.decode(data: responseData) else {
                                 completion(nil, NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.unableToDecode.rawValue]))
                                 return
                             }
                             guard movies.results.count > 0 else { return }
+                            DispatchQueue.main.async {
+                                MovieRealmManager.shared.updateOrSave(realmObject: movies)
+                            }
                             completion(movies,nil)
                         } catch {
 

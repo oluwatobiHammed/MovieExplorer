@@ -9,7 +9,7 @@ import RealmSwift
 import Realm
 
 @objcMembers
-class DiscoverMovie: Object, Decodable {
+class Movies: Object, Decodable {
     private enum CodingKeys: String, CodingKey {
         case page, results, totalPages = "total_pages"
     }
@@ -18,7 +18,7 @@ class DiscoverMovie: Object, Decodable {
         self.init()
 
         let container               = try decoder.container(keyedBy: CodingKeys.self)
-        if let results = try container.decodeIfPresent(Array<Discover>.self, forKey: .results) {
+        if let results = try container.decodeIfPresent(Array<Movie>.self, forKey: .results) {
             self.results.append(objectsIn: results)
         }
         self.totalPages                     = try container.decode(Int.self, forKey: .totalPages)
@@ -26,11 +26,11 @@ class DiscoverMovie: Object, Decodable {
     }
 
     override class func primaryKey() -> String? {
-        return "id"
+        return "page"
     }
     
-    dynamic var id                  : Int = 0
-    var results                     = List<Discover>()
+    //dynamic var id                  : Int = 0
+    var results                     = List<Movie>()
     dynamic var totalPages          : Int = 0
     dynamic var page                : Int = 0
 }

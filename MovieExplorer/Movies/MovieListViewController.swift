@@ -12,11 +12,12 @@ class MovieListViewController: UIViewController, UITextViewDelegate, UITextField
 
     
     private let messageUnavailableCellIdentifier = "UnavailableCellIdentifier"
-    private var movieList: DiscoverMovie?
-    private var movieResult: [Discover] = []
+    private var movieList: Movies?
+    private var movieResult: [Movie] = []
     private var currentPage = 1
     private var query = ""
-    
+    private let image = UIImage(named: .searchIcon)
+    private var sendButtonPressed: Bool = false
     private let inputViewContainerView: UIView = {
         $0.backgroundColor = .white
         $0.layer.shadowColor = UIColor.black.cgColor
@@ -30,24 +31,16 @@ class MovieListViewController: UIViewController, UITextViewDelegate, UITextField
     }(UIView())
     
     lazy var searchTextField: CustomTextField = {
-        let image = UIImage(named: .searchIcon)
-        let textField = CustomTextField(iconImage: image.imageWithColor(tintColor: kColor.BrandColours.DarkGray))
-        textField.backgroundColor = .clear
-        textField.clipsToBounds = false
-        textField.attributedPlaceholder = NSAttributedString( string: "Search for movie", attributes: [NSAttributedString.Key.foregroundColor: kColor.BrandColours.DarkGray])
-        textField.textColor = kColor.BrandColours.DarkGray
-        textField.font = kFont.EffraRegular.of(size: 15)
-        textField.delegate = self
-        textField.returnKeyType = UIReturnKeyType.next
-        return textField
-    }()
-    
-    lazy var refreshControl : UIRefreshControl = {
         $0.backgroundColor = .clear
-        $0.tintColor = .black
-        $0.addTarget(self, action: #selector(handlePullDownToRefresh), for: UIControl.Event.valueChanged)
+        $0.clipsToBounds = false
+        $0.attributedPlaceholder = NSAttributedString( string: "Search for movie", attributes: [NSAttributedString.Key.foregroundColor: kColor.BrandColours.DarkGray])
+        $0.textColor = kColor.BrandColours.DarkGray
+        $0.font = kFont.EffraRegular.of(size: 15)
+        $0.delegate = self
+        $0.returnKeyType = UIReturnKeyType.next
         return $0
-    }(UIRefreshControl(frame: .zero))
+    }(CustomTextField(iconImage: image.imageWithColor(tintColor: kColor.BrandColours.DarkGray)))
+    
     
     private let naVBarView: UIView = {
         $0.backgroundColor = .white
@@ -73,7 +66,6 @@ class MovieListViewController: UIViewController, UITextViewDelegate, UITextField
         $0.register(MovieDetailTableViewCell.self, forCellReuseIdentifier: MovieDetailTableViewCell.reuseIdentifier)
         $0.register(UITableViewCell.self, forCellReuseIdentifier: messageUnavailableCellIdentifier)
         $0.separatorStyle = .none
-        $0.refreshControl = refreshControl
         $0.backgroundColor = kColor.BrandColours.Bizarre
         $0.contentInsetAdjustmentBehavior = .never
         $0.keyboardDismissMode = .interactive
@@ -99,7 +91,12 @@ class MovieListViewController: UIViewController, UITextViewDelegate, UITextField
     }
     
     
-    func setUpview() {
+    private func setUpview() {
+        if let movies = MovieRealmManager.shared.movies {
+            movieResult = Array(movies.results)
+            movieList = movies
+        }
+       
         let centerImageTitleView  = centerImageTitleView(title: "TMBD", subTitle: "Millions of movies TV shows and people to discover", tintColor: kColor.BrandColours.DarkGray)
         view.addSubview(naVBarView)
         naVBarView.addSubview(centerImageTitleView)
@@ -199,35 +196,49 @@ class MovieListViewController: UIViewController, UITextViewDelegate, UITextField
         
     }
     
-    func getQueryText(page: Int) {
-        guard query != ""  else { return }
+    private func getQueryText(page: Int) {
+        guard let query = UserDefaults.standard.string(forKey: "searchQuery")  else {
+            AlertManager.sharedAlertManager.showAlertWithTitle(title: "", message: "Type in a movie name to search for a movie", controller: self)
+            return }
         
         networkManager.getSearch(page: page, query: query) { [weak self] movie, err in
             
             DispatchQueue.main.async { [weak self] in
                 guard let self, let movie else {return}
-                if movieList?.results.count ?? 0 < 1 {
-                    movieList = movie
-                    movieResult = Array(movie.results)
+                if err == nil {
+                    if movieList?.results.count ?? 0 < 1 {
+                        movieList = movie
+                        movieResult = Array(movie.results)
+                    } else {
+                        movieList = movie
+                        movieResult.append(contentsOf: movie.results)
+                    }
                 } else {
-                    movieList = movie
-                    movieResult.append(contentsOf: movie.results)
+                    AlertManager.sharedAlertManager.showAlertWithTitle(title: "Something went wrong", message: "We are experiencing technical difficulties. Please try again later.", controller: self)
                 }
+           
                 
                 movieListTableView.reloadData()
+                if sendButtonPressed {
+                    movieListTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                }
                 searchTextField.text = ""
+                sendButtonPressed = false
             }
             
         }
     }
     
     @objc private func sendButtonnPressed() {
+        UserDefaults.standard.removeObject(forKey: "searchQuery")
+        MovieRealmManager.shared.deleteDatabase()
         if currentPage > 1 {
             currentPage = 1
         }
         movieList = nil
         movieResult.removeAll()
-        query = searchTextField.text ?? ""
+        UserDefaults.standard.set(searchTextField.text, forKey: "searchQuery")
+        sendButtonPressed = true
         getQueryText(page: currentPage)
         searchTextField.endEditing(true)
     }
@@ -258,7 +269,7 @@ class MovieListViewController: UIViewController, UITextViewDelegate, UITextField
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        return 300
     }
     
     
