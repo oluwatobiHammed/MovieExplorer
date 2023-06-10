@@ -14,6 +14,7 @@ class MovieDetailTableViewCell:  UITableViewCell {
     
     private let posterImage: UIImageView = {
         $0.contentMode = .scaleToFill
+        $0.cornerRadiusLayer = 5
         $0.clipsToBounds = true
         return $0
     }(UIImageView())
@@ -88,7 +89,7 @@ class MovieDetailTableViewCell:  UITableViewCell {
                                           .diskCacheExpiration(.days(7)),
                                           .transition(.fade(0.5))])
         centeredTitleLabel.text = movie.originalTitle
-            rateLabel.text = "\(movie.voteAverage)"
+            rateLabel.text =  String(format: "%0.1f", movie.voteAverage)
         rateImageView.isHidden = (movie.originalTitle == nil)
         overViewTitleLabel.text = movie.overview
     }
@@ -121,14 +122,14 @@ class MovieDetailTableViewCell:  UITableViewCell {
             make.height.equalTo(20)
             make.width.equalTo(20)
             make.left.equalTo(posterImage.snp.right).offset(10)
-            make.bottom.equalTo(safeAreaView.snp.bottom).offset(-8)
+            make.bottom.equalTo(safeAreaView.snp.bottom).offset(-10)
             make.top.equalTo(containerStackView.snp.bottom).offset(15)
         }
         
         safeAreaView.addSubview(rateLabel)
         rateLabel.snp.makeConstraints { make in
             make.left.equalTo(rateImageView.snp.right).offset(10)
-            make.bottom.equalTo(safeAreaView.snp.bottom).offset(-5)
+            make.bottom.equalTo(safeAreaView.snp.bottom).offset(-8)
             make.top.equalTo(containerStackView.snp.bottom).offset(15)
             make.right.equalTo(safeAreaView.snp.right).offset(-10)
         }
