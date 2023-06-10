@@ -40,4 +40,8 @@ enum ImageName: String {
     case sendButton = "send_icon"
     case searchIcon = "search-icon"
     case starfill = "star_fill"
+    case imagePlaceholder = "Image_Placeholder"
+    case tipsPlaceholder = "tips_placeholder"
+    case tmdb = "tmdb"
+    case darktmdb = "darktmdb"
 }

@@ -81,22 +81,26 @@ class MovieDetailTableViewCell:  UITableViewCell {
     }
     
     func setUpImage(movie: Movie) {
-        guard let urlString = movie.posterPath, let url = URL(string: kAPI.Base_img_URL+urlString) else { return }
-        posterImage.kf.setImage(with:url,
-                                placeholder: #imageLiteral(resourceName: "Image_Placeholder"),
+        
+        let image = UIImage(named: .imagePlaceholder)
+        let imgUrl = movie.posterPath ?? ""
+        posterImage.kf.setImage(with:URL(string: kAPI.Base_img_URL+imgUrl),
+                                placeholder: image,
                                 options: [.loadDiskFileSynchronously,
                                           .cacheOriginalImage,
                                           .diskCacheExpiration(.days(7)),
-                                          .transition(.fade(0.5))])
+                                          .transition(.fade(0.5))]) { _ in
+                                              self.layoutIfNeeded()
+                                          }
+        
         centeredTitleLabel.text = movie.originalTitle
-            rateLabel.text =  String(format: "%0.1f", movie.voteAverage)
+        rateLabel.text =  String(format: "%0.1f", movie.voteAverage)
         rateImageView.isHidden = (movie.originalTitle == nil)
         overViewTitleLabel.text = movie.overview
     }
     
     private func setUpUI() {
      addSubview(safeAreaView)
-        
         safeAreaView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(10)
             make.right.equalToSuperview().offset(-10)

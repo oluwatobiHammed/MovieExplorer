@@ -8,16 +8,21 @@
 import UIKit
 import SnapKit
 
-class MovieListViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
 
+
+protocol MovieListViewProtocol: AnyObject {
+    func reloadMovieTableView(sendButtonPressed: Bool)
+    func showAlert(title: String?, message: String)
+}
+
+
+class MovieListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    // MARK: Properties
     private let messageUnavailableCellIdentifier = "UnavailableCellIdentifier"
-    private var movieList: Movies?
-    private var movieResult: [Movie] = []
     private var currentPage = 1
-    private var query = ""
     private let image = UIImage(named: .searchIcon)
-    private var sendButtonPressed: Bool = false
+    
     private let inputViewContainerView: UIView = {
         $0.backgroundColor = .white
         $0.layer.shadowColor = UIColor.black.cgColor
@@ -36,7 +41,6 @@ class MovieListViewController: UIViewController, UITextViewDelegate, UITextField
         $0.attributedPlaceholder = NSAttributedString( string: "Search for movie", attributes: [NSAttributedString.Key.foregroundColor: kColor.BrandColours.DarkGray])
         $0.textColor = kColor.BrandColours.DarkGray
         $0.font = kFont.EffraRegular.of(size: 15)
-        $0.delegate = self
         $0.returnKeyType = UIReturnKeyType.next
         return $0
     }(CustomTextField(iconImage: image.imageWithColor(tintColor: kColor.BrandColours.DarkGray)))
@@ -47,10 +51,6 @@ class MovieListViewController: UIViewController, UITextViewDelegate, UITextField
         return $0
     }(UIView())
     
-    @objc private func handlePullDownToRefresh() {
-
-    }
-    
     
     private (set) lazy var sendButton: UIButton = {
         let image = UIImage(named: .sendButton)
@@ -59,7 +59,6 @@ class MovieListViewController: UIViewController, UITextViewDelegate, UITextField
         return $0
     }(UIButton())
     
-    private let networkManager = NetworkManager()
     private lazy var movieListTableView: UITableView = {
         $0.delegate = self
         $0.dataSource = self
@@ -74,12 +73,16 @@ class MovieListViewController: UIViewController, UITextViewDelegate, UITextField
         $0.alwaysBounceVertical = true
         return $0
     }(UITableView())
+    
+    
+    private lazy var movieViewViewModel: MovieViewModelProtocol = {
+        return MovieViewModel(setView: self)
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
-        
         setupNotificationObservers()
         setUpview()
     }
@@ -90,26 +93,23 @@ class MovieListViewController: UIViewController, UITextViewDelegate, UITextField
         NotificationCenter.default.removeObserver(self)
     }
     
-    
+    // MARK: setUpview
     private func setUpview() {
-        if let movies = MovieRealmManager.shared.movies {
-            movieResult = Array(movies.results)
-            movieList = movies
-        }
-       
-        let centerImageTitleView  = centerImageTitleView(title: "TMBD", subTitle: "Millions of movies TV shows and people to discover", tintColor: kColor.BrandColours.DarkGray)
+        movieViewViewModel.getMovies()
+        let icon = UIImage(named: .darktmdb)
+        let centerImageTitleView  = centerImageTitleView(icon: icon, subTitle: "Millions of movies TV shows and people to discover")
         view.addSubview(naVBarView)
         naVBarView.addSubview(centerImageTitleView)
         
         centerImageTitleView.snp.makeConstraints { make in
-            make.top.equalTo(naVBarView.snp.top).inset(-35)
+            make.top.equalTo(naVBarView.snp.top).inset(-50)
             make.left.equalTo(naVBarView.snp.left)
             make.right.equalTo(naVBarView.snp.right)
-            make.bottom.equalTo(naVBarView.snp.bottom)
+            make.bottom.equalTo(naVBarView.snp.bottom).offset(-5)
         }
         
         naVBarView.snp.makeConstraints { make in
-            make.topMargin.equalToSuperview().inset(15)
+            make.topMargin.equalToSuperview().inset(10)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.height.equalTo(40)
@@ -144,6 +144,7 @@ class MovieListViewController: UIViewController, UITextViewDelegate, UITextField
         }
     }
     
+    // MARK: Keyboard Responses
     private func adjustKeyboard(bottomConstraint: CGFloat) {
         view.addSubview(inputViewContainerView)
         inputViewContainerView.snp.updateConstraints { make in
@@ -155,17 +156,16 @@ class MovieListViewController: UIViewController, UITextViewDelegate, UITextField
     
     }
     
-    
-    private func centerImageTitleView(title: String, subTitle: String, tintColor: UIColor) -> UIView {
+    // MARK: Title and Image Navbar view
+    private func centerImageTitleView(icon: UIImage, subTitle: String) -> UIView {
         
         let titleView = UIView()
         
-        let centeredTitleLabel: UILabel = {
-            $0.font = kFont.EffraMediumRegular.of(size: 25)
-            $0.textAlignment = .center
-            $0.textColor = tintColor
+        let imageIcon: UIImageView = {
+            $0.contentMode = .scaleAspectFit
+            $0.clipsToBounds = true
             return $0
-        }(UILabel())
+        }(UIImageView())
         
         let subTitleLabel: UILabel = {
             $0.font = kFont.EffraMediumRegular.of(size: 14)
@@ -174,84 +174,50 @@ class MovieListViewController: UIViewController, UITextViewDelegate, UITextField
             return $0
         }(UILabel())
         
-        centeredTitleLabel.text = title
+        imageIcon.image = icon
         subTitleLabel.text = subTitle
 
         lazy var  containerStackView: UIStackView = {
             $0.axis = .vertical
-            $0.distribution = .fillEqually
+            $0.distribution = .fill
             $0.alignment = .fill
+            $0.spacing = 4
             $0.isUserInteractionEnabled = true
             return $0
-        }(UIStackView(arrangedSubviews: [centeredTitleLabel, subTitleLabel]))
+        }(UIStackView(arrangedSubviews: [imageIcon, subTitleLabel]))
         
-
+        imageIcon.snp.makeConstraints { make in
+            make.height.equalTo(40)
+        }
+        
         titleView.addSubview(containerStackView)
         containerStackView.snp.makeConstraints { make in
             make.center.equalTo(titleView.snp.center)
         }
         
-        
         return titleView
         
     }
     
-    private func getQueryText(page: Int) {
-        guard let query = UserDefaults.standard.string(forKey: "searchQuery")  else {
-            AlertManager.sharedAlertManager.showAlertWithTitle(title: "", message: "Type in a movie name to search for a movie", controller: self)
-            return }
-        
-        networkManager.getSearch(page: page, query: query) { [weak self] movie, err in
-            
-            DispatchQueue.main.async { [weak self] in
-                guard let self, let movie else {return}
-                if err == nil {
-                    if movieList?.results.count ?? 0 < 1 {
-                        movieList = movie
-                        movieResult = Array(movie.results)
-                    } else {
-                        movieList = movie
-                        movieResult.append(contentsOf: movie.results)
-                    }
-                } else {
-                    AlertManager.sharedAlertManager.showAlertWithTitle(title: "Something went wrong", message: "We are experiencing technical difficulties. Please try again later.", controller: self)
-                }
-           
-                
-                movieListTableView.reloadData()
-                if sendButtonPressed {
-                    movieListTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-                }
-                searchTextField.text = ""
-                sendButtonPressed = false
-            }
-            
-        }
-    }
     
     @objc private func sendButtonnPressed() {
-        UserDefaults.standard.removeObject(forKey: "searchQuery")
-        MovieRealmManager.shared.deleteDatabase()
         if currentPage > 1 {
             currentPage = 1
         }
-        movieList = nil
-        movieResult.removeAll()
-        UserDefaults.standard.set(searchTextField.text, forKey: "searchQuery")
-        sendButtonPressed = true
-        getQueryText(page: currentPage)
+        movieViewViewModel.handleSendButton(query: searchTextField.text ?? "", currentPage: currentPage)
         searchTextField.endEditing(true)
     }
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        movieResult.count
+       let (_, movieResult) = movieViewViewModel.numberofMovies()
+       return movieResult.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if  let cell = tableView.dequeueReusableCell(withIdentifier: MovieDetailTableViewCell.reuseIdentifier, for: indexPath) as? MovieDetailTableViewCell {
-            cell.setUpImage(movie:  movieResult[indexPath.row])
-            
+            let (_, movieResult) = movieViewViewModel.numberofMovies()
+            cell.setUpImage(movie: movieResult[indexPath.row])
             return cell
         } else {
             return tableView.dequeueReusableCell(withIdentifier: messageUnavailableCellIdentifier, for: indexPath)
@@ -259,11 +225,11 @@ class MovieListViewController: UIViewController, UITextViewDelegate, UITextField
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-            if let totalPages = movieList?.totalPages, currentPage  < totalPages, indexPath.row == movieResult.count  - 1 {
-                currentPage += 1
-                
-                getQueryText(page: currentPage)
-            }
+        let (totalPages, movieResult) = movieViewViewModel.numberofMovies()
+        if  currentPage  < totalPages, indexPath.row == movieResult.count  - 1 {
+            currentPage += 1
+            movieViewViewModel.getQueryText(page: currentPage)
+        }
     
     }
     
@@ -310,3 +276,17 @@ class MovieListViewController: UIViewController, UITextViewDelegate, UITextField
 
 }
 
+
+extension MovieListViewController: MovieListViewProtocol {
+    func showAlert(title: String?, message: String) {
+        AlertManager.sharedAlertManager.showAlertWithTitle(title: title ?? "", message: message, controller: self)
+    }
+    
+    func reloadMovieTableView(sendButtonPressed: Bool) {
+        movieListTableView.reloadData()
+        if sendButtonPressed {
+            movieListTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        }
+        searchTextField.text = ""
+    }
+}
