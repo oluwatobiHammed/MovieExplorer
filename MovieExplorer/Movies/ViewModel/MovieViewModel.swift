@@ -67,7 +67,9 @@ extension MovieViewModel: MovieViewModelProtocol {
             DispatchQueue.main.async { [weak self] in
                 guard let self else {return}
                 if err == nil {
-                    guard let movie else {return}
+                    guard let movie, movie.results.count > 0  else {
+                        view?.showAlert(title: "No Movies Found", message: "Try adjusting your query and try again")
+                        return}
                     if movieList?.results.count ?? 0 < 1 {
                         movieList = movie
                         movieResult = Array(movie.results)
@@ -78,9 +80,10 @@ extension MovieViewModel: MovieViewModelProtocol {
                     view?.reloadMovieTableView(sendButtonPressed: sendButtonPressed)
                     sendButtonPressed = false
                 } else {
-                    view?.showAlert(title: "Something went wrong", message: "We are experiencing technical difficulties. Please try again later or Please check your network connection.. or check if you have mistyped the movie name.")
+                    guard let err else {return}
+                    view?.showAlert(title: "Something went wrong", message: err.localizedDescription)
                 }
-         
+                
             }
             
         }
