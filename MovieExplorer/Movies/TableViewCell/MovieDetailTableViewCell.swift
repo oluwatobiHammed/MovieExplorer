@@ -96,7 +96,7 @@ class MovieDetailTableViewCell:  UITableViewCell {
         centeredTitleLabel.text = movie.originalTitle
         rateLabel.text = String(format: "%0.1f", movie.voteAverage)
         rateImageView.isHidden = (movie.originalTitle == nil)
-        overViewTitleLabel.text = movie.overview
+        overViewTitleLabel.text = movie.overview != "" ? movie.overview : "No details available for this movie"
     }
     
     private func setUpUI() {

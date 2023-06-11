@@ -151,7 +151,8 @@ class MovieDetailsViewController: UIViewController {
                                           .transition(.fade(0.5))]) { _ in
                                               self.view.layoutIfNeeded()
                                           }
-        overViewLabel.text = movie.overview
+        
+        overViewLabel.text =  movie.overview != "" ? movie.overview : "No details available for this movie"
         rateLabel.text = String(format: "%0.1f", movie.voteAverage)
         releasedateLabel.text = movie.releaseDate
         setStarsRating(rating: Int(movie.voteAverage)/2)
