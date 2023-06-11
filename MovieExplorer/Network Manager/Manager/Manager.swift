@@ -39,6 +39,10 @@ struct NetworkManager {
                             completion(movies,nil)
                             guard movies.results.count > 0 else { return }
                             DispatchQueue.main.async {
+                                if page == 1 {
+                                    MovieRealmManager.shared.deleteDatabase()
+                                }
+                                
                                 MovieRealmManager.shared.updateOrSave(realmObject: movies)
                             }
                            

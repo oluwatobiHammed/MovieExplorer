@@ -255,7 +255,9 @@ extension MovieListViewController:  UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if  let cell = tableView.dequeueReusableCell(withIdentifier: MovieDetailTableViewCell.reuseIdentifier, for: indexPath) as? MovieDetailTableViewCell {
             let (_, movieResult) = movieViewViewModel.numberofMovies()
-            cell.setUpImage(movie: movieResult[indexPath.row])
+            if movieResult.count > 0 {
+                cell.setUpImage(movie: movieResult[indexPath.row])
+            }
             return cell
         } else {
             return tableView.dequeueReusableCell(withIdentifier: messageUnavailableCellIdentifier, for: indexPath)

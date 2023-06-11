@@ -28,9 +28,10 @@ class MovieViewModel {
 
 extension MovieViewModel: MovieViewModelProtocol {
     func pagination(index: Int) {
+        guard let query = UserDefaults.standard.string(forKey: "searchQuery") else {return}
         if  currentPage  < movieList?.totalPages ?? 0, index == movieResult.count - 1 {
             currentPage += 1
-            getQueryText(page: currentPage)
+            getQueryText(page: currentPage, query: query)
         }
     }
     
@@ -43,6 +44,7 @@ extension MovieViewModel: MovieViewModelProtocol {
         if let movies = MovieRealmManager.shared.movies {
             movieResult = Array(movies.results)
             movieList = movies
+            view?.reloadMovieTableView(sendButtonPressed: sendButtonPressed)
         }
     }
 
@@ -50,17 +52,16 @@ extension MovieViewModel: MovieViewModelProtocol {
         if currentPage > 1 {
             currentPage = 1
         }
-        UserDefaults.standard.removeObject(forKey: "searchQuery")
-        MovieRealmManager.shared.deleteDatabase()
+        
         movieList = nil
         movieResult.removeAll()
-        UserDefaults.standard.set(query, forKey: "searchQuery")
         sendButtonPressed = true
-        getQueryText(page: currentPage)
+        getQueryText(page: currentPage, query: query)
     }
     
-    private func getQueryText(page: Int) {
-        guard let query = UserDefaults.standard.string(forKey: "searchQuery")  else { view?.showAlert(title: nil, message: "Type in a movie name to search for a movie")
+    private func getQueryText(page: Int, query: String?) {
+        guard let query else {
+            view?.showAlert(title: nil, message: "Type in a movie name to search for a movie")
             return }
         networkManager.getSearch(page: page, query: query) { [weak self] movie, err in
             
@@ -69,7 +70,9 @@ extension MovieViewModel: MovieViewModelProtocol {
                 if err == nil {
                     guard let movie, movie.results.count > 0  else {
                         self.view?.showAlert(title: "No Movies Found", message: "Try adjusting your query and try again")
+                        self.getMovies()
                         return}
+                    UserDefaults.standard.removeObject(forKey: "searchQuery")
                     if self.movieList?.results.count ?? 0 < 1 {
                         self.movieList = movie
                         self.movieResult = Array(movie.results)
@@ -77,6 +80,7 @@ extension MovieViewModel: MovieViewModelProtocol {
                         self.movieList = movie
                         self.movieResult.append(contentsOf: movie.results)
                     }
+                    UserDefaults.standard.set(query, forKey: "searchQuery")
                     self.view?.reloadMovieTableView(sendButtonPressed: sendButtonPressed)
                     self.sendButtonPressed = false
                 } else {
