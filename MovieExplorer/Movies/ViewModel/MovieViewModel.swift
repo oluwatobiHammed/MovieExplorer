@@ -13,22 +13,27 @@ class MovieViewModel {
     
     
     weak var view : MovieListViewProtocol?
-    private let networkManager = NetworkManager()
+    private var networkManager: ManagerProtocol
     private var movieResult: [Movie] = []
     private var movieList: Movies?
     private var sendButtonPressed: Bool = false
     private var currentPage = 1
     
     
-    init(setView view: MovieListViewProtocol?) {
+    init(setView view: MovieListViewProtocol?, networkManager: ManagerProtocol) {
         if let view  { self.view = view }
-        
+        self.networkManager = networkManager
     }
 }
 
 extension MovieViewModel: MovieViewModelProtocol {
     func pagination(index: Int) {
         guard let query = UserDefaults.standard.string(forKey: "searchQuery") else {return}
+        let movieR = movieResult.count
+        let current = currentPage
+        let total = movieList?.totalPages
+        
+        
         if  currentPage  < movieList?.totalPages ?? 0, index == movieResult.count - 1 {
             currentPage += 1
             getQueryText(page: currentPage, query: query)
@@ -61,10 +66,10 @@ extension MovieViewModel: MovieViewModelProtocol {
         guard let query else {
             view?.showAlert(title: nil, message: "Type in a movie name to search for a movie")
             return }
-        networkManager.getSearch(page: page, query: query) { [weak self] movie, err in
+        networkManager.getSearch(page: page, query: query) { movie, err in
             
-            DispatchQueue.main.async { [weak self] in
-                guard let self else {return}
+            DispatchQueue.main.async { [self] in
+                
                 if err == nil {
                     guard let movie, movie.results.count > 0  else {
                         self.view?.showAlert(title: "No Movies Found", message: "Check your search spelling and try again")

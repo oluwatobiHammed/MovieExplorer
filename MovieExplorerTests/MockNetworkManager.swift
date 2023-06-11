@@ -1,39 +1,34 @@
 //
-//  Manager.swift
-//  MovieDetails
+//  MockNetwork.swift
+//  MovieExplorerTests
 //
-//  Created by Oladipupo Oluwatobi on 08/06/2023.
+//  Created by Oluwatobi Oladipupo on 11/06/2023.
 //
 
 import Foundation
+@testable import MovieExplorer
+import XCTest
 
-struct NetworkManager: ManagerProtocol {
+struct MockNetworkManager: ManagerProtocol {
     let router = Router<MovieEndpoints>()
     
     
     func getSearch(page: Int, query: String, completion: @escaping (_ movies: Movies?, _ error: Error?)->()) {
         Task {
-            await router.request(.search(query: query, page: page)) { data, response, error in
-                
-                if error != nil {
-                    completion(nil, NSError(domain: "", code: URLError.Code.notConnectedToInternet.rawValue, userInfo: [NSLocalizedDescriptionKey : "Please check your network connection."]))
-                }
-                
-                if let response = response as? HTTPURLResponse {
-                    let result = self.handleNetworkResponse(response)
-                    switch result {
-                    case .success:
-                        guard let responseData = data else {
-                            completion(nil, NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.noData.rawValue]))
+            
+            if let file = Bundle.main.url(forResource: "movies", withExtension: "json") {
+                let jsonData = try? Data(contentsOf: file)
+                        guard let responseData = jsonData else {
+                            completion(nil, NSError(domain: "", code: 20, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.noData.rawValue]))
                             return
                         }
                         do {
-
+                            
                             let jsonData = try JSONSerialization.jsonObject(with: responseData, options: .mutableContainers)
                             print(jsonData)
                             
                             guard let movies = try? Movies.decode(data: responseData) else {
-                                completion(nil, NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.unableToDecode.rawValue]))
+                                completion(nil, NSError(domain: "", code: 15, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.unableToDecode.rawValue]))
                                 return
                             }
                             completion(movies,nil)
@@ -45,16 +40,13 @@ struct NetworkManager: ManagerProtocol {
                                 
                                 MovieRealmManager.shared.updateOrSave(realmObject: movies)
                             }
-                           
+                            
                         } catch {
-
-                            completion(nil, NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.unableToDecode.rawValue]))
+                            
+                            completion(nil, NSError(domain: "", code: 10, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.unableToDecode.rawValue]))
                         }
-                    case .failure(let networkFailureError):
-                        completion(nil, networkFailureError)
-                    }
-                }
             }
+         
         }
     }
     
@@ -68,5 +60,4 @@ struct NetworkManager: ManagerProtocol {
         default: return .failure(NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.failed.rawValue]))
         }
     }
-    
 }

@@ -13,6 +13,7 @@ class MovieListViewController: UIViewController {
     // MARK: Properties
     private let messageUnavailableCellIdentifier = "UnavailableCellIdentifier"
     private let image = UIImage(named: .searchIcon)
+    private var networkManager = NetworkManager()
     
     private let inputViewContainerView: UIView = {
         $0.backgroundColor = .white
@@ -67,7 +68,7 @@ class MovieListViewController: UIViewController {
     
     
     private lazy var movieViewViewModel: MovieViewModelProtocol = {
-        return MovieViewModel(setView: self)
+        return MovieViewModel(setView: self, networkManager: networkManager)
     }()
 
     override func viewDidLoad() {
