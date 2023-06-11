@@ -18,6 +18,8 @@ class MovieViewModel {
     private var movieList: Movies?
     private var sendButtonPressed: Bool = false
     private var currentPage = 1
+    
+    
     init(setView view: MovieListViewProtocol?) {
         if let view  { self.view = view }
         
@@ -57,7 +59,7 @@ extension MovieViewModel: MovieViewModelProtocol {
         getQueryText(page: currentPage)
     }
     
-    func getQueryText(page: Int) {
+    private func getQueryText(page: Int) {
         guard let query = UserDefaults.standard.string(forKey: "searchQuery")  else { view?.showAlert(title: nil, message: "Type in a movie name to search for a movie")
             return }
         networkManager.getSearch(page: page, query: query) { [weak self] movie, err in

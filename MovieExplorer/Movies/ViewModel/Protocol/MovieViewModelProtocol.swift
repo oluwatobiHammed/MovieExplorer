@@ -8,7 +8,6 @@
 import Foundation
 
 protocol MovieViewModelProtocol {
-    func getQueryText(page: Int)
     func handleSendButton(query: String)
     func numberofMovies() -> (Int, [Movie])
     func getMovies()

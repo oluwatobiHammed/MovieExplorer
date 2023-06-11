@@ -19,7 +19,7 @@ class MovieDetailTableViewCell:  UITableViewCell {
         return $0
     }(UIImageView())
     
-    let rateImageView: UIImageView = {
+    private let rateImageView: UIImageView = {
         let image = UIImage(named: .starfill)
         $0.image = image
         $0.contentMode = .scaleAspectFit
@@ -27,7 +27,7 @@ class MovieDetailTableViewCell:  UITableViewCell {
         return $0
     }(UIImageView(frame: .zero))
     
-    let rateLabel: UILabel = {
+    private let rateLabel: UILabel = {
         $0.font = kFont.EffraMediumRegular.of(size: 16)
         $0.textAlignment = .left
         $0.numberOfLines = 0
@@ -35,13 +35,13 @@ class MovieDetailTableViewCell:  UITableViewCell {
         return $0
     }(UILabel())
     
-    lazy var safeAreaView: UIView = {
+    private let safeAreaView: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = .white.withAlphaComponent(0.6)
         return view
     }()
     
-    let centeredTitleLabel: UILabel = {
+    private let centeredTitleLabel: UILabel = {
         $0.font = kFont.EffraBold.of(size: 20)
         $0.textAlignment = .left
         $0.numberOfLines = 3
@@ -49,7 +49,7 @@ class MovieDetailTableViewCell:  UITableViewCell {
         return $0
     }(UILabel())
     
-    let overViewTitleLabel: UILabel = {
+    private let overViewTitleLabel: UILabel = {
         $0.font = kFont.EffraBold.of(size: 16)
         $0.textAlignment = .left
         $0.numberOfLines = 5
@@ -57,7 +57,7 @@ class MovieDetailTableViewCell:  UITableViewCell {
         return $0
     }(UILabel())
 
-    lazy var containerStackView: UIStackView = {
+    private lazy var containerStackView: UIStackView = {
         $0.axis = .vertical
         $0.distribution = .fill
         $0.alignment = .fill

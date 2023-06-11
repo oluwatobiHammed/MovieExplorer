@@ -489,8 +489,8 @@
 		F10FC1D52A35593700B1F2EE /* ViewContrller */ = {
 			isa = PBXGroup;
 			children = (
-				F10FC1CF2A34F30E00B1F2EE /* MovieDetailsViewController.swift */,
 				F10FC1BA2A337B7500B1F2EE /* MovieListViewController.swift */,
+				F10FC1CF2A34F30E00B1F2EE /* MovieDetailsViewController.swift */,
 			);
 			path = ViewContrller;
 			sourceTree = "<group>";
