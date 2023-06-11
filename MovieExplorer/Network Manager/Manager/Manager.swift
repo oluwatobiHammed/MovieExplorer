@@ -36,7 +36,9 @@ struct NetworkManager {
                                 completion(nil, NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.unableToDecode.rawValue]))
                                 return
                             }
-                            guard movies.results.count > 0 else { return }
+                            guard movies.results.count > 0 else {
+                                completion(nil, NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.unableToDecode.rawValue]))
+                                return }
                             DispatchQueue.main.async {
                                 MovieRealmManager.shared.updateOrSave(realmObject: movies)
                             }

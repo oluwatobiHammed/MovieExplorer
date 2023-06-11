@@ -65,8 +65,9 @@ extension MovieViewModel: MovieViewModelProtocol {
         networkManager.getSearch(page: page, query: query) { [weak self] movie, err in
             
             DispatchQueue.main.async { [weak self] in
-                guard let self, let movie else {return}
+                guard let self else {return}
                 if err == nil {
+                    guard let movie else {return}
                     if movieList?.results.count ?? 0 < 1 {
                         movieList = movie
                         movieResult = Array(movie.results)
@@ -74,12 +75,11 @@ extension MovieViewModel: MovieViewModelProtocol {
                         movieList = movie
                         movieResult.append(contentsOf: movie.results)
                     }
+                    view?.reloadMovieTableView(sendButtonPressed: sendButtonPressed)
+                    sendButtonPressed = false
                 } else {
-                    view?.showAlert(title: "Something went wrong", message: "We are experiencing technical difficulties. Please try again later.")
+                    view?.showAlert(title: "Something went wrong", message: "We are experiencing technical difficulties. Please try again later or Please check your network connection.. or check if you have mistyped the movie name.")
                 }
-           
-                view?.reloadMovieTableView(sendButtonPressed: sendButtonPressed)
-                sendButtonPressed = false
          
             }
             

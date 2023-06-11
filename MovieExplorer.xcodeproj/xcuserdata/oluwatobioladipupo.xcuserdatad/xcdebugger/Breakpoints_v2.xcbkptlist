@@ -3,4 +3,70 @@
    uuid = "EAA01993-431F-4097-AAC8-126A6F9CA7B6"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0EEAAF48-C71F-43AE-B5EF-8A3CF87E7C1F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MovieExplorer/Network Manager/Manager/Manager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "getSearch(page:query:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2AEC9558-4BDE-4103-9CCF-D181F43B90B0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MovieExplorer/Movies/ViewModel/MovieViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "getQueryText(page:)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "2AEC9558-4BDE-4103-9CCF-D181F43B90B0 - 95440b4ff74d9994"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 (Swift.Optional&lt;MovieExplorer.Movies&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in MovieExplorer.MovieViewModel.getQueryText(page: Swift.Int) -&gt; ()"
+                  moduleName = "MovieExplorer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/oluwatobioladipupo/Documents/GitHub/MovieExplorer/MovieExplorer/Movies/ViewModel/MovieViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "1684">
+               </Location>
+               <Location
+                  uuid = "2AEC9558-4BDE-4103-9CCF-D181F43B90B0 - 95440b4ff74d9994"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 (Swift.Optional&lt;MovieExplorer.Movies&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in MovieExplorer.MovieViewModel.getQueryText(page: Swift.Int) -&gt; ()"
+                  moduleName = "MovieExplorer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/oluwatobioladipupo/Documents/GitHub/MovieExplorer/MovieExplorer/Movies/ViewModel/MovieViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "1456">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
