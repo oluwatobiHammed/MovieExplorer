@@ -35,8 +35,6 @@
 		31A847E32A3308F5009B6903 /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A847DE2A3308F5009B6903 /* ColorConstants.swift */; };
 		31A847E42A3308F5009B6903 /* kAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A847DF2A3308F5009B6903 /* kAPI.swift */; };
 		31A847E62A33090C009B6903 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A847E52A33090C009B6903 /* SceneDelegate.swift */; };
-		31CF4AF32A330AA90044A51D /* HomeTabSelectorHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CF4AF02A330AA90044A51D /* HomeTabSelectorHeaderView.swift */; };
-		31CF4AF42A330AA90044A51D /* HomeTabSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CF4AF12A330AA90044A51D /* HomeTabSelectorCell.swift */; };
 		31CF4B6D2A330C060044A51D /* Univers-CondensedLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B4E2A330C060044A51D /* Univers-CondensedLight.ttf */; };
 		31CF4B6E2A330C060044A51D /* Univers-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B4F2A330C060044A51D /* Univers-Light.ttf */; };
 		31CF4B6F2A330C060044A51D /* Univers-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B502A330C060044A51D /* Univers-Bold.ttf */; };
@@ -57,7 +55,6 @@
 		31CF4B812A33118C0044A51D /* String+isBlank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CF4B802A33118C0044A51D /* String+isBlank.swift */; };
 		31CF4B832A33137A0044A51D /* UIImage+ImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CF4B822A33137A0044A51D /* UIImage+ImageName.swift */; };
 		31CF4B852A331AEC0044A51D /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CF4B842A331AEC0044A51D /* CustomTextField.swift */; };
-		31CF4B882A332C090044A51D /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 31CF4B872A332C090044A51D /* SkeletonView */; };
 		31CF4B9C2A33320A0044A51D /* Effra-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B8B2A33320A0044A51D /* Effra-BoldItalic.ttf */; };
 		31CF4B9E2A33320A0044A51D /* Effra-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B8D2A33320A0044A51D /* Effra-Regular.ttf */; };
 		31CF4B9F2A33320A0044A51D /* Effra-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31CF4B8E2A33320A0044A51D /* Effra-Bold.ttf */; };
@@ -78,6 +75,7 @@
 		F10FC1CC2A34C4D800B1F2EE /* MovieViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FC1CB2A34C4D800B1F2EE /* MovieViewModelProtocol.swift */; };
 		F10FC1CE2A34C52D00B1F2EE /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FC1CD2A34C52D00B1F2EE /* MovieViewModel.swift */; };
 		F10FC1D02A34F30E00B1F2EE /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FC1CF2A34F30E00B1F2EE /* MovieDetailsViewController.swift */; };
+		F10FC1D42A35589F00B1F2EE /* MovieListControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FC1D32A35589F00B1F2EE /* MovieListControllerProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,8 +126,6 @@
 		31A847DE2A3308F5009B6903 /* ColorConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
 		31A847DF2A3308F5009B6903 /* kAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kAPI.swift; sourceTree = "<group>"; };
 		31A847E52A33090C009B6903 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		31CF4AF02A330AA90044A51D /* HomeTabSelectorHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTabSelectorHeaderView.swift; sourceTree = "<group>"; };
-		31CF4AF12A330AA90044A51D /* HomeTabSelectorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTabSelectorCell.swift; sourceTree = "<group>"; };
 		31CF4B4E2A330C060044A51D /* Univers-CondensedLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Univers-CondensedLight.ttf"; sourceTree = "<group>"; };
 		31CF4B4F2A330C060044A51D /* Univers-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Univers-Light.ttf"; sourceTree = "<group>"; };
 		31CF4B502A330C060044A51D /* Univers-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Univers-Bold.ttf"; sourceTree = "<group>"; };
@@ -168,6 +164,7 @@
 		F10FC1CB2A34C4D800B1F2EE /* MovieViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModelProtocol.swift; sourceTree = "<group>"; };
 		F10FC1CD2A34C52D00B1F2EE /* MovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModel.swift; sourceTree = "<group>"; };
 		F10FC1CF2A34F30E00B1F2EE /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
+		F10FC1D32A35589F00B1F2EE /* MovieListControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListControllerProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,7 +172,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31CF4B882A332C090044A51D /* SkeletonView in Frameworks */,
 				31CF4B7F2A3311000044A51D /* SnapKit in Frameworks */,
 				31A847D92A3308DE009B6903 /* RealmSwift in Frameworks */,
 				31A847D72A3308DE009B6903 /* Realm in Frameworks */,
@@ -230,8 +226,6 @@
 				31A847B22A33085B009B6903 /* Network Manager */,
 				F10FC1B62A3362A400B1F2EE /* Movies */,
 				31A847152A3304B0009B6903 /* AppDelegate.swift */,
-				31CF4AF12A330AA90044A51D /* HomeTabSelectorCell.swift */,
-				31CF4AF02A330AA90044A51D /* HomeTabSelectorHeaderView.swift */,
 				31A847E52A33090C009B6903 /* SceneDelegate.swift */,
 				31CF4AF62A330AEB0044A51D /* Resources */,
 				31A847202A3304B1009B6903 /* LaunchScreen.storyboard */,
@@ -436,10 +430,9 @@
 		F10FC1B62A3362A400B1F2EE /* Movies */ = {
 			isa = PBXGroup;
 			children = (
+				F10FC1D62A35595700B1F2EE /* TableViewCell */,
+				F10FC1D52A35593700B1F2EE /* ViewContrller */,
 				F10FC1C92A34C46B00B1F2EE /* ViewModel */,
-				F10FC1BA2A337B7500B1F2EE /* MovieListViewController.swift */,
-				31CF4BAA2A3334550044A51D /* MovieDetailTableViewCell.swift */,
-				F10FC1CF2A34F30E00B1F2EE /* MovieDetailsViewController.swift */,
 			);
 			path = Movies;
 			sourceTree = "<group>";
@@ -488,8 +481,26 @@
 			isa = PBXGroup;
 			children = (
 				F10FC1CB2A34C4D800B1F2EE /* MovieViewModelProtocol.swift */,
+				F10FC1D32A35589F00B1F2EE /* MovieListControllerProtocol.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		F10FC1D52A35593700B1F2EE /* ViewContrller */ = {
+			isa = PBXGroup;
+			children = (
+				F10FC1CF2A34F30E00B1F2EE /* MovieDetailsViewController.swift */,
+				F10FC1BA2A337B7500B1F2EE /* MovieListViewController.swift */,
+			);
+			path = ViewContrller;
+			sourceTree = "<group>";
+		};
+		F10FC1D62A35595700B1F2EE /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				31CF4BAA2A3334550044A51D /* MovieDetailTableViewCell.swift */,
+			);
+			path = TableViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -512,7 +523,6 @@
 				31A847D62A3308DE009B6903 /* Realm */,
 				31A847D82A3308DE009B6903 /* RealmSwift */,
 				31CF4B7E2A3311000044A51D /* SnapKit */,
-				31CF4B872A332C090044A51D /* SkeletonView */,
 				F10FC1B42A335DF800B1F2EE /* Kingfisher */,
 			);
 			productName = MovieExplorer;
@@ -590,7 +600,6 @@
 			packageReferences = (
 				31A847D52A3308DE009B6903 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				31CF4B7D2A3311000044A51D /* XCRemoteSwiftPackageReference "SnapKit" */,
-				31CF4B862A332C090044A51D /* XCRemoteSwiftPackageReference "SkeletonView" */,
 				F10FC1B32A335DF800B1F2EE /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 31A847132A3304B0009B6903 /* Products */;
@@ -670,7 +679,6 @@
 				31A847C82A33086E009B6903 /* SyncDataManager.swift in Sources */,
 				31CF4B852A331AEC0044A51D /* CustomTextField.swift in Sources */,
 				31A847CB2A33086E009B6903 /* Router.swift in Sources */,
-				31CF4AF32A330AA90044A51D /* HomeTabSelectorHeaderView.swift in Sources */,
 				F10FC1D02A34F30E00B1F2EE /* MovieDetailsViewController.swift in Sources */,
 				31A847D32A3308A5009B6903 /* Movie.swift in Sources */,
 				F10FC1BB2A337B7500B1F2EE /* MovieListViewController.swift in Sources */,
@@ -678,11 +686,11 @@
 				31CF4B812A33118C0044A51D /* String+isBlank.swift in Sources */,
 				31A847CA2A33086E009B6903 /* HTTPMethod.swift in Sources */,
 				F10FC1CE2A34C52D00B1F2EE /* MovieViewModel.swift in Sources */,
+				F10FC1D42A35589F00B1F2EE /* MovieListControllerProtocol.swift in Sources */,
 				F10FC1BD2A33A77F00B1F2EE /* UIViewControllerExtension.swift in Sources */,
 				F10FC1C72A347CB300B1F2EE /* UIView+Border.swift in Sources */,
 				31A847CF2A33086E009B6903 /* Manager.swift in Sources */,
 				31A847C52A33086E009B6903 /* URLParameterEncoding.swift in Sources */,
-				31CF4AF42A330AA90044A51D /* HomeTabSelectorCell.swift in Sources */,
 				31A847E22A3308F5009B6903 /* UIColor+HexStringHelper.swift in Sources */,
 				F10FC1CC2A34C4D800B1F2EE /* MovieViewModelProtocol.swift in Sources */,
 				31CF4BAB2A3334550044A51D /* MovieDetailTableViewCell.swift in Sources */,
@@ -874,8 +882,10 @@
 				INFOPLIST_FILE = MovieExplorer/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -905,8 +915,10 @@
 				INFOPLIST_FILE = MovieExplorer/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1058,14 +1070,6 @@
 				minimumVersion = 5.6.0;
 			};
 		};
-		31CF4B862A332C090044A51D /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Juanpe/SkeletonView";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.30.4;
-			};
-		};
 		F10FC1B32A335DF800B1F2EE /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -1091,11 +1095,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 31CF4B7D2A3311000044A51D /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		31CF4B872A332C090044A51D /* SkeletonView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 31CF4B862A332C090044A51D /* XCRemoteSwiftPackageReference "SkeletonView" */;
-			productName = SkeletonView;
 		};
 		F10FC1B42A335DF800B1F2EE /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

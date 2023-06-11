@@ -94,7 +94,7 @@ class MovieDetailTableViewCell:  UITableViewCell {
                                           }
         
         centeredTitleLabel.text = movie.originalTitle
-        rateLabel.text =  String(format: "%0.1f", movie.voteAverage)
+        rateLabel.text = String(format: "%0.1f", movie.voteAverage)
         rateImageView.isHidden = (movie.originalTitle == nil)
         overViewTitleLabel.text = movie.overview
     }

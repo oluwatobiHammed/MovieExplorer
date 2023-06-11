@@ -8,15 +8,7 @@
 import UIKit
 import SnapKit
 
-
-
-protocol MovieListViewProtocol: AnyObject {
-    func reloadMovieTableView(sendButtonPressed: Bool)
-    func showAlert(title: String?, message: String)
-}
-
-
-class MovieListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MovieListViewController: UIViewController {
     
     // MARK: Properties
     private let messageUnavailableCellIdentifier = "UnavailableCellIdentifier"
@@ -89,6 +81,11 @@ class MovieListViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         dismissKeyboard()
+       
+
+    }
+    
+    deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -205,35 +202,12 @@ class MovieListViewController: UIViewController, UITableViewDataSource, UITableV
     }
 
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       let (_, movieResult) = movieViewViewModel.numberofMovies()
-       return movieResult.count
+ 
+    
+    private func navigationToDetailVC(movie: Movie) {
+        let movieDetailVC = MovieDetailsViewController(movie: movie)
+        navigationController?.pushViewController(movieDetailVC, animated: true)
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if  let cell = tableView.dequeueReusableCell(withIdentifier: MovieDetailTableViewCell.reuseIdentifier, for: indexPath) as? MovieDetailTableViewCell {
-            let (_, movieResult) = movieViewViewModel.numberofMovies()
-            cell.setUpImage(movie: movieResult[indexPath.row])
-            return cell
-        } else {
-            return tableView.dequeueReusableCell(withIdentifier: messageUnavailableCellIdentifier, for: indexPath)
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        movieViewViewModel.pagination(index: indexPath.row)
-    
-    }
-    
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 300
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
-    
     
     fileprivate func setupNotificationObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -270,6 +244,38 @@ class MovieListViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
 
+}
+
+extension MovieListViewController:  UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       let (_, movieResult) = movieViewViewModel.numberofMovies()
+       return movieResult.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if  let cell = tableView.dequeueReusableCell(withIdentifier: MovieDetailTableViewCell.reuseIdentifier, for: indexPath) as? MovieDetailTableViewCell {
+            let (_, movieResult) = movieViewViewModel.numberofMovies()
+            cell.setUpImage(movie: movieResult[indexPath.row])
+            return cell
+        } else {
+            return tableView.dequeueReusableCell(withIdentifier: messageUnavailableCellIdentifier, for: indexPath)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        movieViewViewModel.pagination(index: indexPath.row)
+    
+    }
+    
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 300
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let (_, movieResult) = movieViewViewModel.numberofMovies()
+        navigationToDetailVC(movie: movieResult[indexPath.row])
+    }
 }
 
 

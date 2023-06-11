@@ -17,22 +17,6 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-
-    class func displaySpinner(on appendView: UIView, sizeOf referView: UIView) -> UIView {
-        let ai = UIActivityIndicatorView(style: .large)
-        ai.startAnimating()
-        ai.center = referView.center
-        ai.backgroundColor = .white
-        appendView.addSubview(ai)
-        ai.isHidden = true
-        return ai
-    }
-
-    class func removeSpinner(spinner: UIView) {
-        DispatchQueue.main.async {
-            spinner.removeFromSuperview()
-        }
-    }
     
     /**
     Gathers all the data defined in `Keyboard Notification User Info Keys` from

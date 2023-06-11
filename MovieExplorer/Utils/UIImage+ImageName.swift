@@ -42,6 +42,8 @@ enum ImageName: String {
     case starfill = "star_fill"
     case imagePlaceholder = "Image_Placeholder"
     case tipsPlaceholder = "tips_placeholder"
-    case tmdb = "tmdb"
-    case darktmdb = "darktmdb"
+    case tmdb
+    case darktmdb
+    case circle
+    case back
 }
