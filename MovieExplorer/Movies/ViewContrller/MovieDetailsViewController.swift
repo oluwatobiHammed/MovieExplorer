@@ -76,7 +76,7 @@ class MovieDetailsViewController: UIViewController {
     }(UILabel())
     
     private let releasedateLabel: UILabel = {
-        $0.font = kFont.EffraRegular.of(size: 12)
+        $0.font = kFont.EffraHeavyRegular.of(size: 14)
         $0.textAlignment = .left
         $0.numberOfLines = 2
         $0.textColor = kColor.BrandColours.DarkGray
@@ -103,7 +103,7 @@ class MovieDetailsViewController: UIViewController {
     
     
     private let circleImage: UIImageView = {
-        let image = UIImage(named: .circle).imageWithColor(tintColor: kColor.BrandColours.DarkGray)
+        let image = UIImage(named: .circle).imageWithColor(tintColor: UIColor.hexString("FFCA28"))
         $0.contentMode = .scaleAspectFit
         $0.image = image
         $0.clipsToBounds = true
@@ -114,7 +114,7 @@ class MovieDetailsViewController: UIViewController {
         $0.axis = .horizontal
         $0.distribution = .fillEqually
         $0.alignment = .fill
-        $0.spacing = 0
+        $0.spacing = 5
         $0.isUserInteractionEnabled = true
         return $0
     }(UIStackView(frame: .zero))
@@ -154,7 +154,8 @@ class MovieDetailsViewController: UIViewController {
         overViewLabel.text = movie.overview
         rateLabel.text = String(format: "%0.1f", movie.voteAverage)
         releasedateLabel.text = movie.releaseDate
-        navigationController?.navigationItem.hidesBackButton = true
+        setStarsRating(rating: Int(movie.voteAverage)/2)
+        
     }
     
     
@@ -162,7 +163,6 @@ class MovieDetailsViewController: UIViewController {
     private func setUpstarRatingView() {
         var starTag = 1
         ratingImages.forEach {
-            
             $0.tag = starTag
             starTag = starTag + 1
             $0.contentMode = .scaleAspectFit
@@ -175,7 +175,7 @@ class MovieDetailsViewController: UIViewController {
         let stackSubViews = ratingbuttonsStackView.subviews.filter{$0 is UIImageView}
         stackSubViews.forEach {
             if let imageView = $0 as? UIImageView {
-                let image = UIImage(named:  5 > starsRating ?? 1 ? .starEmpty : .starfill).withTintColor(UIColor.hexString("F80089").withAlphaComponent(0.5))
+                let image = UIImage(named:  imageView.tag > starsRating ?? 1 ? .starEmpty : .starFilled).withTintColor(UIColor.hexString("FFCA28"))
                 imageView.image = image
             }
             
@@ -185,10 +185,13 @@ class MovieDetailsViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         mainContentContainer.roundCorners([.bottomLeft, .bottomRight], radius: 20)
+        posterImage.roundCorners([.topLeft, .topRight], radius: 20)
     }
     
     
     private func setUpview() {
+        
+        setUpstarRatingView()
         view.addSubview(posterImage)
         posterImage.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(55)
@@ -227,6 +230,14 @@ class MovieDetailsViewController: UIViewController {
         topcontentContainer.addSubview(rateLabel)
         rateLabel.snp.makeConstraints { make in
             make.center.equalTo(circleImage.snp.center)
+        }
+        
+        topcontentContainer.addSubview(ratingbuttonsStackView)
+        ratingbuttonsStackView.snp.makeConstraints { make in
+            make.left.equalTo(circleImage.snp.right).offset(10)
+            make.top.equalTo(topcontentContainer.snp.top)
+            make.bottom.equalTo(topcontentContainer.snp.bottom).offset(10)
+            make.width.equalTo(100)
         }
 
         topcontentContainer.addSubview(releaseDatecontainerStackView)

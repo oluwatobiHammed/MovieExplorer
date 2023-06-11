@@ -47,4 +47,5 @@ enum ImageName: String {
     case circle
     case back
     case starEmpty = "star_empty"
+    case starFilled = "star_filled"
 }
