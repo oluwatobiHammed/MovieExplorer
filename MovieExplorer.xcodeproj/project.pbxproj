@@ -219,11 +219,11 @@
 		31A847142A3304B0009B6903 /* MovieExplorer */ = {
 			isa = PBXGroup;
 			children = (
-				F10FC1C12A345AA700B1F2EE /* Alert Manager */,
+				31A847B22A33085B009B6903 /* Network Manager */,
 				F10FC1BE2A33BA8C00B1F2EE /* DB Manager */,
+				F10FC1C12A345AA700B1F2EE /* Alert Manager */,
 				F10FC1C82A347CC600B1F2EE /* Utils */,
 				31A847D02A330885009B6903 /* Models */,
-				31A847B22A33085B009B6903 /* Network Manager */,
 				F10FC1B62A3362A400B1F2EE /* Movies */,
 				31A847152A3304B0009B6903 /* AppDelegate.swift */,
 				31A847E52A33090C009B6903 /* SceneDelegate.swift */,
