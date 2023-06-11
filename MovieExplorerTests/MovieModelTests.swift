@@ -52,25 +52,5 @@ final class MovieModelTests: XCTestCase {
         
     }
     
-//    func testPagination() throws {
-//        let file = Bundle.main.url(forResource: "movies", withExtension: "json")!
-//        let jsonData = try Data(contentsOf: file)
-//        let movies = try? Movies.decode(data: jsonData)
-//        
-//        sut.pagination(index: 19)
-//        
-//      //  DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: { [self] in
-//            let (total, movieResult) = sut.numberofMovies()
-//            XCTAssertEqual(total, movies?.totalPages, "not the same total count")
-//            XCTAssertEqual(movieResult.count, movies?.results.count, "not the same count of movies")
-//            XCTAssertEqual(movieResult.first?.originalTitle, movies?.results.first?.originalTitle, "not the same title of movies")
-//            XCTAssertEqual(movieResult.first?.backdropPath, movies?.results.first?.backdropPath, "not the same backdropPath of movies")
-//            XCTAssertEqual(movieResult.first?.id, movies?.results.first?.id, "not the same backdropPath of movies")
-//            XCTAssertEqual(movieResult.first?.overview, movies?.results.first?.overview, "not the same overview of movies")
-//            XCTAssertEqual(movieResult.first?.popularity, movies?.results.first?.popularity, "not the same popularity of movies")
-//            XCTAssertEqual(movieResult.first?.voteAverage, movies?.results.first?.voteAverage, "not the same voteAverage of movies")
-//     //   })
-//    }
-    
 }
 
