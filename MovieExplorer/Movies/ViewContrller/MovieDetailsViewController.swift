@@ -53,13 +53,13 @@ class MovieDetailsViewController: UIViewController {
         return $0
     }(UILabel())
     
-    private let overViewTitleLabel: UILabel = {
-        $0.font = kFont.EffraRegular.of(size: 12)
+    private let overViewLabel: UILabel = {
+        $0.font = kFont.EffraRegular.of(size: 14)
         $0.textAlignment = .center
         $0.numberOfLines = 0
         $0.textColor = kColor.BrandColours.DarkGray
         $0.adjustsFontForContentSizeCategory = true
-        $0.minimumScaleFactor = 0.3
+        $0.minimumScaleFactor = 0.4
         $0.adjustsFontSizeToFitWidth = true
         $0.sizeToFit()
         return $0
@@ -139,7 +139,7 @@ class MovieDetailsViewController: UIViewController {
                                           .transition(.fade(0.5))]) { _ in
                                               self.view.layoutIfNeeded()
                                           }
-        overViewTitleLabel.text = movie.overview
+        overViewLabel.text = movie.overview
         rateLabel.text = String(format: "%0.1f", movie.voteAverage)
         releasedateLabel.text = movie.releaseDate
         navigationController?.navigationItem.hidesBackButton = true
@@ -200,8 +200,8 @@ class MovieDetailsViewController: UIViewController {
             make.bottom.equalTo(topcontentContainer.snp.bottom)
         }
 
-        contentContainer.addSubview(overViewTitleLabel)
-        overViewTitleLabel.snp.makeConstraints { make in
+        contentContainer.addSubview(overViewLabel)
+        overViewLabel.snp.makeConstraints { make in
             make.left.equalTo(contentContainer.snp.left)
             make.right.equalTo(contentContainer.snp.right)
             make.height.equalTo(60)
@@ -210,7 +210,7 @@ class MovieDetailsViewController: UIViewController {
         contentContainer.addSubview(firstLineViewContainer)
         firstLineViewContainer.snp.makeConstraints { make in
             make.height.equalTo(1)
-            make.top.equalTo(overViewTitleLabel.snp.bottom).offset(20)
+            make.top.equalTo(overViewLabel.snp.bottom).offset(20)
             make.left.equalTo(contentContainer.snp.left)
             make.right.equalTo(contentContainer.snp.right)
             make.bottom.equalTo(contentContainer.snp.bottom)
@@ -221,7 +221,7 @@ class MovieDetailsViewController: UIViewController {
             make.height.equalTo(1)
             make.left.equalTo(contentContainer.snp.left)
             make.right.equalTo(contentContainer.snp.right)
-            make.bottom.equalTo(overViewTitleLabel.snp.top).offset(-20)
+            make.bottom.equalTo(overViewLabel.snp.top).offset(-20)
         }
     }
     
