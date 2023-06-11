@@ -68,20 +68,20 @@ extension MovieViewModel: MovieViewModelProtocol {
                 guard let self else {return}
                 if err == nil {
                     guard let movie, movie.results.count > 0  else {
-                        view?.showAlert(title: "No Movies Found", message: "Try adjusting your query and try again")
+                        self.view?.showAlert(title: "No Movies Found", message: "Try adjusting your query and try again")
                         return}
-                    if movieList?.results.count ?? 0 < 1 {
-                        movieList = movie
-                        movieResult = Array(movie.results)
+                    if self.movieList?.results.count ?? 0 < 1 {
+                        self.movieList = movie
+                        self.movieResult = Array(movie.results)
                     } else {
-                        movieList = movie
-                        movieResult.append(contentsOf: movie.results)
+                        self.movieList = movie
+                        self.movieResult.append(contentsOf: movie.results)
                     }
-                    view?.reloadMovieTableView(sendButtonPressed: sendButtonPressed)
-                    sendButtonPressed = false
+                    self.view?.reloadMovieTableView(sendButtonPressed: sendButtonPressed)
+                    self.sendButtonPressed = false
                 } else {
                     guard let err else {return}
-                    view?.showAlert(title: "Something went wrong", message: err.localizedDescription)
+                    self.view?.showAlert(title: "Something went wrong", message: err.localizedDescription)
                 }
                 
             }
