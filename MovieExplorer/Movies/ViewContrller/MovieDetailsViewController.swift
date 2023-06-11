@@ -12,6 +12,7 @@ class MovieDetailsViewController: UIViewController {
     
     
     private var movie: Movie
+    private var starsRating: Int?
     
     private let posterImage: UIImageView = {
         $0.contentMode = .scaleToFill
@@ -102,12 +103,23 @@ class MovieDetailsViewController: UIViewController {
     
     
     private let circleImage: UIImageView = {
-        let image = UIImage(named: .circle).imageWithColor(tintColor: kColor.BrandColours.Pink)
+        let image = UIImage(named: .circle).imageWithColor(tintColor: kColor.BrandColours.DarkGray)
         $0.contentMode = .scaleAspectFit
         $0.image = image
         $0.clipsToBounds = true
         return $0
     }(UIImageView())
+    
+    private let ratingbuttonsStackView: UIStackView = {
+        $0.axis = .horizontal
+        $0.distribution = .fillEqually
+        $0.alignment = .fill
+        $0.spacing = 0
+        $0.isUserInteractionEnabled = true
+        return $0
+    }(UIStackView(frame: .zero))
+    
+    private lazy var ratingImages = [UIImageView(), UIImageView(), UIImageView(), UIImageView(), UIImageView()]
     
     init(movie: Movie) {
         self.movie = movie
@@ -145,6 +157,30 @@ class MovieDetailsViewController: UIViewController {
         navigationController?.navigationItem.hidesBackButton = true
     }
     
+    
+    // MARK: - Set Up starRatingView
+    private func setUpstarRatingView() {
+        var starTag = 1
+        ratingImages.forEach {
+            
+            $0.tag = starTag
+            starTag = starTag + 1
+            $0.contentMode = .scaleAspectFit
+            ratingbuttonsStackView.addArrangedSubview($0)
+        }
+    }
+    
+    func setStarsRating(rating: Int) {
+        self.starsRating = rating
+        let stackSubViews = ratingbuttonsStackView.subviews.filter{$0 is UIImageView}
+        stackSubViews.forEach {
+            if let imageView = $0 as? UIImageView {
+                let image = UIImage(named:  5 > starsRating ?? 1 ? .starEmpty : .starfill).withTintColor(UIColor.hexString("F80089").withAlphaComponent(0.5))
+                imageView.image = image
+            }
+            
+        }
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

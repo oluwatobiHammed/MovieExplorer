@@ -53,8 +53,6 @@ extension MovieViewModel: MovieViewModelProtocol {
             currentPage = 1
         }
         
-        movieList = nil
-        movieResult.removeAll()
         sendButtonPressed = true
         getQueryText(page: currentPage, query: query)
     }
@@ -69,10 +67,14 @@ extension MovieViewModel: MovieViewModelProtocol {
                 guard let self else {return}
                 if err == nil {
                     guard let movie, movie.results.count > 0  else {
-                        self.view?.showAlert(title: "No Movies Found", message: "Try adjusting your query and try again")
-                        self.getMovies()
-                        return}
-                    UserDefaults.standard.removeObject(forKey: "searchQuery")
+                        self.view?.showAlert(title: "No Movies Found", message: "Check your search spelling and try again")
+                        return }
+                    if page == 1 {
+                        movieList = nil
+                        movieResult.removeAll()
+                        UserDefaults.standard.removeObject(forKey: "searchQuery")
+                        UserDefaults.standard.set(query, forKey: "searchQuery")
+                    }
                     if self.movieList?.results.count ?? 0 < 1 {
                         self.movieList = movie
                         self.movieResult = Array(movie.results)
@@ -80,7 +82,7 @@ extension MovieViewModel: MovieViewModelProtocol {
                         self.movieList = movie
                         self.movieResult.append(contentsOf: movie.results)
                     }
-                    UserDefaults.standard.set(query, forKey: "searchQuery")
+                    
                     self.view?.reloadMovieTableView(sendButtonPressed: sendButtonPressed)
                     self.sendButtonPressed = false
                 } else {

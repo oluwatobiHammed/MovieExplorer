@@ -46,4 +46,5 @@ enum ImageName: String {
     case darktmdb
     case circle
     case back
+    case starEmpty = "star_empty"
 }

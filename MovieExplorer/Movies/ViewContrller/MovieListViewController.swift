@@ -283,7 +283,10 @@ extension MovieListViewController:  UITableViewDataSource, UITableViewDelegate {
 
 extension MovieListViewController: MovieListViewProtocol {
     func showAlert(title: String?, message: String) {
-        AlertManager.sharedAlertManager.showAlertWithTitle(title: title ?? "", message: message, controller: self)
+        AlertManager.sharedAlertManager.showAlertWithTitle(title: title ?? "", message: message, controller: self) {[weak self] _ in
+            guard let self else {return}
+            self.searchTextField.text = ""
+        }
     }
     
     func reloadMovieTableView(sendButtonPressed: Bool) {
