@@ -171,7 +171,7 @@ class MovieDetailsViewController: UIViewController {
         setStarsRating(rating: Int(movie.voteAverage)/2)
         print("listOfLiked", listOfLiked)
         isfavorite = listOfLiked.contains(where: { $0 == movie.id })
-        likeButton.setImage( likebuttonimage.imageWithColor(tintColor: listOfLiked.contains(where: { $0 == movie.id }) ? .red : .white), for: .normal)
+        likeButton.setImage( likebuttonimage.imageWithColor(tintColor: isfavorite ? .red : .white), for: .normal)
         
         
         
