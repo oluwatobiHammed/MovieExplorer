@@ -27,7 +27,9 @@ extension FavoriteMovieViewModel: FavoriteMovieViewModelProtocol {
             if error == nil {
                 DispatchQueue.main.sync {
                     guard let movies, movies.results.count > 0  else {
-                        self.view?.showAlert(title: "No Movies Found", message: "Check your search spelling and try again")
+                        movieList = nil
+                        movieResult.removeAll()
+                        view?.reloadMovieTableView()
                         return }
                     if page < 2 {
                         movieList = nil
@@ -47,7 +49,8 @@ extension FavoriteMovieViewModel: FavoriteMovieViewModelProtocol {
                 DispatchQueue.main.sync {
                     getMovies()
                 }
-               
+                guard let error, movieResult.count > 0 else {return}
+                self.view?.showAlert(title: "No Movies Found", message: error.localizedDescription)
             }
         }
     }

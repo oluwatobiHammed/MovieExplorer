@@ -100,7 +100,6 @@
 		F14139192A3775FC00880386 /* FavoriteMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14139182A3775FC00880386 /* FavoriteMovieViewModel.swift */; };
 		F141391B2A3785E800880386 /* FavoriteMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = F141391A2A3785E800880386 /* FavoriteMovies.swift */; };
 		F141391D2A37952E00880386 /* FavoriteMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = F141391C2A37952E00880386 /* FavoriteMovie.swift */; };
-		F14139212A37C2C700880386 /* UITableView+CellVisible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14139202A37C2C700880386 /* UITableView+CellVisible.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -218,7 +217,6 @@
 		F14139182A3775FC00880386 /* FavoriteMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieViewModel.swift; sourceTree = "<group>"; };
 		F141391A2A3785E800880386 /* FavoriteMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovies.swift; sourceTree = "<group>"; };
 		F141391C2A37952E00880386 /* FavoriteMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovie.swift; sourceTree = "<group>"; };
-		F14139202A37C2C700880386 /* UITableView+CellVisible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+CellVisible.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -536,7 +534,6 @@
 				31CF4B842A331AEC0044A51D /* CustomTextField.swift */,
 				F10FC1BC2A33A77F00B1F2EE /* UIViewControllerExtension.swift */,
 				F10FC1C62A347CB300B1F2EE /* UIView+Border.swift */,
-				F14139202A37C2C700880386 /* UITableView+CellVisible.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -811,7 +808,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F14139212A37C2C700880386 /* UITableView+CellVisible.swift in Sources */,
 				31CF4B832A33137A0044A51D /* UIImage+ImageName.swift in Sources */,
 				31A847C92A33086E009B6903 /* HTTPTask.swift in Sources */,
 				F141391D2A37952E00880386 /* FavoriteMovie.swift in Sources */,

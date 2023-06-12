@@ -41,6 +41,17 @@ class FavoriteMoviesViewController: UIViewController {
         return $0
     }(UITableView())
     
+    private var errorTitle: UILabel = {
+        let label = UILabel()
+        label.text = "Add favorite movies here"
+        label.textColor = kColor.BrandColours.DarkGray
+        label.textAlignment = .center
+        label.font = kFont.EffraRegular.of(size: 16)
+        label.numberOfLines = 0
+        label.isHidden = true
+        return label
+    }()
+    
     private lazy var favouriteMovieViewViewModel: FavoriteMovieViewModelProtocol = {
         return FavoriteMovieViewModel(setView: self, networkManager: networkManager)
     }()
@@ -51,6 +62,13 @@ class FavoriteMoviesViewController: UIViewController {
         view.backgroundColor = .white
         favouriteMovieViewViewModel.getFavorite(page: 1)
         setUpview()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        favouriteMovieViewViewModel.getFavorite(page: 1)
+        let (_, movieResult) = favouriteMovieViewViewModel.numberofMovies()
+        errorTitle.isHidden = (movieResult.count > 0)
     }
     
     deinit {
@@ -85,7 +103,11 @@ class FavoriteMoviesViewController: UIViewController {
             make.right.equalToSuperview()
             make.bottom.equalToSuperview()
         }
-       
+        
+        movieListTableView.addSubview(errorTitle)
+        errorTitle.snp.makeConstraints { make in
+            make.center.equalTo(movieListTableView.snp.center)
+        }
     }
     
     // MARK: Title and Image Navbar view
@@ -199,6 +221,8 @@ extension FavoriteMoviesViewController: FavoriteListViewProtocol {
         if refreshControl.isRefreshing {
             refreshControl.endRefreshing()
         }
+        let (_, movieResult) = favouriteMovieViewViewModel.numberofMovies()
+        errorTitle.isHidden = (movieResult.count > 0)
     }
 
 
