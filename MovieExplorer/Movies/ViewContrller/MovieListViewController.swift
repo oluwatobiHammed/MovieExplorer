@@ -64,15 +64,15 @@ class MovieListViewController: UIViewController {
         $0.backgroundColor = kColor.BrandColours.Bizarre
         $0.contentInsetAdjustmentBehavior = .never
         $0.keyboardDismissMode = .interactive
-        $0.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        $0.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: tabBarHeight, right: 0)
         $0.scrollIndicatorInsets = UIEdgeInsets(top: 15, left: 0, bottom: 10, right: 0)
         $0.alwaysBounceVertical = true
         return $0
     }(UITableView())
     
     
-    private lazy var movieViewViewModel: MovieViewModelProtocol = {
-        return MovieViewModel(setView: self, networkManager: networkManager)
+    private lazy var movieViewViewModel: SearchedMovieViewModelProtocol = {
+        return SearchedMovieViewModel(setView: self, networkManager: networkManager)
     }()
 
     override func viewDidLoad() {
@@ -217,6 +217,7 @@ class MovieListViewController: UIViewController {
     
     private func navigationToDetailVC(movie: Movie) {
         let movieDetailVC = MovieDetailsViewController(movie: movie)
+        movieDetailVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(movieDetailVC, animated: true)
     }
     
@@ -292,7 +293,7 @@ extension MovieListViewController:  UITableViewDataSource, UITableViewDelegate {
 }
 
 
-extension MovieListViewController: MovieListViewProtocol {
+extension MovieListViewController: SearchMovieListViewProtocol {
     func showAlert(title: String?, message: String) {
         AlertManager.sharedAlertManager.showAlertWithTitle(title: title ?? "", message: message, controller: self) {[weak self] _ in
             guard let self else {return}

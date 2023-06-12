@@ -65,6 +65,8 @@ class MovieDetailTableViewCell:  UITableViewCell {
         return $0
     }(UIStackView(arrangedSubviews: [centeredTitleLabel, overViewTitleLabel]))
     
+  
+    
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -82,21 +84,23 @@ class MovieDetailTableViewCell:  UITableViewCell {
     
     func setUpImage(movie: Movie) {
         
-        let image = UIImage(named: .imagePlaceholder)
-        let imgUrl = movie.posterPath ?? ""
-        posterImage.kf.setImage(with:URL(string: kAPI.Base_img_URL+imgUrl),
-                                placeholder: image,
-                                options: [.loadDiskFileSynchronously,
-                                          .cacheOriginalImage,
-                                          .diskCacheExpiration(.days(7)),
-                                          .transition(.fade(0.5))]) { _ in
-                                              self.layoutIfNeeded()
-                                          }
+            let image = UIImage(named: .imagePlaceholder)
+            let imgUrl = movie.posterPath ?? ""
+            posterImage.kf.setImage(with:URL(string: kAPI.Base_img_URL+imgUrl),
+                                    placeholder: image,
+                                    options: [.loadDiskFileSynchronously,
+                                              .cacheOriginalImage,
+                                              .diskCacheExpiration(.days(7)),
+                                              .transition(.fade(0.5))]) { _ in
+                                                  self.layoutIfNeeded()
+                                              }
+            
+            centeredTitleLabel.text = movie.originalTitle
+            rateLabel.text = String(format: "%0.1f", movie.voteAverage)
+            rateImageView.isHidden = (movie.originalTitle == nil)
+            overViewTitleLabel.text = movie.overview != "" ? movie.overview : "No details available for this movie"
         
-        centeredTitleLabel.text = movie.originalTitle
-        rateLabel.text = String(format: "%0.1f", movie.voteAverage)
-        rateImageView.isHidden = (movie.originalTitle == nil)
-        overViewTitleLabel.text = movie.overview != "" ? movie.overview : "No details available for this movie"
+ 
     }
     
     private func setUpUI() {
@@ -137,5 +141,8 @@ class MovieDetailTableViewCell:  UITableViewCell {
             make.top.equalTo(containerStackView.snp.bottom).offset(15)
             make.right.equalTo(safeAreaView.snp.right).offset(-10)
         }
+        
     }
+    
+
 }

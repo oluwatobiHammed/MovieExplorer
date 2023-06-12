@@ -8,10 +8,9 @@
 import Foundation
 
 enum MovieEndpoints: EndPointType {
-    case getMovies(page: Int)
-    case getNowPlayinMovies(page: Int)
     case search(query: String, page: Int)
-    case addFavorite(movie: Int)
+    case addFavorite(movie: Int, isfavorite: Bool)
+    case getFavorite(page: Int)
     
     var baseURL: URL {
         guard let url = URL(string: kAPI.Base_URL) else { fatalError("baseURL could not be configured.")}
@@ -20,14 +19,12 @@ enum MovieEndpoints: EndPointType {
     
     var path: String {
         switch self {
-        case .getMovies:
-            return kAPI.Endpoints.discover
-        case .getNowPlayinMovies:
-            return kAPI.Endpoints.nowPlaying
         case .search:
             return kAPI.Endpoints.search
         case .addFavorite:
             return kAPI.Endpoints.favorite
+        case .getFavorite:
+            return kAPI.Endpoints.favoriteList
         }
     }
     
@@ -43,19 +40,6 @@ enum MovieEndpoints: EndPointType {
     
     var task: HTTPTask {
         switch self {
-        case .getMovies(let page):
-            let trimmedDictionary = getTrimmedDict(page: page)
-            return .requestParametersAndHeaders(bodyParameters: nil,
-                                                bodyEncoding: .urlEncoding,
-                                                urlParameters: trimmedDictionary as Parameters,
-                                                additionHeaders: headers)
-            
-            case .getNowPlayinMovies(let page):
-                return .requestParametersAndHeaders(bodyParameters: nil,
-                                                    bodyEncoding: .urlEncoding,
-                                                    urlParameters: ["page" : page],
-                                                    additionHeaders: headers)
-            
             
             case .search(let query, let page):
                 return .requestParametersAndHeaders(bodyParameters: nil,
@@ -63,10 +47,19 @@ enum MovieEndpoints: EndPointType {
                                                     urlParameters: ["page" : page, "query": query, "include_adult": false],
                                                     additionHeaders: headers)
             
-        case .addFavorite(let mediaId):
-            return .requestParametersAndHeaders(bodyParameters: ["media_type" : "movie", "media_id": mediaId, "favorite": true],
-                                                bodyEncoding: .urlEncoding,
+        case .addFavorite(let mediaId, let isfavorite):
+            
+            var bodyParameters : [String : Any] = ["media_type" : "movie","favorite": isfavorite]
+        
+            bodyParameters["media_id"] = mediaId
+            return .requestParametersAndHeaders(bodyParameters: bodyParameters,
+                                                bodyEncoding: .urlAndJsonEncoding,
                                                 urlParameters: nil,
+                                                additionHeaders: headers)
+        case .getFavorite(let page):
+            return .requestParametersAndHeaders(bodyParameters: nil,
+                                                bodyEncoding: .urlEncoding,
+                                                urlParameters: ["page" : page, "sort_by": "created_at.desc"],
                                                 additionHeaders: headers)
         }
     }
@@ -84,36 +77,6 @@ enum MovieEndpoints: EndPointType {
     
 }
 
-
-extension MovieEndpoints {
-    
-    func getTrimmedDict(page: Int) -> [String: Any?] {
-        let preparedDictionary: [String: Any?] =  [
-            "include_adult": false,
-            "include_video": false,
-            "page": page,
-            "sort_by": "popularity.desc",
-        ]
-        
-        var trimmedDictionaryForNilValues = preparedDictionary.filter ({ $0.value != nil }).mapValues( { $0 })
-        
-        let keysToRemove = trimmedDictionaryForNilValues
-        
-        for key in keysToRemove {
-            if let value = key.value as? String{
-                if value == "" {
-                    trimmedDictionaryForNilValues.removeValue(forKey: key.key)
-                }
-            }
-        }
-        return trimmedDictionaryForNilValues
-    }
-    
-    
-    
-    
-    
-}
 
 
 extension Encodable {

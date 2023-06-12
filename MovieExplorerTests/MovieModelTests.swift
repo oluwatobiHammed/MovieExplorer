@@ -11,14 +11,14 @@ import XCTest
 
 final class MovieModelTests: XCTestCase {
     
-    private var sut: MovieViewModelProtocol!
-    private var VCProtocol: MovieListViewProtocol!
+    private var sut: SearchedMovieViewModelProtocol!
+    private var VCProtocol: SearchMovieListViewProtocol!
     
     override func setUp()  {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         super.setUp()
         VCProtocol = MovieListViewController()
-        sut = MovieViewModel(setView: VCProtocol, networkManager: MockNetworkManager())
+        sut = SearchedMovieViewModel(setView: VCProtocol, networkManager: MockNetworkManager())
     }
 
     override func tearDown()  {

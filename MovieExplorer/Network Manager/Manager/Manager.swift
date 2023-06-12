@@ -8,6 +8,85 @@
 import Foundation
 
 struct NetworkManager: ManagerProtocol {
+    func addFavorite(movieId: Int, isfavorite: Bool, completion: @escaping (Error?) -> ()) {
+        Task {
+            await router.request(.addFavorite(movie: movieId, isfavorite: isfavorite)) { data, response, error in
+                
+                if error != nil {
+                    completion(NSError(domain: "", code: URLError.Code.notConnectedToInternet.rawValue, userInfo: [NSLocalizedDescriptionKey : "Please check your network connection."]))
+                }
+                
+                if let response = response as? HTTPURLResponse {
+                    let result = self.handleNetworkResponse(response)
+                    switch result {
+                    case .success:
+                        guard let responseData = data else {
+                            completion(NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.noData.rawValue]))
+                            return
+                        }
+                        do {
+
+                            let jsonData = try JSONSerialization.jsonObject(with: responseData, options: .mutableContainers)
+                            print(jsonData)
+                            completion(nil)
+                        } catch {
+
+                            completion(NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.unableToDecode.rawValue]))
+                        }
+                    case .failure(let networkFailureError):
+                        completion(networkFailureError)
+                    }
+                }
+            }
+        }
+    }
+    
+    func getFavorite(page: Int, completion: @escaping (FavoriteMovies?, Error?) -> ()) {
+        Task {
+            await router.request(.getFavorite(page: page)) { data, response, error in
+                
+                if error != nil {
+                    completion(nil, NSError(domain: "", code: URLError.Code.notConnectedToInternet.rawValue, userInfo: [NSLocalizedDescriptionKey : "Please check your network connection."]))
+                }
+                
+                if let response = response as? HTTPURLResponse {
+                    let result = self.handleNetworkResponse(response)
+                    switch result {
+                    case .success:
+                        guard let responseData = data else {
+                            completion(nil, NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.noData.rawValue]))
+                            return
+                        }
+                        do {
+
+                            let jsonData = try JSONSerialization.jsonObject(with: responseData, options: .mutableContainers)
+                            print(jsonData)
+                            
+                            guard let movies = try? FavoriteMovies.decode(data: responseData) else {
+                                completion(nil, NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.unableToDecode.rawValue]))
+                                return
+                            }
+                            completion(movies,nil)
+                            guard movies.results.count > 0 else { return }
+                            DispatchQueue.main.async {
+                                
+                                MovieRealmManager.shared.updateOrSave(realmObject: movies)
+                            }
+                           
+                        } catch {
+
+                            completion(nil, NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.unableToDecode.rawValue]))
+                        }
+                    case .failure(let networkFailureError):
+                        completion(nil, networkFailureError)
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    
     let router = Router<MovieEndpoints>()
     
     
@@ -39,9 +118,6 @@ struct NetworkManager: ManagerProtocol {
                             completion(movies,nil)
                             guard movies.results.count > 0 else { return }
                             DispatchQueue.main.async {
-                                if page == 1 {
-                                    MovieRealmManager.shared.deleteDatabase()
-                                }
                                 
                                 MovieRealmManager.shared.updateOrSave(realmObject: movies)
                             }

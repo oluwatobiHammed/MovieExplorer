@@ -1,15 +1,15 @@
 //
-//  DiscoverMovie.swift
-//  MovieDetails
+//  FavoriteMovies.swift
+//  MovieExplorer
 //
-//  Created by Oladipupo Oluwatobi on 08/06/2023.
+//  Created by Oluwatobi Oladipupo on 12/06/2023.
 //
 
 import RealmSwift
 import Realm
 
 @objcMembers
-class Movies: Object, Decodable {
+class FavoriteMovies: Object, Decodable {
     private enum CodingKeys: String, CodingKey {
         case page, results, totalPages = "total_pages"
     }
@@ -29,7 +29,6 @@ class Movies: Object, Decodable {
         return "totalPages"
     }
     
-    //dynamic var id                  : Int = 0
     var results                     = List<Movie>()
     dynamic var totalPages          : Int = 0
     dynamic var page                : Int = 0

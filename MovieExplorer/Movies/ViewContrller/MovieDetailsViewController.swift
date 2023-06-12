@@ -10,10 +10,12 @@ import Kingfisher
 
 class MovieDetailsViewController: UIViewController {
     
-    
     private var movie: Movie
     private var starsRating: Int?
-    
+    private var networkManager = NetworkManager()
+    private var listOfLiked =  UserManager().readSkippedContent()
+    private let likebuttonimage = UIImage(named: .heartFill)
+    private var isfavorite: Bool = false
     private let posterImage: UIImageView = {
         $0.contentMode = .scaleToFill
         $0.clipsToBounds = true
@@ -119,7 +121,18 @@ class MovieDetailsViewController: UIViewController {
         return $0
     }(UIStackView(frame: .zero))
     
+    private (set) lazy var likeButton: UIButton = {
+        $0.addTarget(self, action: #selector(likedButtonnPressed), for: .touchUpInside)
+        $0.imageView?.contentMode = .scaleAspectFit
+        return $0
+    }(UIButton())
+    
     private lazy var ratingImages = [UIImageView(), UIImageView(), UIImageView(), UIImageView(), UIImageView()]
+    
+    
+    private lazy var moviedetailsViewViewModel: DetailMovieViewModelProtocol = {
+        return DetailMovieViewModel(setView: self, networkManager: networkManager)
+    }()
     
     init(movie: Movie) {
         self.movie = movie
@@ -156,6 +169,11 @@ class MovieDetailsViewController: UIViewController {
         rateLabel.text = String(format: "%0.1f", movie.voteAverage)
         releasedateLabel.text = movie.releaseDate
         setStarsRating(rating: Int(movie.voteAverage)/2)
+        print("listOfLiked", listOfLiked)
+        isfavorite = listOfLiked.contains(where: { $0 == movie.id })
+        likeButton.setImage( likebuttonimage.imageWithColor(tintColor: listOfLiked.contains(where: { $0 == movie.id }) ? .red : .white), for: .normal)
+        
+        
         
     }
     
@@ -200,7 +218,6 @@ class MovieDetailsViewController: UIViewController {
             make.right.equalToSuperview().offset(-5)
         }
         
-        
         view.addSubview(mainContentContainer)
         mainContentContainer.snp.makeConstraints { make in
             make.top.equalTo(posterImage.snp.bottom)
@@ -227,7 +244,7 @@ class MovieDetailsViewController: UIViewController {
             make.top.equalTo(topcontentContainer.snp.top)
             make.bottom.equalTo(topcontentContainer.snp.bottom)
         }
-
+        
         topcontentContainer.addSubview(rateLabel)
         rateLabel.snp.makeConstraints { make in
             make.center.equalTo(circleImage.snp.center)
@@ -240,21 +257,21 @@ class MovieDetailsViewController: UIViewController {
             make.bottom.equalTo(topcontentContainer.snp.bottom).offset(10)
             make.width.equalTo(100)
         }
-
+        
         topcontentContainer.addSubview(releaseDatecontainerStackView)
         releaseDatecontainerStackView.snp.makeConstraints { make in
             make.right.equalTo(topcontentContainer.snp.right)
             make.top.equalTo(topcontentContainer.snp.top)
             make.bottom.equalTo(topcontentContainer.snp.bottom)
         }
-
+        
         contentContainer.addSubview(overViewLabel)
         overViewLabel.snp.makeConstraints { make in
             make.left.equalTo(contentContainer.snp.left)
             make.right.equalTo(contentContainer.snp.right)
             make.height.equalTo(60)
         }
-
+        
         contentContainer.addSubview(firstLineViewContainer)
         firstLineViewContainer.snp.makeConstraints { make in
             make.height.equalTo(1)
@@ -263,7 +280,7 @@ class MovieDetailsViewController: UIViewController {
             make.right.equalTo(contentContainer.snp.right)
             make.bottom.equalTo(contentContainer.snp.bottom)
         }
-
+        
         contentContainer.addSubview(secondLineViewContainer)
         secondLineViewContainer.snp.makeConstraints { make in
             make.height.equalTo(1)
@@ -271,6 +288,34 @@ class MovieDetailsViewController: UIViewController {
             make.right.equalTo(contentContainer.snp.right)
             make.bottom.equalTo(overViewLabel.snp.top).offset(-20)
         }
+        
+        
+        view.addSubview(likeButton)
+        likeButton.snp.makeConstraints { make in
+            make.height.equalTo(40)
+            make.width.equalTo(40)
+            make.right.equalTo(posterImage.snp.right).offset(-10)
+            make.bottom.equalTo(posterImage.snp.bottom).offset(-10)
+        }
+        
+        
     }
     
+    @objc private func likedButtonnPressed() {
+        isfavorite = !isfavorite
+        moviedetailsViewViewModel.addFavoiteMovie(movieId: movie.id, isfavorite: isfavorite)
+        
+        
+    }
+}
+
+extension MovieDetailsViewController: DetailMovieViewProtocol {
+    func updateLikeButton(isfavorite: Bool) {
+        likeButton.setImage(likebuttonimage.imageWithColor(tintColor: isfavorite ? .red : .white), for: .normal)
+    }
+    
+    func showAlert(title: String?, message: String) {
+        AlertManager.sharedAlertManager.showAlertWithTitle(title: title ?? "", message: message, controller: self)
+    }
+
 }

@@ -27,6 +27,13 @@ class MovieRealmManager {
         })
     }
     
+    func deleteObject(realmObject : Object, isCascading: Bool = false) {
+        try? realm?.write ({
+            guard !realmObject.isInvalidated else { return }
+            realm?.delete(realmObject)
+        })
+    }
+    
     func updateOrSave(realmObject: Object) {
         try? realm?.write ({
             guard !realmObject.isInvalidated else { return }
@@ -36,6 +43,21 @@ class MovieRealmManager {
     
     func fetchObjects(type: Object.Type) -> Results<Object>? {
         return realm?.objects(type)
+    }
+    
+    func clearDailySearchMovies() {
+        DispatchQueue.main.async { [self] in
+            clearObject(type: Movies.self, isCascading: false)
+        }
+    }
+    
+    func clearObject(type: Object.Type, isCascading: Bool = false) {
+        try? realm?.write ({
+            if let result = realm?.objects(type.self) {
+                guard !result.isInvalidated || result.first != nil else { return }
+                realm?.delete(result)
+            }
+        })
     }
     
 }
@@ -49,6 +71,16 @@ extension MovieRealmManager {
         let results = fetchObjects(type: Movies.self)
         if let results = results, !results.isInvalidated,  results.count > 0 {
             return results.first as? Movies
+        }
+        return nil
+        
+    }
+    
+    var favoriteMovies : FavoriteMovies? {
+        
+        let results = fetchObjects(type: FavoriteMovies.self)
+        if let results = results, !results.isInvalidated,  results.count > 0 {
+            return results.first as? FavoriteMovies
         }
         return nil
         

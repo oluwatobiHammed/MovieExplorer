@@ -26,11 +26,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigation = UINavigationController(rootViewController: MovieListViewController())
         navigation.tabBarItem.title = "Search"
         navigation.tabBarItem.image = UIImage(systemName: "house")
+        navigation.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
         
         // Set up the second View Controller
         let navigation1 = UINavigationController(rootViewController: FavoriteMoviesViewController())
         navigation1.tabBarItem.title = "Favorite"
-        navigation1.tabBarItem.image = UIImage(systemName: "star")
+        navigation1.tabBarItem.image = UIImage(systemName: "heart")
+        navigation1.tabBarItem.selectedImage = UIImage(systemName: "heart.fill")
         
         // Set up the Tab Bar Controller to have two tabs
         let tabBarController = UITabBarController()

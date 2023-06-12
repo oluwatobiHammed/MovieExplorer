@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol MovieViewModelProtocol {
+protocol SearchedMovieViewModelProtocol {
     func handleSendButton(query: String)
     func numberofMovies() -> (Int, [Movie])
     func getMovies()

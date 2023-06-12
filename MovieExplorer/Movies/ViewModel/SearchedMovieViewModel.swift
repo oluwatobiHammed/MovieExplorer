@@ -9,10 +9,10 @@
 
 import Foundation
 
-class MovieViewModel {
+class SearchedMovieViewModel {
     
     
-    weak var view : MovieListViewProtocol?
+    weak var view : SearchMovieListViewProtocol?
     private var networkManager: ManagerProtocol
     private var movieResult: [Movie] = []
     private var movieList: Movies?
@@ -20,19 +20,16 @@ class MovieViewModel {
     private var currentPage = 1
     
     
-    init(setView view: MovieListViewProtocol?, networkManager: ManagerProtocol) {
+    init(setView view: SearchMovieListViewProtocol?, networkManager: ManagerProtocol) {
         if let view  { self.view = view }
         self.networkManager = networkManager
     }
 }
 
-extension MovieViewModel: MovieViewModelProtocol {
+extension SearchedMovieViewModel: SearchedMovieViewModelProtocol {
+    
     func pagination(index: Int) {
         guard let query = UserDefaults.standard.string(forKey: "searchQuery") else {return}
-        let movieR = movieResult.count
-        let current = currentPage
-        let total = movieList?.totalPages
-        
         
         if  currentPage  < movieList?.totalPages ?? 0, index == movieResult.count - 1 {
             currentPage += 1
@@ -45,6 +42,7 @@ extension MovieViewModel: MovieViewModelProtocol {
     func numberofMovies() -> (Int, [Movie]) {
         (movieList?.totalPages ?? 0,movieResult)
     }
+    
     func getMovies() {
         if let movies = MovieRealmManager.shared.movies {
             movieResult = Array(movies.results)
@@ -63,6 +61,9 @@ extension MovieViewModel: MovieViewModelProtocol {
     }
     
     private func getQueryText(page: Int, query: String?) {
+        if UserDefaults.standard.string(forKey: "searchQuery") != query {
+            MovieRealmManager.shared.clearDailySearchMovies()
+        }
         guard let query else {
             view?.showAlert(title: nil, message: "Type in a movie name to search for a movie")
             return }

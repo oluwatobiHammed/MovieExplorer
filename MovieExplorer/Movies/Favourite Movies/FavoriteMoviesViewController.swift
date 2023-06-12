@@ -10,9 +10,14 @@ import SnapKit
 
 class FavoriteMoviesViewController: UIViewController {
     
+    
     // MARK: Properties
-    private let messageUnavailableCellIdentifier = "UnavailableCellIdentifier"
+    private let movieUnavailableCellIdentifier = "UnavailableCellIdentifier"
     private var networkManager = NetworkManager()
+    
+    private var tabBarHeight: CGFloat {
+        return  10 + (tabBarController?.tabBar.frame.size.height ?? 0)
+    }
     
     private let naVBarView: UIView = {
         $0.backgroundColor = .white
@@ -24,31 +29,28 @@ class FavoriteMoviesViewController: UIViewController {
         $0.delegate = self
         $0.dataSource = self
         $0.register(MovieDetailTableViewCell.self, forCellReuseIdentifier: MovieDetailTableViewCell.reuseIdentifier)
-        $0.register(UITableViewCell.self, forCellReuseIdentifier: messageUnavailableCellIdentifier)
+        $0.register(UITableViewCell.self, forCellReuseIdentifier: movieUnavailableCellIdentifier)
         $0.separatorStyle = .none
         $0.backgroundColor = kColor.BrandColours.Bizarre
         $0.contentInsetAdjustmentBehavior = .never
         $0.keyboardDismissMode = .interactive
-        $0.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        $0.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: tabBarHeight, right: 0)
         $0.scrollIndicatorInsets = UIEdgeInsets(top: 15, left: 0, bottom: 10, right: 0)
         $0.alwaysBounceVertical = true
+        $0.refreshControl = refreshControl
         return $0
     }(UITableView())
     
-    
+    private lazy var favouriteMovieViewViewModel: FavoriteMovieViewModelProtocol = {
+        return FavoriteMovieViewModel(setView: self, networkManager: networkManager)
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
+        favouriteMovieViewViewModel.getFavorite(page: 1)
         setUpview()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        dismissKeyboard()
-       
-
     }
     
     deinit {
@@ -130,32 +132,45 @@ class FavoriteMoviesViewController: UIViewController {
     }
     
 
-    
+    lazy var refreshControl : UIRefreshControl = {
+        $0.backgroundColor = .clear
+        $0.tintColor = .black
+        $0.addTarget(self, action: #selector(handlePullDownToRefresh), for: UIControl.Event.valueChanged)
+        return $0
+    }(UIRefreshControl(frame: .zero))
  
     
     private func navigationToDetailVC(movie: Movie) {
         let movieDetailVC = MovieDetailsViewController(movie: movie)
+        movieDetailVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(movieDetailVC, animated: true)
     }
+    
+    @objc private func handlePullDownToRefresh() {
+        favouriteMovieViewViewModel.getFavorite(page: 1)
+    }
+    
 
 }
 
 extension FavoriteMoviesViewController:  UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return 0
+        let (_, movieResult) = favouriteMovieViewViewModel.numberofMovies()
+       return movieResult.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if  let cell = tableView.dequeueReusableCell(withIdentifier: MovieDetailTableViewCell.reuseIdentifier, for: indexPath) as? MovieDetailTableViewCell {
-         
+            let (_, movieResult) = favouriteMovieViewViewModel.numberofMovies()
+            cell.setUpImage(movie: movieResult[indexPath.row])
             return cell
         } else {
-            return tableView.dequeueReusableCell(withIdentifier: messageUnavailableCellIdentifier, for: indexPath)
+            return tableView.dequeueReusableCell(withIdentifier: movieUnavailableCellIdentifier, for: indexPath)
         }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-    
+        favouriteMovieViewViewModel.pagination(index: indexPath.row)
     }
     
     
@@ -164,8 +179,27 @@ extension FavoriteMoviesViewController:  UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
+        let (_, movieResult) = favouriteMovieViewViewModel.numberofMovies()
+        navigationToDetailVC(movie: movieResult[indexPath.row])
     }
+    
+  
 }
 
 
+
+extension FavoriteMoviesViewController: FavoriteListViewProtocol {
+    
+    func showAlert(title: String?, message: String) {
+        AlertManager.sharedAlertManager.showAlertWithTitle(title: title ?? "", message: message, controller: self)
+    }
+    
+    func reloadMovieTableView() {
+        movieListTableView.reloadData()
+        if refreshControl.isRefreshing {
+            refreshControl.endRefreshing()
+        }
+    }
+
+
+}

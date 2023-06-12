@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol MovieListViewProtocol: AnyObject {
+protocol SearchMovieListViewProtocol: AnyObject {
     func reloadMovieTableView(sendButtonPressed: Bool)
     func showAlert(title: String?, message: String)
 }

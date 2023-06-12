@@ -36,6 +36,9 @@ public enum ParameterEncoding {
                        imageTuple: (UIImage?, String)? = nil) throws {
         do {
             
+            if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
+                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            }
             
             if urlRequest.value(forHTTPHeaderField: "accept") == nil {
                 urlRequest.setValue("application/json", forHTTPHeaderField: "accept")
