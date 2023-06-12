@@ -5,6 +5,8 @@ The master view shows a list of movies. Select a movie to show the details of th
 
 The movie detail view has multi views.
 
+The Favorite pictures liked status are saved locally to keep the state of the like button 
+
 ## System Requirements
 
 * Xcode 14.0+ for iOS version 
@@ -26,6 +28,7 @@ Tap the movie tile to view full detail of each movies
 * The `MovieListViewController.swift` and `MovieViewModel.swift` files have all the core logic of list of movies.
 * The `MovieDetailsViewController.swift` and `Movie.swift` files have the code for details of each movies.
 * The `MovieDetailTableViewCell.swift` and `Movies.swift` files have the code for what is displaying what is on the tile.
+* The `FavoriteMoviesViewController.swift` and `Movies.swift` files have the code for displaying favorite movies.
 
 ## Package Dependencies (Used Swift Package Manager)
 
@@ -35,8 +38,10 @@ Tap the movie tile to view full detail of each movies
 
 ## Screen Shot
 
-![IMG_2613](https://github.com/oluwatobiHammed/MovieExplorer/assets/50711478/c61f7f38-47c9-4d68-b218-d3d67cf38bb5)
+![IMG_2618](https://github.com/oluwatobiHammed/MovieExplorer/assets/50711478/2a340f87-0d79-4365-81d7-523a6cc0cd8b)
 
+![IMG_2619](https://github.com/oluwatobiHammed/MovieExplorer/assets/50711478/55f49a47-148c-4872-b704-1dd1544a06d5)
 
-![IMG_2614](https://github.com/oluwatobiHammed/MovieExplorer/assets/50711478/79260b62-72c1-462f-b526-9be8b55a3020)
+![IMG_2620](https://github.com/oluwatobiHammed/MovieExplorer/assets/50711478/749d5ac9-b3f3-4ed6-8bb4-11826a3cc14a)
+
 
