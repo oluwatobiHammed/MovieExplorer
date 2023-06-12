@@ -21,12 +21,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         /// 2. Create a new UIWindow using the windowScene constructor which takes in a window scene.
             let window = UIWindow(windowScene: windowScene)
         
+        
+        // Set up the first View Controller
+        let navigation = UINavigationController(rootViewController: MovieListViewController())
+        navigation.tabBarItem.title = "Search"
+        navigation.tabBarItem.image = UIImage(systemName: "house")
+        
+        // Set up the second View Controller
+        let navigation1 = UINavigationController(rootViewController: FavoriteMoviesViewController())
+        navigation1.tabBarItem.title = "Favorite"
+        navigation1.tabBarItem.image = UIImage(systemName: "star")
+        
+        // Set up the Tab Bar Controller to have two tabs
+        let tabBarController = UITabBarController()
+        tabBarController.setViewControllers([navigation, navigation1], animated: false)
         /// 3. Create a view hierarchy programmatically
-         let viewController = MovieListViewController()
-         let navigation = UINavigationController(rootViewController: viewController)
-         
+        ///
+           if #available(iOS 15.0, *) {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .white //or whatever your color is
+        
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
+    }
+
          /// 4. Set the root view controller of the window with your view controller
-         window.rootViewController = navigation
+         window.rootViewController = tabBarController
          
          /// 5. Set the window and call makeKeyAndVisible()
          self.window = window

@@ -17,5 +17,6 @@ struct kAPI {
         static let discover           = "/discover/movie"
         static let nowPlaying         = "/movie/now_playing"
         static let search             = "/search/movie"
+        static let favorite           = "/account/8527385/favorite"
     }
 }

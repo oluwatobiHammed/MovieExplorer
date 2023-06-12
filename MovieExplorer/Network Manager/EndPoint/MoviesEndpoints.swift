@@ -11,6 +11,7 @@ enum MovieEndpoints: EndPointType {
     case getMovies(page: Int)
     case getNowPlayinMovies(page: Int)
     case search(query: String, page: Int)
+    case addFavorite(movie: Int)
     
     var baseURL: URL {
         guard let url = URL(string: kAPI.Base_URL) else { fatalError("baseURL could not be configured.")}
@@ -25,11 +26,19 @@ enum MovieEndpoints: EndPointType {
             return kAPI.Endpoints.nowPlaying
         case .search:
             return kAPI.Endpoints.search
+        case .addFavorite:
+            return kAPI.Endpoints.favorite
         }
     }
     
     var httpMethod: HTTPMethod {
-        return.get
+        switch self {
+        case .addFavorite:
+            return .post
+        default:
+            return .get
+        }
+        
     }
     
     var task: HTTPTask {
@@ -53,6 +62,12 @@ enum MovieEndpoints: EndPointType {
                                                     bodyEncoding: .urlEncoding,
                                                     urlParameters: ["page" : page, "query": query, "include_adult": false],
                                                     additionHeaders: headers)
+            
+        case .addFavorite(let mediaId):
+            return .requestParametersAndHeaders(bodyParameters: ["media_type" : "movie", "media_id": mediaId, "favorite": true],
+                                                bodyEncoding: .urlEncoding,
+                                                urlParameters: nil,
+                                                additionHeaders: headers)
         }
     }
     

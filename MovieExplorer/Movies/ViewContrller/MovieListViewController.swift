@@ -14,7 +14,9 @@ class MovieListViewController: UIViewController {
     private let messageUnavailableCellIdentifier = "UnavailableCellIdentifier"
     private let image = UIImage(named: .searchIcon)
     private var networkManager = NetworkManager()
-    
+    private var tabBarHeight: CGFloat {
+        return  10 + (tabBarController?.tabBar.frame.size.height ?? 0)
+    }
     private let inputViewContainerView: UIView = {
         $0.backgroundColor = .white
         $0.layer.shadowColor = UIColor.black.cgColor
@@ -34,6 +36,7 @@ class MovieListViewController: UIViewController {
         $0.textColor = kColor.BrandColours.DarkGray
         $0.font = kFont.EffraRegular.of(size: 15)
         $0.returnKeyType = UIReturnKeyType.next
+        $0.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         return $0
     }(CustomTextField(iconImage: image.imageWithColor(tintColor: kColor.BrandColours.DarkGray)))
     
@@ -48,6 +51,7 @@ class MovieListViewController: UIViewController {
         let image = UIImage(named: .sendButton)
         $0.setImage(image.imageWithColor(tintColor: kColor.BrandColours.DarkGray), for: .normal)
         $0.addTarget(self, action: #selector(sendButtonnPressed), for: .touchUpInside)
+        $0.isEnabled = false
         return $0
     }(UIButton())
     
@@ -121,7 +125,7 @@ class MovieListViewController: UIViewController {
         }
        
     
-        adjustKeyboard(bottomConstraint: 55)
+        adjustKeyboard(bottomConstraint: tabBarHeight)
         inputViewContainerView.addSubview(searchTextField)
         inputViewContainerView.addSubview(sendButton)
         sendButton.snp.makeConstraints { make in
@@ -201,6 +205,12 @@ class MovieListViewController: UIViewController {
         movieViewViewModel.handleSendButton(query: searchTextField.text ?? "")
         searchTextField.endEditing(true)
     }
+    
+    @objc fileprivate func textFieldDidChange(textField: UITextField) {
+        sendButton.isEnabled = !(textField.text?.isBlank ?? false)
+        
+    }
+    
 
     
  
@@ -219,7 +229,7 @@ class MovieListViewController: UIViewController {
         
         let keyboardData = keyboardInfoFromNotification(notification)
         
-        adjustKeyboard(bottomConstraint: 55)
+        adjustKeyboard(bottomConstraint: tabBarHeight)
         weak var weakSelf = self
         UIView.animate(withDuration: keyboardData.animationDuration,
                        delay: 0,
@@ -286,6 +296,7 @@ extension MovieListViewController: MovieListViewProtocol {
     func showAlert(title: String?, message: String) {
         AlertManager.sharedAlertManager.showAlertWithTitle(title: title ?? "", message: message, controller: self) {[weak self] _ in
             guard let self else {return}
+            sendButton.isEnabled = false
             self.searchTextField.text = ""
         }
     }
@@ -295,6 +306,7 @@ extension MovieListViewController: MovieListViewProtocol {
         if sendButtonPressed {
             movieListTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
         }
+        sendButton.isEnabled = false
         searchTextField.text = ""
     }
 }

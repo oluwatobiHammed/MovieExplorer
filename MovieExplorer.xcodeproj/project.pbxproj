@@ -89,6 +89,8 @@
 		F10FC1F12A3636A800B1F2EE /* movies.json in Resources */ = {isa = PBXBuildFile; fileRef = F10FC1F02A3636A800B1F2EE /* movies.json */; };
 		F10FC1F32A3646AD00B1F2EE /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FC1F22A3646AD00B1F2EE /* MockNetworkManager.swift */; };
 		F10FC1F52A364B0A00B1F2EE /* ManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FC1F42A364B0A00B1F2EE /* ManagerProtocol.swift */; };
+		F14139042A37141C00880386 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = F10FC1E02A361CF400B1F2EE /* SnapKit-Dynamic */; };
+		F14139072A37151000880386 /* FavoriteMoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14139062A37151000880386 /* FavoriteMoviesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,6 +198,7 @@
 		F10FC1F02A3636A800B1F2EE /* movies.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = movies.json; sourceTree = "<group>"; };
 		F10FC1F22A3646AD00B1F2EE /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
 		F10FC1F42A364B0A00B1F2EE /* ManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerProtocol.swift; sourceTree = "<group>"; };
+		F14139062A37151000880386 /* FavoriteMoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMoviesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +217,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F14139042A37141C00880386 /* SnapKit-Dynamic in Frameworks */,
 				F10FC1DF2A361CF400B1F2EE /* SnapKit in Frameworks */,
 				F10FC1DD2A361CF400B1F2EE /* RealmSwift in Frameworks */,
 				F10FC1DB2A361CF400B1F2EE /* Realm in Frameworks */,
@@ -474,6 +478,7 @@
 		F10FC1B62A3362A400B1F2EE /* Movies */ = {
 			isa = PBXGroup;
 			children = (
+				F14139052A3714CE00880386 /* Favourite Movies */,
 				F10FC1D62A35595700B1F2EE /* TableViewCell */,
 				F10FC1D52A35593700B1F2EE /* ViewContrller */,
 				F10FC1C92A34C46B00B1F2EE /* ViewModel */,
@@ -552,6 +557,14 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F14139052A3714CE00880386 /* Favourite Movies */ = {
+			isa = PBXGroup;
+			children = (
+				F14139062A37151000880386 /* FavoriteMoviesViewController.swift */,
+			);
+			path = "Favourite Movies";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -761,6 +774,7 @@
 				31A847E22A3308F5009B6903 /* UIColor+HexStringHelper.swift in Sources */,
 				F10FC1CC2A34C4D800B1F2EE /* MovieViewModelProtocol.swift in Sources */,
 				31CF4BAB2A3334550044A51D /* MovieDetailTableViewCell.swift in Sources */,
+				F14139072A37151000880386 /* FavoriteMoviesViewController.swift in Sources */,
 				31A847E32A3308F5009B6903 /* ColorConstants.swift in Sources */,
 				F10FC1C02A33BAAB00B1F2EE /* MovieRealmManager.swift in Sources */,
 				31A847E12A3308F5009B6903 /* FontConstants.swift in Sources */,
