@@ -15,10 +15,6 @@ The movie detail view has multi views.
 
 Type in search bar to search for movies
 
-### iOS
-
-Tap the Edit button. Tap on the name of a page to rename it.
-
 
 ### iOS
 
