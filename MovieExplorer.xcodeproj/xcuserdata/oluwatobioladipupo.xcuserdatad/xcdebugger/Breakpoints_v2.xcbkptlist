@@ -132,5 +132,69 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CF03C112-2442-41BF-8DBC-640D7FBB355C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MovieExplorer/Movies/ViewModel/SearchedMovieViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "updateAddedFavoriteMovie()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "15D9BFEB-5E4C-4B08-9F67-2ADC9FD8F3CC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MovieExplorer/Movies/ViewContrller/SearchMovieListViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
+            landmarkName = "checkStoryCellUpdate()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "15D9BFEB-5E4C-4B08-9F67-2ADC9FD8F3CC - d46ecf184a728b0f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MovieExplorer.SearchMovieListViewController.checkStoryCellUpdate() -&gt; ()"
+                  moduleName = "MovieExplorer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/oluwatobioladipupo/Documents/GitHub/MovieExplorer/MovieExplorer/Movies/ViewContrller/SearchMovieListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "269"
+                  endingLineNumber = "269"
+                  offsetFromSymbolStart = "1004">
+               </Location>
+               <Location
+                  uuid = "15D9BFEB-5E4C-4B08-9F67-2ADC9FD8F3CC - d46ecf184a728b0f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MovieExplorer.SearchMovieListViewController.checkStoryCellUpdate() -&gt; ()"
+                  moduleName = "MovieExplorer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/oluwatobioladipupo/Documents/GitHub/MovieExplorer/MovieExplorer/Movies/ViewContrller/SearchMovieListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "269"
+                  endingLineNumber = "269"
+                  offsetFromSymbolStart = "388">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

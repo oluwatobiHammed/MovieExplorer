@@ -68,6 +68,7 @@ class FavoriteMoviesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let (_, movieResult) = favouriteMovieViewViewModel.numberofMovies()
+        checkStoryCellUpdate()
         errorTitle.isHidden = (movieResult.count > 0)
     }
     
@@ -168,6 +169,14 @@ class FavoriteMoviesViewController: UIViewController {
         navigationController?.pushViewController(movieDetailVC, animated: true)
     }
     
+    private func checkStoryCellUpdate() {
+        for cell in movieListTableView.visibleCells {
+            guard let storyCell = cell as? MovieDetailTableViewCell else { continue }
+                storyCell.updateLikedImage()
+                break
+        }
+    }
+    
     @objc private func handlePullDownToRefresh() {
         favouriteMovieViewViewModel.getFavorite(page: 1)
     }
@@ -185,6 +194,7 @@ extension FavoriteMoviesViewController:  UITableViewDataSource, UITableViewDeleg
         if  let cell = tableView.dequeueReusableCell(withIdentifier: MovieDetailTableViewCell.reuseIdentifier, for: indexPath) as? MovieDetailTableViewCell {
             let (_, movieResult) = favouriteMovieViewViewModel.numberofMovies()
             cell.setUpImage(movie: movieResult[indexPath.row])
+            cell.id = movieResult[indexPath.row].id
             return cell
         } else {
             return tableView.dequeueReusableCell(withIdentifier: movieUnavailableCellIdentifier, for: indexPath)

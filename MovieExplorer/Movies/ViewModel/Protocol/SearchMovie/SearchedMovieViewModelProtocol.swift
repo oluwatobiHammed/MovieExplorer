@@ -12,5 +12,6 @@ protocol SearchedMovieViewModelProtocol {
     func numberofMovies() -> (Int, [Movie])
     func getMovies()
     func pagination(index: Int)
+    func viewDidLoad()
 }
 

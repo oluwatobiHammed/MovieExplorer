@@ -78,9 +78,16 @@ class SearchMovieListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        movieViewViewModel.viewDidLoad()
         view.backgroundColor = .white
         setupNotificationObservers()
         setUpview()
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        checkStoryCellUpdate()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -255,6 +262,14 @@ class SearchMovieListViewController: UIViewController {
      
     }
     
+    private func checkStoryCellUpdate() {
+        for cell in movieListTableView.visibleCells {
+            guard let storyCell = cell as? MovieDetailTableViewCell else { continue }
+                storyCell.updateLikedImage()
+                break
+        }
+    }
+    
 
 }
 
@@ -268,6 +283,7 @@ extension SearchMovieListViewController:  UITableViewDataSource, UITableViewDele
         if  let cell = tableView.dequeueReusableCell(withIdentifier: MovieDetailTableViewCell.reuseIdentifier, for: indexPath) as? MovieDetailTableViewCell {
             let (_, movieResult) = movieViewViewModel.numberofMovies()
             if movieResult.count > 0 {
+                cell.id = movieResult[indexPath.row].id
                 cell.setUpImage(movie: movieResult[indexPath.row])
             }
             return cell
@@ -303,11 +319,33 @@ extension SearchMovieListViewController: SearchMovieListViewProtocol {
     }
     
     func reloadMovieTableView(sendButtonPressed: Bool) {
+        checkStoryCellUpdate()
         movieListTableView.reloadData()
         if sendButtonPressed {
             movieListTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
         }
         sendButton.isEnabled = false
         searchTextField.text = ""
+        
+    }
+}
+
+
+
+
+import Foundation
+
+extension UITableView {
+    
+    public var boundsWithoutInset: CGRect {
+        var boundsWithoutInset = bounds
+        boundsWithoutInset.origin.y += contentInset.top
+        boundsWithoutInset.size.height -= contentInset.top + contentInset.bottom
+        return boundsWithoutInset
+    }
+    
+    public func isRowCompletelyVisible(at indexPath: IndexPath) -> Bool {
+        let rect = rectForRow(at: indexPath)
+        return boundsWithoutInset.contains(rect)
     }
 }

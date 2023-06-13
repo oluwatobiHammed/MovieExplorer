@@ -103,4 +103,18 @@ extension SearchedMovieViewModel: SearchedMovieViewModelProtocol {
             
         }
     }
+    
+    
+    private func addNotificationObserver() {
+        // Favorite Movie update
+        NotificationCenter.default.addObserver(self, selector: #selector(updateAddedFavoriteMovie), name: NSNotification.Name(rawValue: "updateAddedFavoriteMovie"), object: nil)
+    }
+    
+    @objc func updateAddedFavoriteMovie() {
+        view?.reloadMovieTableView(sendButtonPressed: false)
+    }
+    
+    func viewDidLoad() {
+        addNotificationObserver()
+    }
 }

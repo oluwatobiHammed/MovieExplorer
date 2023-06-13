@@ -11,10 +11,17 @@ import Kingfisher
 class MovieDetailTableViewCell:  UITableViewCell {
     
     static let reuseIdentifier = "MovieDetailCellIdentifier"
-    
+    private var listOfLiked: [Int] = []
+    var id: Int?
     private let posterImage: UIImageView = {
         $0.contentMode = .scaleToFill
         $0.cornerRadiusLayer = 5
+        $0.clipsToBounds = true
+        return $0
+    }(UIImageView())
+    
+    private let LikedImage: UIImageView = {
+        $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         return $0
     }(UIImageView())
@@ -82,6 +89,11 @@ class MovieDetailTableViewCell:  UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateLikedImage() 
+    }
+    
     func setUpImage(movie: Movie) {
         
             let image = UIImage(named: .imagePlaceholder)
@@ -99,8 +111,18 @@ class MovieDetailTableViewCell:  UITableViewCell {
             rateLabel.text = String(format: "%0.1f", movie.voteAverage)
             rateImageView.isHidden = (movie.originalTitle == nil)
             overViewTitleLabel.text = movie.overview != "" ? movie.overview : "No details available for this movie"
-        
+            updateLikedImage()
  
+    }
+    
+    func updateLikedImage() {
+        if let id {
+            listOfLiked = UserManager().readSkippedContent()
+            let isfavorite = listOfLiked.contains(where: { $0 == id })
+            let favoriteMovieLikeImage = UIImage(named: .heartFill).imageWithColor(tintColor: isfavorite ? .red : kColor.BrandColours.Bizarre)
+            LikedImage.image = favoriteMovieLikeImage
+        }
+  
     }
     
     private func setUpUI() {
@@ -140,6 +162,15 @@ class MovieDetailTableViewCell:  UITableViewCell {
             make.bottom.equalTo(safeAreaView.snp.bottom).offset(-8)
             make.top.equalTo(containerStackView.snp.bottom).offset(15)
             make.right.equalTo(safeAreaView.snp.right).offset(-10)
+        }
+        
+        safeAreaView.addSubview(LikedImage)
+        LikedImage.snp.makeConstraints { make in
+            make.height.equalTo(50)
+            make.width.equalTo(40)
+            make.right.equalTo(safeAreaView.snp.right).offset(-10)
+            make.bottom.equalTo(safeAreaView.snp.bottom).offset(-10)
+            make.top.equalTo(containerStackView.snp.bottom).offset(15)
         }
         
     }
