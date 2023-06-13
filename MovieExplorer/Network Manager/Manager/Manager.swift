@@ -41,12 +41,12 @@ struct NetworkManager: ManagerProtocol {
         }
     }
     
-    func getFavorite(page: Int, completion: @escaping (FavoriteMovies?, Error?) -> ()) {
+    func getFavorite(page: Int, completion: @escaping (ApiResults<FavoriteMovies>) -> Void) {
         Task {
             await router.request(.getFavorite(page: page)) { data, response, error in
                 
                 if error != nil {
-                    completion(nil, NSError(domain: "", code: URLError.Code.notConnectedToInternet.rawValue, userInfo: [NSLocalizedDescriptionKey : "Please check your network connection."]))
+                    completion(.failure(NSError(domain: "", code: URLError.Code.notConnectedToInternet.rawValue, userInfo: [NSLocalizedDescriptionKey : "Please check your network connection."])))
                 }
                 
                 if let response = response as? HTTPURLResponse {
@@ -54,7 +54,7 @@ struct NetworkManager: ManagerProtocol {
                     switch result {
                     case .success:
                         guard let responseData = data else {
-                            completion(nil, NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.noData.rawValue]))
+                            completion(.failure (NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.noData.rawValue])))
                             return
                         }
                         do {
@@ -63,10 +63,10 @@ struct NetworkManager: ManagerProtocol {
                             print(jsonData)
                             
                             guard let movies = try? FavoriteMovies.decode(data: responseData) else {
-                                completion(nil, NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.unableToDecode.rawValue]))
+                                completion(.failure (NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.unableToDecode.rawValue])))
                                 return
                             }
-                            completion(movies,nil)
+                            completion(.success(movies))
                             guard movies.results.count > 0 else { return }
                             DispatchQueue.main.async {
                                 
@@ -75,10 +75,10 @@ struct NetworkManager: ManagerProtocol {
                            
                         } catch {
 
-                            completion(nil, NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.unableToDecode.rawValue]))
+                            completion(.failure(NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.unableToDecode.rawValue])))
                         }
                     case .failure(let networkFailureError):
-                        completion(nil, networkFailureError)
+                        completion(.failure(networkFailureError))
                     }
                 }
             }
@@ -90,12 +90,12 @@ struct NetworkManager: ManagerProtocol {
     let router = Router<MovieEndpoints>()
     
     
-    func getSearch(page: Int, query: String, completion: @escaping (_ movies: Movies?, _ error: Error?)->()) {
+    func getSearch(page: Int, query: String, completion: @escaping (ApiResults<Movies>) -> Void) {
         Task {
             await router.request(.search(query: query, page: page)) { data, response, error in
                 
                 if error != nil {
-                    completion(nil, NSError(domain: "", code: URLError.Code.notConnectedToInternet.rawValue, userInfo: [NSLocalizedDescriptionKey : "Please check your network connection."]))
+                    completion(.failure(NSError(domain: "", code: URLError.Code.notConnectedToInternet.rawValue, userInfo: [NSLocalizedDescriptionKey : "Please check your network connection."])))
                 }
                 
                 if let response = response as? HTTPURLResponse {
@@ -103,7 +103,7 @@ struct NetworkManager: ManagerProtocol {
                     switch result {
                     case .success:
                         guard let responseData = data else {
-                            completion(nil, NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.noData.rawValue]))
+                            completion(.failure(NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.noData.rawValue])))
                             return
                         }
                         do {
@@ -112,22 +112,22 @@ struct NetworkManager: ManagerProtocol {
                             print(jsonData)
                             
                             guard let movies = try? Movies.decode(data: responseData) else {
-                                completion(nil, NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.unableToDecode.rawValue]))
+                                completion(.failure(NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.unableToDecode.rawValue])))
                                 return
                             }
-                            completion(movies,nil)
+                            completion(.success(movies))
                             guard movies.results.count > 0 else { return }
                             DispatchQueue.main.async {
                     
-                                MovieRealmManager.shared.updateOrSave(realmObject: movies)
+                               // MovieRealmManager.shared.updateOrSave(realmObject: movies)
                             }
                            
                         } catch {
 
-                            completion(nil, NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.unableToDecode.rawValue]))
+                            completion(.failure(NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey : NetworkResponse.unableToDecode.rawValue])))
                         }
                     case .failure(let networkFailureError):
-                        completion(nil, networkFailureError)
+                        completion(.failure(networkFailureError))
                     }
                 }
             }
@@ -145,4 +145,10 @@ struct NetworkManager: ManagerProtocol {
         }
     }
     
+}
+
+
+enum ApiResults<T> {
+    case success(T)
+    case failure(Error)
 }

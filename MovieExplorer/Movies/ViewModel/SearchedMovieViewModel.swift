@@ -62,43 +62,41 @@ extension SearchedMovieViewModel: SearchedMovieViewModelProtocol {
     
     private func getQueryText(page: Int, query: String?) {
         let oldQuery = UserDefaults.standard.string(forKey: "searchQuery")
-        if oldQuery != query {
-             MovieRealmManager.shared.clearSearchMovies()
-        }
 
         guard let query else {
             view?.showAlert(title: nil, message: "Type in a movie name to search for a movie")
             return }
-        networkManager.getSearch(page: page, query: query) { movie, err in
+        networkManager.getSearch(page: page, query: query) { result in
             
             DispatchQueue.main.async { [self] in
-                
-                if err == nil {
-                    guard let movie, movie.results.count > 0  else {
+                switch result {
+                case .success(let movies):
+                    guard movies.results.count > 0  else {
                         self.view?.showAlert(title: "No Movies Found", message: "Check your search spelling and try again")
                         return }
                     if page == 1 {
                         movieList = nil
                         movieResult.removeAll()
+                        if oldQuery != query && MovieRealmManager.shared.movies != nil {
+                             MovieRealmManager.shared.clearSearchMovies()
+                        }
                         UserDefaults.standard.removeObject(forKey: "searchQuery")
                         UserDefaults.standard.set(query, forKey: "searchQuery")
                     }
                     if self.movieList?.results.count ?? 0 < 1 {
-                        self.movieList = movie
-                        self.movieResult = Array(movie.results)
+                        self.movieList = movies
+                        self.movieResult = Array(movies.results)
                     } else {
-                        self.movieList = movie
-                        self.movieResult.append(contentsOf: movie.results)
+                        self.movieList = movies
+                        self.movieResult.append(contentsOf: movies.results)
                     }
-                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                        MovieRealmManager.shared.updateOrSave(realmObject: movies)
+                    })
                     self.view?.reloadMovieTableView(sendButtonPressed: sendButtonPressed)
                     self.sendButtonPressed = false
-                } else {
-                    DispatchQueue.main.async {
-                        guard let err else {return}
-                        self.view?.showAlert(title: "Something went wrong", message: err.localizedDescription)
-                    }
-   
+                case .failure(let err):
+                    self.view?.showAlert(title: "Something went wrong", message: err.localizedDescription)
                 }
                 
             }

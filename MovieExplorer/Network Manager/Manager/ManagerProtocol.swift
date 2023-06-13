@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ManagerProtocol {
-    func getSearch(page: Int, query: String, completion: @escaping (_ movies: Movies?, _ error: Error?)->())
-    func addFavorite(movieId: Int, isfavorite: Bool, completion: @escaping (_ error: Error?)->())
-    func getFavorite(page: Int, completion: @escaping (_ movies: FavoriteMovies?, _ error: Error?)->())
+    func getSearch(page: Int, query: String, completion: @escaping (ApiResults<Movies>) -> Void )
+    func addFavorite(movieId: Int, isfavorite: Bool, completion: @escaping (_ error: Error?)-> Void)
+    func getFavorite(page: Int, completion: @escaping (ApiResults<FavoriteMovies>) -> Void)
 }

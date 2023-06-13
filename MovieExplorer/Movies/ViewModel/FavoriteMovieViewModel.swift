@@ -24,10 +24,20 @@ class FavoriteMovieViewModel {
 
 extension FavoriteMovieViewModel: FavoriteMovieViewModelProtocol {
     func getFavorite(page: Int) {
-        networkManager.getFavorite(page: page) { [self] movies, error in
-            if error == nil {
-                DispatchQueue.main.sync {
-                    guard let movies, movies.results.count > 0  else {
+        
+        networkManager.getFavorite(page: page) { [self] result in
+            DispatchQueue.main.sync {
+                switch result {
+                case .failure(let err):
+                    
+                    getMovies()
+                    view?.reloadMovieTableView()
+                    guard movieResult.count > 0 else {return}
+                    view?.showAlert(title: "No Movies Found", message: err.localizedDescription)
+                    
+                case .success(let movies):
+                    
+                    guard movies.results.count > 0  else {
                         movieList = nil
                         movieResult.removeAll()
                         if listOfLiked.isEmpty {
@@ -41,24 +51,16 @@ extension FavoriteMovieViewModel: FavoriteMovieViewModelProtocol {
                         movieResult.removeAll()
                     }
                     if self.movieList?.results.count ?? 0 < 1 {
-                        self.movieList = movies
-                        self.movieResult = Array(movies.results)
+                       movieList = movies
+                       movieResult = Array(movies.results)
                     } else {
-                        self.movieList = movies
-                        self.movieResult.append(contentsOf: movies.results)
+                        movieList = movies
+                        movieResult.append(contentsOf: movies.results)
                     }
                     view?.reloadMovieTableView()
                 }
-                
-            } else {
-                DispatchQueue.main.sync {
-                    getMovies()
-                    view?.reloadMovieTableView()
-                    guard let error, movieResult.count > 0 else {return}
-                    self.view?.showAlert(title: "No Movies Found", message: error.localizedDescription)
-                }
-
             }
+            
         }
     }
     
