@@ -14,6 +14,7 @@ class FavoriteMovieViewModel {
     private var movieResult: [Movie] = []
     private var movieList: FavoriteMovies?
     private var currentPage = 1
+    private var listOfLiked =  UserManager().readSkippedContent()
     
     init(setView view: FavoriteListViewProtocol?, networkManager: ManagerProtocol) {
         if let view  { self.view = view }
@@ -29,7 +30,10 @@ extension FavoriteMovieViewModel: FavoriteMovieViewModelProtocol {
                     guard let movies, movies.results.count > 0  else {
                         movieList = nil
                         movieResult.removeAll()
-                        MovieRealmManager.shared.clearFavoriteMovies()
+                        if listOfLiked.isEmpty {
+                            MovieRealmManager.shared.clearFavoriteMovies()
+                        }
+                        
                         view?.reloadMovieTableView()
                         return }
                     if page < 2 {
@@ -49,6 +53,7 @@ extension FavoriteMovieViewModel: FavoriteMovieViewModelProtocol {
             } else {
                 DispatchQueue.main.sync {
                     getMovies()
+                    view?.reloadMovieTableView()
                     guard let error, movieResult.count > 0 else {return}
                     self.view?.showAlert(title: "No Movies Found", message: error.localizedDescription)
                 }
