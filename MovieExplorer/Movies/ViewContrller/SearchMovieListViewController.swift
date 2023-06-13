@@ -87,7 +87,7 @@ class SearchMovieListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        checkStoryCellUpdate()
+        checkLikedImageUpdate()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -262,7 +262,7 @@ class SearchMovieListViewController: UIViewController {
      
     }
     
-    private func checkStoryCellUpdate() {
+    private func checkLikedImageUpdate() {
         for cell in movieListTableView.visibleCells {
             guard let storyCell = cell as? MovieDetailTableViewCell else { continue }
                 storyCell.updateLikedImage()
@@ -319,7 +319,7 @@ extension SearchMovieListViewController: SearchMovieListViewProtocol {
     }
     
     func reloadMovieTableView(sendButtonPressed: Bool) {
-        checkStoryCellUpdate()
+        checkLikedImageUpdate()
         movieListTableView.reloadData()
         if sendButtonPressed {
             movieListTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
