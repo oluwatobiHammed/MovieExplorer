@@ -40,6 +40,9 @@ Tap the movie tile to view full detail of each movies
 * I used MVVM achitectural pattern because, i am very familiar with it and its easier to write clean, readable, maintainable code and isolate each functionality. It was a bit hard because it gets complex when setting up the code base but, using dependency injection makes it easier to achieve my goal.
 * I wanted go with the Best UI Practise so i made sure the UI is Purposeful and easy to use. I had help from my wife to use the app and give me feedback on noticable bugs that i fixed.
 
+## Future Improvement 
+* I will add log in functionality to make it possible for different users to have there profile and list of favorite movies and add now showing moving 
+
 ## Screen Shot
 
 ![IMG_2618](https://github.com/oluwatobiHammed/MovieExplorer/assets/50711478/2a340f87-0d79-4365-81d7-523a6cc0cd8b)
