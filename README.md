@@ -41,7 +41,7 @@ Tap the movie tile to view full detail of each movies
 * I wanted go with the Best UI Practise so i made sure the UI is Purposeful and easy to use. I had help from my wife to use the app and give me feedback on noticable bugs that i fixed.
 
 ## Future Improvement 
-* I will add log in functionality to make it possible for different users to have there profile and list of favorite movies and add now showing moving 
+* I will add log in functionality to make it possible for different users to have there profile and list of favorite movies and add now showing movies
 
 ## Screen Shot
 
