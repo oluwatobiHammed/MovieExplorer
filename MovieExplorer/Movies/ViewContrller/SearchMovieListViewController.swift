@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MovieListViewController: UIViewController {
+class SearchMovieListViewController: UIViewController {
     
     // MARK: Properties
     private let messageUnavailableCellIdentifier = "UnavailableCellIdentifier"
@@ -258,7 +258,7 @@ class MovieListViewController: UIViewController {
 
 }
 
-extension MovieListViewController:  UITableViewDataSource, UITableViewDelegate {
+extension SearchMovieListViewController:  UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        let (_, movieResult) = movieViewViewModel.numberofMovies()
        return movieResult.count
@@ -293,7 +293,7 @@ extension MovieListViewController:  UITableViewDataSource, UITableViewDelegate {
 }
 
 
-extension MovieListViewController: SearchMovieListViewProtocol {
+extension SearchMovieListViewController: SearchMovieListViewProtocol {
     func showAlert(title: String?, message: String) {
         AlertManager.sharedAlertManager.showAlertWithTitle(title: title ?? "", message: message, controller: self) {[weak self] _ in
             guard let self else {return}

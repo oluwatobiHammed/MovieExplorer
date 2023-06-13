@@ -92,8 +92,11 @@ extension SearchedMovieViewModel: SearchedMovieViewModelProtocol {
                     self.view?.reloadMovieTableView(sendButtonPressed: sendButtonPressed)
                     self.sendButtonPressed = false
                 } else {
-                    guard let err else {return}
-                    self.view?.showAlert(title: "Something went wrong", message: err.localizedDescription)
+                    DispatchQueue.main.async {
+                        guard let err else {return}
+                        self.view?.showAlert(title: "Something went wrong", message: err.localizedDescription)
+                    }
+   
                 }
                 
             }

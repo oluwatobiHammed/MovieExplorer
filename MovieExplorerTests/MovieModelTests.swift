@@ -17,7 +17,7 @@ final class MovieModelTests: XCTestCase {
     override func setUp()  {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         super.setUp()
-        VCProtocol = MovieListViewController()
+        VCProtocol = SearchMovieListViewController()
         sut = SearchedMovieViewModel(setView: VCProtocol, networkManager: MockNetworkManager())
     }
 
