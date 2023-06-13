@@ -22,9 +22,11 @@ class DetailMovieViewModel {
 
 extension DetailMovieViewModel: DetailMovieViewModelProtocol {
     func addFavoiteMovie(movieId: Int, isfavorite: Bool) {
-        networkManager.addFavorite(movieId: movieId, isfavorite: isfavorite) { [self] error in
-            if error == nil {
-                DispatchQueue.main.async { [self] in
+        networkManager.addFavorite(movieId: movieId, isfavorite: isfavorite) { [self] result in
+            
+            DispatchQueue.main.async { [self] in
+                switch result {
+                case .success:
                     view?.updateLikeButton(isfavorite: isfavorite)
                     if isfavorite {
                         listOfLiked.append(movieId)
@@ -34,15 +36,9 @@ extension DetailMovieViewModel: DetailMovieViewModelProtocol {
                         listOfLiked.remove(at: removeIndex)
                         UserManager().setSkippedContent(listOfLiked)
                     }
+                case .failure(let error):
+                    view?.showAlert(title: "Something happened", message: error.localizedDescription)
                 }
-            } else {
-                if let error {
-                    DispatchQueue.main.async { [self] in
-                        view?.showAlert(title: "Something happened", message: error.localizedDescription)
-                    }
-                   
-                }
-                
             }
         }
     }
