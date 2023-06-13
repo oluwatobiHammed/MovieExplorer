@@ -62,7 +62,7 @@ extension SearchedMovieViewModel: SearchedMovieViewModelProtocol {
     
     private func getQueryText(page: Int, query: String?) {
         if UserDefaults.standard.string(forKey: "searchQuery") != query {
-            MovieRealmManager.shared.clearDailySearchMovies()
+            MovieRealmManager.shared.clearSearchMovies()
         }
         guard let query else {
             view?.showAlert(title: nil, message: "Type in a movie name to search for a movie")

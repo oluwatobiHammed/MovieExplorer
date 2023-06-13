@@ -45,9 +45,15 @@ class MovieRealmManager {
         return realm?.objects(type)
     }
     
-    func clearDailySearchMovies() {
+    func clearSearchMovies() {
         DispatchQueue.main.async { [self] in
             clearObject(type: Movies.self, isCascading: false)
+        }
+    }
+    
+    func clearFavoriteMovies() {
+        DispatchQueue.main.async { [self] in
+            clearObject(type: FavoriteMovies.self, isCascading: false)
         }
     }
     

@@ -37,7 +37,10 @@ extension DetailMovieViewModel: DetailMovieViewModelProtocol {
                 }
             } else {
                 if let error {
-                    view?.showAlert(title: "Something happened", message: error.localizedDescription)
+                    DispatchQueue.main.async { [self] in
+                        view?.showAlert(title: "Something happened", message: error.localizedDescription)
+                    }
+                   
                 }
                 
             }

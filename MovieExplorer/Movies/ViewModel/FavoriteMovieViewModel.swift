@@ -29,6 +29,7 @@ extension FavoriteMovieViewModel: FavoriteMovieViewModelProtocol {
                     guard let movies, movies.results.count > 0  else {
                         movieList = nil
                         movieResult.removeAll()
+                        MovieRealmManager.shared.clearFavoriteMovies()
                         view?.reloadMovieTableView()
                         return }
                     if page < 2 {
@@ -48,9 +49,10 @@ extension FavoriteMovieViewModel: FavoriteMovieViewModelProtocol {
             } else {
                 DispatchQueue.main.sync {
                     getMovies()
+                    guard let error, movieResult.count > 0 else {return}
+                    self.view?.showAlert(title: "No Movies Found", message: error.localizedDescription)
                 }
-                guard let error, movieResult.count > 0 else {return}
-                self.view?.showAlert(title: "No Movies Found", message: error.localizedDescription)
+
             }
         }
     }
