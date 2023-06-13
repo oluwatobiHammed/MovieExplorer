@@ -28,6 +28,7 @@ extension DetailMovieViewModel: DetailMovieViewModelProtocol {
                 switch result {
                 case .success:
                     view?.updateLikeButton(isfavorite: isfavorite)
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateAddedFavoriteMovie") , object: nil)
                     if isfavorite {
                         listOfLiked.append(movieId)
                         UserManager().setSkippedContent(listOfLiked)

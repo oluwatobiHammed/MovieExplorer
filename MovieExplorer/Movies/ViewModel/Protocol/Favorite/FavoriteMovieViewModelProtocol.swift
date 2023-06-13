@@ -12,4 +12,5 @@ protocol FavoriteMovieViewModelProtocol {
     func pagination(index: Int)
     func numberofMovies() -> (Int, [Movie])
     func getFavorite(page: Int)
+    func viewDidLoad()
 }

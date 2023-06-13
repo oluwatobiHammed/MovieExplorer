@@ -60,13 +60,13 @@ class FavoriteMoviesViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
+        favouriteMovieViewViewModel.viewDidLoad()
         favouriteMovieViewViewModel.getFavorite(page: 1)
         setUpview()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        favouriteMovieViewViewModel.getFavorite(page: 1)
         let (_, movieResult) = favouriteMovieViewViewModel.numberofMovies()
         errorTitle.isHidden = (movieResult.count > 0)
     }

@@ -23,6 +23,8 @@ class FavoriteMovieViewModel {
 }
 
 extension FavoriteMovieViewModel: FavoriteMovieViewModelProtocol {
+    
+    
     func getFavorite(page: Int) {
         
         networkManager.getFavorite(page: page) { [self] result in
@@ -84,7 +86,18 @@ extension FavoriteMovieViewModel: FavoriteMovieViewModelProtocol {
         (movieList?.totalPages ?? 0,movieResult)
     }
     
-
+    private func addNotificationObserver() {
+        // Favorite Movie update
+        NotificationCenter.default.addObserver(self, selector: #selector(updateAddedFavoriteMovie), name: NSNotification.Name(rawValue: "updateAddedFavoriteMovie"), object: nil)
+    }
+    
+    @objc func updateAddedFavoriteMovie() {
+        getFavorite(page: 1)
+    }
+    
+    func viewDidLoad() {
+        addNotificationObserver()
+    }
     
 }
 

@@ -90,7 +90,7 @@ extension SearchedMovieViewModel: SearchedMovieViewModelProtocol {
                         self.movieList = movies
                         self.movieResult.append(contentsOf: movies.results)
                     }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6, execute: {
                         MovieRealmManager.shared.updateOrSave(realmObject: movies)
                     })
                     self.view?.reloadMovieTableView(sendButtonPressed: sendButtonPressed)
