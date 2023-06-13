@@ -118,11 +118,7 @@ struct NetworkManager: ManagerProtocol {
                             completion(movies,nil)
                             guard movies.results.count > 0 else { return }
                             DispatchQueue.main.async {
-                                if UserDefaults.standard.string(forKey: "searchQuery") != query {
-                                    if page == 1 {
-                                        MovieRealmManager.shared.clearSearchMovies()
-                                    }
-                                }
+                    
                                 MovieRealmManager.shared.updateOrSave(realmObject: movies)
                             }
                            
