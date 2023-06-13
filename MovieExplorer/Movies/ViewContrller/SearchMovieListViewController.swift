@@ -331,21 +331,3 @@ extension SearchMovieListViewController: SearchMovieListViewProtocol {
 }
 
 
-
-
-import Foundation
-
-extension UITableView {
-    
-    public var boundsWithoutInset: CGRect {
-        var boundsWithoutInset = bounds
-        boundsWithoutInset.origin.y += contentInset.top
-        boundsWithoutInset.size.height -= contentInset.top + contentInset.bottom
-        return boundsWithoutInset
-    }
-    
-    public func isRowCompletelyVisible(at indexPath: IndexPath) -> Bool {
-        let rect = rectForRow(at: indexPath)
-        return boundsWithoutInset.contains(rect)
-    }
-}
