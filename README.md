@@ -45,10 +45,9 @@ Tap the movie tile to view full detail of each movies
 
 ## Screen Shot
 
-![IMG_2618](https://github.com/oluwatobiHammed/MovieExplorer/assets/50711478/2a340f87-0d79-4365-81d7-523a6cc0cd8b)
+![IMG_6EBCCD450B81-1](https://github.com/oluwatobiHammed/MovieExplorer/assets/50711478/0cbf6f47-081c-4cb5-8ff0-fea36fd29be9)
+![IMG_2629](https://github.com/oluwatobiHammed/MovieExplorer/assets/50711478/16deab7e-d37c-43f8-b64f-94387120f13b)
+![IMG_D4FC68B9B05F-1](https://github.com/oluwatobiHammed/MovieExplorer/assets/50711478/19dfdb01-0236-4c26-a396-2246432e21a5)
 
-![IMG_2619](https://github.com/oluwatobiHammed/MovieExplorer/assets/50711478/55f49a47-148c-4872-b704-1dd1544a06d5)
-
-![IMG_2620](https://github.com/oluwatobiHammed/MovieExplorer/assets/50711478/749d5ac9-b3f3-4ed6-8bb4-11826a3cc14a)
 
 
