@@ -25,8 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Set up the first View Controller
         let navigation = UINavigationController(rootViewController: SearchMovieListViewController())
         navigation.tabBarItem.title = "Search"
-        navigation.tabBarItem.image = UIImage(systemName: "house")
-        navigation.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
+        navigation.tabBarItem.image = UIImage(systemName: "magnifyingglass")
         
         // Set up the second View Controller
         let navigation1 = UINavigationController(rootViewController: FavoriteMoviesViewController())
