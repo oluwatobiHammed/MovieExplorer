@@ -8,12 +8,13 @@
 import UIKit
 import SnapKit
 
-class SearchMovieListViewController: UIViewController {
+class SearchMovieListViewController: BaseViewController {
     
     // MARK: Properties
     private let messageUnavailableCellIdentifier = "UnavailableCellIdentifier"
     private let image = UIImage(named: .searchIcon)
     private var networkManager = NetworkManager()
+   
     private var tabBarHeight: CGFloat {
         return  10 + (tabBarController?.tabBar.frame.size.height ?? 0)
     }
@@ -64,7 +65,7 @@ class SearchMovieListViewController: UIViewController {
         $0.backgroundColor = kColor.BrandColours.Bizarre
         $0.contentInsetAdjustmentBehavior = .never
         $0.keyboardDismissMode = .interactive
-        $0.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: tabBarHeight, right: 0)
+        $0.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 30, right: 0)
         $0.scrollIndicatorInsets = UIEdgeInsets(top: 15, left: 0, bottom: 10, right: 0)
         $0.alwaysBounceVertical = true
         return $0
@@ -207,6 +208,16 @@ class SearchMovieListViewController: UIViewController {
         
     }
     
+    override func hideSearchbar(isShown: Bool = true) {
+        adjustKeyboard(bottomConstraint: isShown ? -tabBarHeight : tabBarHeight)
+    }
+    
+  
+    override func hideTabbar(isShown: Bool = true) -> Bool {
+        let (_, movieResult) = movieViewViewModel.numberofMovies()
+        return movieResult.count >= 4
+    }
+    
     
     @objc private func sendButtonnPressed() {
         movieViewViewModel.handleSendButton(query: searchTextField.text ?? "")
@@ -329,5 +340,6 @@ extension SearchMovieListViewController: SearchMovieListViewProtocol {
         
     }
 }
+
 
 

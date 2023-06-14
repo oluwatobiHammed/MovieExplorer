@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class FavoriteMoviesViewController: UIViewController {
+class FavoriteMoviesViewController: BaseViewController {
     
     
     // MARK: Properties
@@ -34,7 +34,7 @@ class FavoriteMoviesViewController: UIViewController {
         $0.backgroundColor = kColor.BrandColours.Bizarre
         $0.contentInsetAdjustmentBehavior = .never
         $0.keyboardDismissMode = .interactive
-        $0.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: tabBarHeight, right: 0)
+        $0.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 30, right: 0)
         $0.scrollIndicatorInsets = UIEdgeInsets(top: 15, left: 0, bottom: 10, right: 0)
         $0.alwaysBounceVertical = true
         $0.refreshControl = refreshControl
@@ -70,6 +70,11 @@ class FavoriteMoviesViewController: UIViewController {
         let (_, movieResult) = favouriteMovieViewViewModel.numberofMovies()
         checkStoryCellUpdate()
         errorTitle.isHidden = (movieResult.count > 0)
+    }
+    
+    override func hideTabbar(isShown: Bool = true) -> Bool {
+        let (_, movieResult) = favouriteMovieViewViewModel.numberofMovies()
+        return movieResult.count >= 4
     }
     
     deinit {
