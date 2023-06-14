@@ -53,20 +53,7 @@ extension UIViewController {
 
 extension UIViewController: UIScrollViewDelegate {
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        if hideTabbar() {
-            if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0{
-                //scrolling down
-                changeTabBar(hidden: true, animated: true)
-                
-            }
-            else{
-                //scrolling up
-                changeTabBar(hidden: false, animated: true)
-            }
-        }
-        
-        
+        if hideTabbar() { changeTabBar(hidden: scrollView.panGestureRecognizer.translation(in: scrollView).y < 0, animated: true) }
     }
     
     func changeTabBar(hidden:Bool, animated: Bool) {
