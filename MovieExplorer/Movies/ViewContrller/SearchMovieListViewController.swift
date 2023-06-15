@@ -158,7 +158,6 @@ extension SearchMovieListViewController: SearchMovieListViewProtocol {
     }
     
     func reloadMovieTableView(sendButtonPressed: Bool) {
-        checkLikedImageUpdate()
         movieListTableView.reloadData()
         if sendButtonPressed {
             movieListTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)

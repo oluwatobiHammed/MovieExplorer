@@ -147,7 +147,7 @@ class BaseViewController: UIViewController {
         
     }
     
-    func checkLikedImageUpdate() {
+    private func checkLikedImageUpdate() {
         for cell in movieListTableView.visibleCells {
             guard let storyCell = cell as? MovieDetailTableViewCell else { continue }
                 storyCell.updateLikedImage()

@@ -39,7 +39,7 @@ extension UIViewController {
             e.g. `UIKeyboardWillShowNotification`
     - returns: A tuple of data about the keyboard appearance extracted from the notification user info.
     */
-    public func keyboardInfoFromNotification(_ notification: Notification) -> (beginFrame: CGRect, endFrame: CGRect, animationCurve: UIView.AnimationOptions, animationDuration: Double) {
+    private func keyboardInfoFromNotification(_ notification: Notification) -> (beginFrame: CGRect, endFrame: CGRect, animationCurve: UIView.AnimationOptions, animationDuration: Double) {
         let userInfo = (notification as NSNotification).userInfo!
         let beginFrameValue = userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue
         let endFrameValue = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
