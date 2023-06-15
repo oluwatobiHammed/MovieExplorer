@@ -53,6 +53,7 @@ class BaseViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let _ = numberofMovies(total: 0, movie: [])
         checkLikedImageUpdate()
     }
     
