@@ -123,13 +123,19 @@ class SearchMovieListViewController: BaseViewController {
     }
     
   
- 
-    
-    override func numberofMovies(total: Int = 0, movie: [Movie] = []) -> (Int, [Movie]) {
-        return movieViewViewModel.numberofMovies()
+    override func numberofFavoriteMovies(total: Int = 0, movie: [Movie] = []) -> (Int, [Movie]){
+      return (0, [])
     }
     
-    override func pagination(index: Int) {
+    override func numberofSearchMovies(total: Int = 0, movie: [Movie] = []) -> (Int, [Movie]){
+      return  movieViewViewModel.numberofMovies()
+    }
+    
+//    override func numberofMovies(total: Int = 0, movie: [Movie] = []) -> (Int, [Movie]) {
+//        return movieViewViewModel.numberofMovies()
+//    }
+    
+    override func paginationSearchMovies(index: Int) {
         movieViewViewModel.pagination(index: index)
     }
     

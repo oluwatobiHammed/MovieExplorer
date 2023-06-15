@@ -47,11 +47,15 @@ class FavoriteMoviesViewController: BaseViewController {
         favouriteMovieViewViewModel.getFavorite(page: 1)
     }
     
-    override func numberofMovies(total: Int = 0, movie: [Movie] = []) -> (Int, [Movie]) {
-        return favouriteMovieViewViewModel.numberofMovies()
+    override func numberofFavoriteMovies(total: Int = 0, movie: [Movie] = []) -> (Int, [Movie]){
+      return favouriteMovieViewViewModel.numberofMovies()
     }
     
-    override func pagination(index: Int) {
+    override func numberofSearchMovies(total: Int = 0, movie: [Movie] = []) -> (Int?, [Movie]){
+      return  (0, [])
+    }
+    
+    override func paginationSearchMovies(index: Int) {
         favouriteMovieViewViewModel.pagination(index: index)
     }
     

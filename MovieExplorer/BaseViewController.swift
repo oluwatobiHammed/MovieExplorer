@@ -53,7 +53,6 @@ class BaseViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let _ = numberofMovies(total: 0, movie: [])
         checkLikedImageUpdate()
     }
     
@@ -92,13 +91,18 @@ class BaseViewController: UIViewController {
         }
     }
     
-    func numberofMovies(total: Int = 0, movie: [Movie] = []) -> (Int, [Movie]){
+    func numberofFavoriteMovies(total: Int = 0, movie: [Movie] = []) -> (Int, [Movie]){
+      return (total, movie)
+    }
+    
+    func numberofSearchMovies(total: Int = 0, movie: [Movie] = []) -> (Int?, [Movie]){
       return (total, movie)
     }
     
     override func hideTabbar(isShown: Bool = true) -> Bool {
-        let (_, movieResult) = numberofMovies()
-        return movieResult.count >= 4
+        let (_, favoriteMovieResult) = numberofFavoriteMovies()
+        let (_, searchMovieResult) = numberofSearchMovies()
+        return searchMovieResult.count > 0 ? searchMovieResult.count >= 4 :  favoriteMovieResult.count >= 4
     }
     
     
@@ -156,7 +160,8 @@ class BaseViewController: UIViewController {
         }
     }
     
-    func pagination(index: Int) {}
+    func paginationSearchMovies(index: Int) {}
+    func paginationFavorite(index: Int) {}
     
     private func navigationToDetailVC(movie: Movie) {
         let movieDetailVC = MovieDetailsViewController(movie: movie)
@@ -171,17 +176,17 @@ class BaseViewController: UIViewController {
 extension BaseViewController:  UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       let (_, movieResult) = numberofMovies()
-       return movieResult.count
+       let (_, favoriteMovieResult) = numberofFavoriteMovies()
+        let (_, searchMovieResult) = numberofSearchMovies()
+        return  searchMovieResult.count > 0 ? searchMovieResult.count : favoriteMovieResult.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if  let cell = tableView.dequeueReusableCell(withIdentifier: MovieDetailTableViewCell.reuseIdentifier, for: indexPath) as? MovieDetailTableViewCell {
-            let (_, movieResult) = numberofMovies()
-            if movieResult.count > 0 {
-                cell.id = movieResult[indexPath.row].id
-                cell.setUpImage(movie: movieResult[indexPath.row])
-            }
+            let (_, favoriteMovieResult) = numberofFavoriteMovies()
+            let (_, searchMovieResult) = numberofSearchMovies()
+            cell.id =  searchMovieResult.count > 0 ? searchMovieResult[indexPath.row].id : favoriteMovieResult[indexPath.row].id
+            cell.setUpImage(movie: searchMovieResult.count > 0 ? searchMovieResult[indexPath.row] : favoriteMovieResult[indexPath.row])
             return cell
         } else {
             return tableView.dequeueReusableCell(withIdentifier: messageUnavailableCellIdentifier, for: indexPath)
@@ -189,7 +194,15 @@ extension BaseViewController:  UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        pagination(index: indexPath.row)
+        let (_, favoriteMovieResult) = numberofFavoriteMovies()
+        let (_, searchMovieResult) = numberofSearchMovies()
+        if searchMovieResult.count > 0 {
+            paginationSearchMovies(index: indexPath.row)
+        }
+        if favoriteMovieResult.count > 0 {
+            paginationFavorite(index: indexPath.row)
+        }
+       
     
     }
     
@@ -199,7 +212,9 @@ extension BaseViewController:  UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let (_, movieResult) = numberofMovies()
-        navigationToDetailVC(movie: movieResult[indexPath.row])
+        let (_, favoriteMovieResult) = numberofFavoriteMovies()
+        let (_, searchMovieResult) = numberofSearchMovies()
+        navigationToDetailVC(movie: searchMovieResult.count > 0 ? searchMovieResult[indexPath.row] : favoriteMovieResult[indexPath.row])
+       
     }
 }

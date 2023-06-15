@@ -148,5 +148,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BF846287-AABC-433C-BC66-06F738BC2289"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MovieExplorer/Movies/Favourite Movies/FavoriteMoviesViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "numberofFavoriteMovies(total:movie:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "BF846287-AABC-433C-BC66-06F738BC2289 - c40742af91fda2aa"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MovieExplorer.FavoriteMoviesViewController.numberofFavoriteMovies(total: Swift.Int, movie: Swift.Array&lt;MovieExplorer.Movie&gt;) -&gt; (Swift.Optional&lt;Swift.Int&gt;, Swift.Optional&lt;Swift.Array&lt;MovieExplorer.Movie&gt;&gt;)"
+                  moduleName = "MovieExplorer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/oluwatobioladipupo/Documents/GitHub/MovieExplorer/MovieExplorer/Movies/Favourite%20Movies/FavoriteMoviesViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "BF846287-AABC-433C-BC66-06F738BC2289 - 4f8b219d7b00c04f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MovieExplorer.FavoriteMoviesViewController.numberofFavoriteMovies(total: Swift.Int, movie: Swift.Array&lt;MovieExplorer.Movie&gt;) -&gt; (Swift.Int, Swift.Array&lt;MovieExplorer.Movie&gt;)"
+                  moduleName = "MovieExplorer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/oluwatobioladipupo/Documents/GitHub/MovieExplorer/MovieExplorer/Movies/Favourite%20Movies/FavoriteMoviesViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "52">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
