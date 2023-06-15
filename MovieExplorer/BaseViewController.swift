@@ -12,10 +12,6 @@ class BaseViewController: UIViewController {
     
     private let messageUnavailableCellIdentifier = "UnavailableCellIdentifier"
     
-    var tabBarHeight: CGFloat {
-        return  10 + (tabBarController?.tabBar.frame.size.height ?? 0)
-    }
-    
     lazy var movieListTableView: UITableView = {
         $0.delegate = self
         $0.dataSource = self
@@ -99,9 +95,17 @@ class BaseViewController: UIViewController {
       return (total, movie)
     }
     
+    override func hideTabbar(isShown: Bool = true) -> Bool {
+        let (_, movieResult) = numberofMovies()
+        return movieResult.count >= 4
+    }
+    
+    
+    deinit { NotificationCenter.default.removeObserver(self) }
+    
     
     // MARK: Title and Image Navbar view
-    func centerImageTitleView(icon: UIImage, subTitle: String) -> UIView {
+    private func centerImageTitleView(icon: UIImage, subTitle: String) -> UIView {
         
         let titleView = UIView()
         
@@ -143,35 +147,6 @@ class BaseViewController: UIViewController {
         
     }
     
-    @objc fileprivate func handleKeyboardHide(notification: Notification) {
-        
-        let keyboardData = keyboardInfoFromNotification(notification)
-        
-        adjustKeyboard(bottomConstraint: tabBarHeight)
-        weak var weakSelf = self
-        UIView.animate(withDuration: keyboardData.animationDuration,
-                       delay: 0,
-                       options: keyboardData.animationCurve,
-                       animations: {
-                        weakSelf?.view.layoutIfNeeded()
-        }, completion: nil)
-    }
-    
-    @objc fileprivate func handleKeyboardShow(notification: Notification) {
-        
-        let keyboardData = keyboardInfoFromNotification(notification)
-        adjustKeyboard(bottomConstraint: keyboardData.endFrame.height + 5)
-        
-        weak var weakSelf = self
-        UIView.animate(withDuration: keyboardData.animationDuration,
-                       delay: 0,
-                       options: keyboardData.animationCurve,
-                       animations: {
-            weakSelf?.view.layoutIfNeeded()
-        }, completion: nil)
-     
-    }
-    
     func checkLikedImageUpdate() {
         for cell in movieListTableView.visibleCells {
             guard let storyCell = cell as? MovieDetailTableViewCell else { continue }
@@ -182,17 +157,10 @@ class BaseViewController: UIViewController {
     
     func pagination(index: Int) {}
     
-    func adjustKeyboard(bottomConstraint: CGFloat) {}
-    
     private func navigationToDetailVC(movie: Movie) {
         let movieDetailVC = MovieDetailsViewController(movie: movie)
         movieDetailVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(movieDetailVC, animated: true)
-    }
-    
-    fileprivate func setupNotificationObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
 

@@ -123,10 +123,7 @@ class SearchMovieListViewController: BaseViewController {
     }
     
   
-    override func hideTabbar(isShown: Bool = true) -> Bool {
-        let (_, movieResult) = movieViewViewModel.numberofMovies()
-        return movieResult.count >= 4
-    }
+ 
     
     override func numberofMovies(total: Int = 0, movie: [Movie] = []) -> (Int, [Movie]) {
         return movieViewViewModel.numberofMovies()

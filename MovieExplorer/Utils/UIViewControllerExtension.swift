@@ -8,6 +8,12 @@
 import UIKit
 
 extension UIViewController {
+    
+    
+    var tabBarHeight: CGFloat {
+        return  10 + (tabBarController?.tabBar.frame.size.height ?? 0)
+    }
+    
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
@@ -22,11 +28,9 @@ extension UIViewController {
        return isShown
     }
     
-    @objc func hideSearchbar(isShown: Bool = true) {
+    @objc func hideSearchbar(isShown: Bool = true) {}
     
-    }
-    
-    
+    @objc func adjustKeyboard(bottomConstraint: CGFloat) {}
     
     /**
     Gathers all the data defined in `Keyboard Notification User Info Keys` from
@@ -48,6 +52,41 @@ extension UIViewController {
             animationCurve:     UIView.AnimationOptions(rawValue: UInt(animationCurve.uintValue << 16)),
             animationDuration:  animationDuration.doubleValue)
     }
+    
+    
+    @objc private func handleKeyboardHide(notification: Notification) {
+        
+        let keyboardData = keyboardInfoFromNotification(notification)
+        
+        adjustKeyboard(bottomConstraint: tabBarHeight)
+        weak var weakSelf = self
+        UIView.animate(withDuration: keyboardData.animationDuration,
+                       delay: 0,
+                       options: keyboardData.animationCurve,
+                       animations: {
+                        weakSelf?.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    @objc private func handleKeyboardShow(notification: Notification) {
+        
+        let keyboardData = keyboardInfoFromNotification(notification)
+        adjustKeyboard(bottomConstraint: keyboardData.endFrame.height + 5)
+        
+        weak var weakSelf = self
+        UIView.animate(withDuration: keyboardData.animationDuration,
+                       delay: 0,
+                       options: keyboardData.animationCurve,
+                       animations: {
+            weakSelf?.view.layoutIfNeeded()
+        }, completion: nil)
+     
+    }
+    
+   func setupNotificationObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
 }
 
 
@@ -56,7 +95,7 @@ extension UIViewController: UIScrollViewDelegate {
         if hideTabbar() { changeTabBar(hidden: scrollView.panGestureRecognizer.translation(in: scrollView).y < 0, animated: true) }
     }
     
-    func changeTabBar(hidden:Bool, animated: Bool) {
+    private func changeTabBar(hidden:Bool, animated: Bool) {
         
         let tabBar = self.tabBarController?.tabBar
         let offset = (hidden ? UIScreen.main.bounds.size.height : UIScreen.main.bounds.size.height - (tabBar?.frame.size.height)! )

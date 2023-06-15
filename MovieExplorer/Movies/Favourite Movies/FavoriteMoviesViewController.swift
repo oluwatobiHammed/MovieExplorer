@@ -34,16 +34,6 @@ class FavoriteMoviesViewController: BaseViewController {
         errorTitle.isHidden = (movieResult.count > 0)
     }
     
-    override func hideTabbar(isShown: Bool = true) -> Bool {
-        let (_, movieResult) = favouriteMovieViewViewModel.numberofMovies()
-        return movieResult.count >= 4
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-
     
     lazy var refreshControl : UIRefreshControl = {
         $0.backgroundColor = .clear
